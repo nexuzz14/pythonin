@@ -1,0 +1,86 @@
+{
+  "bab": "bab-1",
+  "judul_kuis": "Kuis Bab 1 — print(), Komentar, dan Membaca Error",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan fungsi komentar (#) sebagai catatan untuk manusia yang diabaikan Python.",
+      "pertanyaan": "Apa yang terjadi saat Python menemukan tanda pagar (#) di dalam kode?",
+      "kode": null,
+      "opsi": [
+        "Python mencetak teks setelah tanda # ke layar",
+        "Python menganggap baris itu perintah penting yang harus didahulukan",
+        "Python mengabaikan semua teks setelah tanda # pada baris itu",
+        "Python menghapus baris itu dari file kode secara permanen"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Tanda pagar (#) membuat Python mengabaikan semua teks setelahnya pada baris itu. Ini disebut komentar — catatan untuk manusia yang tidak dijalankan. Opsi A salah karena komentar tidak pernah dicetak ke layar. Opsi B salah karena komentar justru diabaikan, bukan dianggap penting. Opsi D salah karena komentar tidak menghapus apa pun dari file — baris tetap ada, hanya tidak dieksekusi.",
+      "petunjuk": "Ingat analogi catatan pensil di pinggir naskah pengumuman."
+    },
+    {
+      "id": 2,
+      "tingkat": "mudah",
+      "capaian": "Membedakan kode yang benar dan kode yang menghasilkan error berdasarkan pesan error.",
+      "pertanyaan": "Apa yang terjadi jika kita menulis print(Halo) tanpa tanda kutip di sekitar kata Halo?",
+      "kode": null,
+      "opsi": [
+        "Python menampilkan NameError karena mengira Halo adalah nama yang belum dikenal",
+        "Python mencetak teks Halo ke layar seperti biasa",
+        "Python otomatis menambahkan tanda kutip lalu mencetak Halo",
+        "Python menampilkan SyntaxError karena kurungnya kurang"
+      ],
+      "jawaban_benar": 0,
+      "pembahasan": "Tanpa tanda kutip, Python mengira Halo adalah sebuah nama (seperti variabel) yang belum pernah dibuat. Karena nama itu tidak dikenal, muncul NameError. Opsi B salah karena teks wajib dibungkus tanda kutip agar dikenali sebagai string. Opsi C salah karena Python tidak pernah otomatis menambahkan kutip. Opsi D salah karena kurungnya sudah lengkap — yang kurang adalah tanda kutip, bukan kurung.",
+      "petunjuk": "Python membedakan teks (harus pakai kutip) dan nama (tanpa kutip)."
+    },
+    {
+      "id": 3,
+      "tingkat": "sedang",
+      "capaian": "Menuliskan program menggunakan print() dengan parameter sep.",
+      "pertanyaan": "Apa output dari kode berikut?",
+      "kode": "print(\"SMK\", \"Bisa\", \"Hebat\", sep=\"-\")",
+      "opsi": [
+        "SMK Bisa Hebat",
+        "SMK, Bisa, Hebat",
+        "SMK-Bisa-Hebat-",
+        "SMK-Bisa-Hebat"
+      ],
+      "jawaban_benar": 3,
+      "pembahasan": "Parameter sep mengatur pemisah antar teks di dalam print(). Nilai bawaan sep adalah spasi, tapi di sini diubah menjadi strip \"-\". Jadi tiga teks disambung dengan \"-\" menjadi SMK-Bisa-Hebat. Opsi A salah karena itu hasil jika sep tidak diubah (tetap pakai spasi bawaan). Opsi B salah karena koma hanya pemisah argumen di kode, bukan pemisah di output. Opsi C salah karena sep hanya disisipkan di antara teks, tidak ditambahkan di akhir.",
+      "petunjuk": "Parameter sep mengganti pemisah antar teks. Apa pemisah yang dipakai di sini?"
+    },
+    {
+      "id": 4,
+      "tingkat": "sedang",
+      "capaian": "Menuliskan program menggunakan print() dengan parameter end.",
+      "pertanyaan": "Apa output dari kode berikut?",
+      "kode": "print(\"Halo\", end=\" \")\nprint(\"Dunia\")",
+      "opsi": [
+        "Halo dan Dunia tercetak di dua baris terpisah",
+        "Halo Dunia",
+        "HaloDunia",
+        "Halo  Dunia"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Parameter end mengatur karakter di akhir print(). Nilai bawaannya adalah enter (pindah baris), tapi di sini diubah menjadi satu spasi. Jadi setelah mencetak Halo, kursor tidak pindah baris — hanya menambah satu spasi. Print kedua menyambung di baris yang sama, menghasilkan Halo Dunia. Opsi A salah karena itu hasil jika end tidak diubah. Opsi C salah karena ada satu spasi dari end=\" \". Opsi D salah karena hanya ada satu spasi, bukan dua.",
+      "petunjuk": "Parameter end mengganti karakter di akhir cetakan. Biasanya enter, di sini diubah jadi apa?"
+    },
+    {
+      "id": 5,
+      "tingkat": "sulit",
+      "capaian": "Memperbaiki kesalahan penulisan sederhana (SyntaxError) dengan membaca petunjuk dari pesan error.",
+      "pertanyaan": "Kode berikut menghasilkan error saat dijalankan. Apa perbaikan yang tepat?",
+      "kode": "print(\"Selamat pagi!\"\nprint(\"Hari ini cerah\")",
+      "opsi": [
+        "Ganti print menjadi cetak di baris 1",
+        "Hapus semua tanda kutip di baris 1",
+        "Tambahkan kurung tutup di akhir baris 1: print(\"Selamat pagi!\")",
+        "Tambahkan tanda kutip lagi di akhir baris 2"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Baris 1 kurang kurung tutup — tertulis print(\"Selamat pagi!\" tanpa ) di akhir. Python menampilkan SyntaxError karena kurung buka pada baris 1 tidak pernah ditutup. Perbaikannya: tambahkan ) di akhir baris 1 menjadi print(\"Selamat pagi!\"). Opsi A salah karena cetak bukan perintah Python — justru akan menambah error baru (NameError). Opsi B salah karena menghapus tanda kutip membuat teks tidak dikenali. Opsi D salah karena baris 2 sudah benar — masalahnya ada di baris 1.",
+      "petunjuk": "Hitung jumlah kurung buka dan kurung tutup di setiap baris. Apakah sudah berpasangan?"
+    }
+  ]
+}

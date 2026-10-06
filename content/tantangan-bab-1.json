@@ -1,0 +1,62 @@
+{
+  "bab": "bab-1",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Kartu Identitas Siswa",
+      "cerita": "Guru wali kelas memintamu membuat program yang mencetak kartu identitas siswa di layar. Formatnya harus rapi supaya mudah dibaca.",
+      "instruksi": "Cetak tiga baris teks tepat seperti contoh output. Perhatikan jumlah spasi sebelum tanda titik dua (:) agar setiap baris rata. Gunakan tiga perintah print() terpisah.",
+      "kode_awal": "# Tantangan: Cetak kartu identitas siswa\n# Lengkapi setiap print() dengan data yang sesuai\nprint(\"Nama   : \")\nprint(\"Kelas  : \")\nprint(\"Jurusan: \")",
+      "output_diharapkan": "Nama   : Andi Pratama\nKelas  : X RPL 1\nJurusan: Rekayasa Perangkat Lunak",
+      "contoh_solusi": "# Kartu Identitas Siswa\nprint(\"Nama   : Andi Pratama\")\nprint(\"Kelas  : X RPL 1\")\nprint(\"Jurusan: Rekayasa Perangkat Lunak\")",
+      "petunjuk": [
+        "Setiap baris data cukup dicetak dengan satu perintah print().",
+        "Teks di dalam tanda kutip harus sudah lengkap termasuk nama, kelas, dan jurusan.",
+        "Contoh baris pertama: print(\"Nama   : Andi Pratama\"). Lakukan hal serupa untuk dua baris lainnya."
+      ],
+      "kesalahan_umum": [
+        "Jumlah spasi sebelum tanda titik dua tidak sama persis dengan contoh output.",
+        "Lupa tanda kutip penutup di akhir teks sehingga muncul SyntaxError."
+      ]
+    },
+    {
+      "id": 2,
+      "tingkat": "sedang",
+      "judul": "Struk Kantin Sekolah",
+      "cerita": "Kantin sekolah ingin punya struk pembelian sederhana. Kamu diminta membuat program yang mencetak struk lengkap dengan garis pembatas dan daftar item.",
+      "instruksi": "Cetak struk kantin dengan 5 baris tepat seperti contoh output: garis pembatas atas, tiga baris item beserta harga, dan garis pembatas bawah. Setiap baris panjangnya 24 karakter. Tambahkan tiga print() di antara garis atas dan bawah yang sudah disediakan.",
+      "kode_awal": "# Tantangan: Cetak struk kantin\nprint(\"===== STRUK KANTIN =====\")\n# Tambahkan 3 baris item beserta harga di sini\n\nprint(\"========================\")",
+      "output_diharapkan": "===== STRUK KANTIN =====\nNasi Goreng    Rp 12.000\nEs Teh         Rp  5.000\nGorengan       Rp  3.000\n========================",
+      "contoh_solusi": "# Struk Kantin Sekolah\nprint(\"===== STRUK KANTIN =====\")\nprint(\"Nasi Goreng    Rp 12.000\")\nprint(\"Es Teh         Rp  5.000\")\nprint(\"Gorengan       Rp  3.000\")\nprint(\"========================\")",
+      "petunjuk": [
+        "Kamu perlu menambahkan tiga perintah print() di antara garis atas dan garis bawah.",
+        "Perhatikan jumlah spasi antara nama item dan harga supaya kolom harga sejajar.",
+        "Setiap baris harus 24 karakter. Contoh: 'Nasi Goreng' (11 huruf) + 4 spasi + 'Rp 12.000' (9 huruf) = 24."
+      ],
+      "kesalahan_umum": [
+        "Jumlah spasi antar kolom tidak tepat sehingga output tidak cocok saat dicek otomatis.",
+        "Panjang garis pembatas atas dan bawah berbeda (harus sama-sama 24 karakter)."
+      ]
+    },
+    {
+      "id": 3,
+      "tingkat": "sulit",
+      "judul": "Pola Bintang Segitiga",
+      "cerita": "Guru memberi tantangan klasik pemrograman: mencetak pola segitiga dari karakter bintang (*). Tantangannya, kamu belum boleh pakai perulangan — hanya boleh pakai print().",
+      "instruksi": "Cetak pola segitiga bintang 5 baris tepat seperti contoh output. Baris pertama berisi 1 bintang, baris kedua 2 bintang, sampai baris kelima berisi 5 bintang. Tidak boleh ada spasi sebelum atau sesudah bintang. Gunakan beberapa perintah print(), belum boleh pakai for atau while.",
+      "kode_awal": "# Tantangan: Cetak pola bintang segitiga 5 baris\n# Baris 1: *\n# Baris 2: **\n# dst. sampai baris 5: *****\n# Tulis kode di bawah ini",
+      "output_diharapkan": "*\n**\n***\n****\n*****",
+      "contoh_solusi": "# Pola Bintang Segitiga\nprint(\"*\")\nprint(\"**\")\nprint(\"***\")\nprint(\"****\")\nprint(\"*****\")",
+      "petunjuk": [
+        "Kamu butuh 5 perintah print() — satu untuk setiap baris pola.",
+        "Baris ke-n berisi n buah karakter bintang (*) tanpa spasi di depan atau belakang.",
+        "Baris pertama: print(\"*\"), baris kedua: print(\"**\"), lanjutkan polanya sampai baris kelima."
+      ],
+      "kesalahan_umum": [
+        "Menambahkan spasi sebelum atau sesudah bintang di dalam tanda kutip sehingga output tidak cocok.",
+        "Menggunakan perulangan for atau while — ini belum boleh dipakai di Bab 1."
+      ]
+    }
+  ]
+}

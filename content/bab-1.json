@@ -1,0 +1,113 @@
+{
+  "id": "bab-1",
+  "judul": "Pengenalan Python: print(), Komentar, dan Membaca Error",
+  "tujuan": [
+    "Menulis program pertama menggunakan print() dengan teks satu baris maupun beberapa baris.",
+    "Menjelaskan fungsi komentar (#) sebagai catatan untuk manusia yang diabaikan Python.",
+    "Membedakan kode yang benar dan kode yang error, lalu memperbaiki kesalahan sederhana (SyntaxError, NameError)."
+  ],
+  "prasyarat": [
+    "Tidak ada — ini bab pertama. Cukup bisa membuka browser dan mengetik."
+  ],
+  "ringkasan": "Bab ini mengajarkan cara mencetak teks ke layar dengan print(), menulis catatan di kode dengan komentar (#), dan membaca pesan error. Kamu akan menulis program Python pertamamu langsung di browser.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-1-1",
+      "judul": "Perintah print() — Mencetak Teks ke Layar",
+      "penjelasan": "print() adalah perintah pertama yang akan kamu pelajari. Fungsinya sederhana: mencetak teks ke layar output. Teks yang ingin dicetak harus dibungkus tanda kutip ganda (\") atau tunggal ('). Tanpa tanda kutip, Python akan bingung dan menampilkan error.",
+      "analogi": "print() itu seperti speaker pengumuman di sekolah. Kamu tulis naskah di kertas (teks dalam kutip), lalu serahkan ke petugas piket (print). Speaker membacakan naskahmu ke seluruh kelas (layar output).",
+      "contoh_kode": "print(\"Halo, selamat datang di Python!\")\nprint('Saya siswa SMK kelas X.')",
+      "output_contoh": "Halo, selamat datang di Python!\nSaya siswa SMK kelas X.",
+      "penjelasan_kode": [
+        "Baris 1: print(\"Halo, selamat datang di Python!\") — mencetak teks yang ada di dalam tanda kutip ganda.",
+        "Baris 2: print('Saya siswa SMK kelas X.') — sama saja, tapi pakai tanda kutip tunggal. Keduanya boleh dipakai."
+      ],
+      "catatan_umum_salah": "Kesalahan paling sering: lupa tanda kutip. Misal menulis print(Halo Dunia) tanpa kutip. Python mengira 'Halo' adalah nama variabel dan muncul NameError.",
+      "coba_sendiri": "Ganti teks di dalam print() dengan nama lengkapmu. Coba cetak dua baris: satu dengan kutip ganda, satu dengan kutip tunggal."
+    },
+    {
+      "id": "bab-1-2",
+      "judul": "Mencetak Beberapa Baris dan Parameter sep & end",
+      "penjelasan": "Kamu bisa mencetak beberapa baris sekaligus. Ada dua cara: pakai beberapa print() atau pakai \\n (newline) di dalam satu print(). Selain itu, print() punya parameter sep (pemisah antar teks) dan end (karakter di akhir cetakan).",
+      "analogi": "Bayangkan kamu menulis pengumuman di papan tulis. Setiap print() itu satu baris baru. Tapi kalau mau hemat, kamu bisa tulis semua di satu baris dan kasih tanda garis baru (\\n) supaya terbaca rapi.",
+      "contoh_kode": "print(\"Nama\", \"Kelas\", \"Jurusan\", sep=\" | \")\nprint(\"Baris pertama\")\nprint(\"Baris kedua\")\nprint(\"Satu\", end=\" \")\nprint(\"baris saja\")",
+      "output_contoh": "Nama | Kelas | Jurusan\nBaris pertama\nBaris kedua\nSatu baris saja",
+      "penjelasan_kode": [
+        "Baris 1: sep=\" | \" membuat pemisah antar teks jadi ' | ' bukan spasi biasa.",
+        "Baris 2-3: Dua print() terpisah otomatis mencetak di dua baris berbeda.",
+        "Baris 4-5: end=\" \" mengganti akhir baris dari enter menjadi spasi, jadi print() berikutnya menyambung di baris yang sama."
+      ],
+      "catatan_umum_salah": "Pemula sering bingung kenapa dua print() selalu pindah baris. Itu karena secara bawaan, end=\"\\n\" (enter). Kalau mau menyambung, ubah end jadi karakter lain.",
+      "coba_sendiri": "Cetak nama, kelas, dan jurusanmu dipisah tanda strip (-) menggunakan parameter sep."
+    },
+    {
+      "id": "bab-1-3",
+      "judul": "Komentar (#) — Catatan yang Diabaikan Python",
+      "penjelasan": "Komentar adalah catatan di dalam kode yang tidak dijalankan Python. Tulis tanda pagar (#) di awal, lalu tulis catatanmu. Komentar berguna untuk menjelaskan kode atau menonaktifkan baris sementara.",
+      "analogi": "Komentar itu seperti catatan kecil di pinggir naskah pengumuman. Kamu tulis pakai pensil: 'ini untuk besok, jangan dibaca sekarang.' Petugas piket mengabaikan catatan itu saat membacakan pengumuman.",
+      "contoh_kode": "# Program pertamaku\nprint(\"Halo dari Python!\")\n# print(\"Baris ini tidak akan tercetak\")\nprint(\"Baris ini tercetak\")  # komentar di samping kode",
+      "output_contoh": "Halo dari Python!\nBaris ini tercetak",
+      "penjelasan_kode": [
+        "Baris 1: Komentar murni — Python melewati baris ini sepenuhnya.",
+        "Baris 2: Kode biasa yang tercetak ke layar.",
+        "Baris 3: print() diberi tanda # di depannya, jadi Python menganggapnya komentar dan tidak menjalankannya.",
+        "Baris 4: Komentar juga bisa ditulis di samping kode, setelah tanda #."
+      ],
+      "catatan_umum_salah": "Pemula kadang lupa bahwa # hanya berlaku untuk satu baris. Kalau mau komentar banyak baris, setiap baris harus diawali #.",
+      "coba_sendiri": "Tulis tiga baris print() lalu nonaktifkan baris kedua dengan menambahkan # di depannya. Perhatikan baris mana yang tercetak."
+    },
+    {
+      "id": "bab-1-4",
+      "judul": "Membaca Pesan Error — SyntaxError dan NameError",
+      "penjelasan": "Error itu bukan musuh, tapi petunjuk. Python memberi pesan error yang menunjukkan baris mana yang salah dan apa masalahnya. Dua error paling sering di bab ini: SyntaxError (penulisan tidak sesuai aturan) dan NameError (nama yang tidak dikenal).",
+      "analogi": "Pesan error itu seperti guru yang mencoret tulisanmu dan bilang: 'Baris ke-3, tanda kutipnya kurang satu.' Guru tidak marah — cuma kasih tahu supaya kamu bisa memperbaiki.",
+      "contoh_kode": "# Kode yang BENAR:\nprint(\"Selamat pagi!\")\n\n# Contoh error yang sering terjadi:\n# print(\"Selamat pagi)   -> SyntaxError: kutip penutup hilang\n# print(Selamat pagi)    -> NameError: lupa tanda kutip\n# cetak(\"Halo\")          -> NameError: perintah Python pakai bahasa Inggris",
+      "output_contoh": "Selamat pagi!",
+      "penjelasan_kode": [
+        "Baris 2: Kode yang benar — tanda kutip dan kurung lengkap berpasangan.",
+        "Baris 5: SyntaxError terjadi kalau kutip penutup hilang. Python bingung karena teksnya tidak ditutup.",
+        "Baris 6: NameError terjadi kalau teks tidak dibungkus kutip. Python mengira itu nama variabel.",
+        "Baris 7: NameError juga terjadi kalau menulis cetak() karena perintah Python harus dalam bahasa Inggris (print, bukan cetak)."
+      ],
+      "catatan_umum_salah": "Pemula sering panik melihat error. Ingat, baca pesan error dari bawah ke atas: cari nama error-nya dan nomor barisnya. Itu sudah cukup untuk menemukan masalah.",
+      "coba_sendiri": "Coba tulis print(\"Halo Dunia) tanpa kutip penutup. Perhatikan pesan error-nya. Lalu perbaiki dan jalankan lagi."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Buat kartu identitas siswa. Cetak tiga baris: nama, kelas, dan jurusan. Gunakan tiga perintah print() terpisah. Tambahkan satu komentar di baris paling atas sebagai judul program.",
+    "kode_awal": "# Tulis programmu di bawah ini\nprint(\"Nama   : \")\nprint(\"Kelas  : \")\nprint(\"Jurusan: \")",
+    "output_diharapkan": "Nama   : Andi Pratama\nKelas  : X RPL 1\nJurusan: Rekayasa Perangkat Lunak"
+  },
+  "poin_penting": [
+    "print() mencetak teks ke layar. Teks harus dibungkus tanda kutip (\" atau ').",
+    "Komentar (#) adalah catatan di kode yang tidak dijalankan Python.",
+    "Pesan error adalah petunjuk, bukan hukuman. Baca nama error dan nomor barisnya untuk menemukan masalah."
+  ],
+  "istilah": [
+    {
+      "istilah": "print()",
+      "arti": "Perintah Python untuk mencetak teks atau nilai ke layar output."
+    },
+    {
+      "istilah": "string",
+      "arti": "Tipe data teks, ditulis di dalam tanda kutip. Contoh: \"Halo\"."
+    },
+    {
+      "istilah": "komentar (#)",
+      "arti": "Catatan di kode yang diabaikan Python. Diawali tanda pagar (#)."
+    },
+    {
+      "istilah": "SyntaxError",
+      "arti": "Error karena penulisan kode tidak sesuai aturan Python. Misal: kutip tidak berpasangan."
+    },
+    {
+      "istilah": "NameError",
+      "arti": "Error karena Python menemukan nama yang tidak dikenal. Misal: teks tanpa kutip."
+    },
+    {
+      "istilah": "parameter",
+      "arti": "Pengaturan tambahan di dalam fungsi. Contoh: sep dan end pada print()."
+    }
+  ]
+}
