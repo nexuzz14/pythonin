@@ -1,0 +1,62 @@
+{
+  "bab": "bab-3",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Total Belanja Kantin",
+      "cerita": "Kantin sekolah membutuhkan pencatatan kasir yang cepat dan otomatis. Karena program kita berjalan di browser, data harga jajan disimulasikan langsung lewat variabel di baris awal kode. Kamu diminta menghitung total belanja dari tiga jajan yang dibeli.",
+      "instruksi": "Gunakan tiga variabel yang sudah disediakan: jajan_1 = 8000, jajan_2 = 5000, dan jajan_3 = 3000. Buat variabel total yang menjumlahkan ketiga variabel tersebut menggunakan operator +. Cetak tepat satu baris output sesuai contoh menggunakan f-string.",
+      "kode_awal": "# Tantangan: Total Belanja Kantin\n# Simulasi input (harga jajan di kasir kantin)\njajan_1 = 8000\njajan_2 = 5000\njajan_3 = 3000\n\n# 1. Hitung total belanja dengan operator + di bawah ini\n\n\n# 2. Cetak hasil sesuai format menggunakan f-string",
+      "output_diharapkan": "Total belanja: Rp 16000",
+      "contoh_solusi": "# Solusi: Total Belanja Kantin\njajan_1 = 8000\njajan_2 = 5000\njajan_3 = 3000\n\ntotal = jajan_1 + jajan_2 + jajan_3\nprint(f\"Total belanja: Rp {total}\")",
+      "petunjuk": [
+        "Periksa tiga variabel harga jajan yang telah disediakan pada bagian awal kode.",
+        "Buat variabel baru bernama total yang menjumlahkan jajan_1 + jajan_2 + jajan_3.",
+        "Gunakan perintah print(f\"Total belanja: Rp {total}\") untuk mencetak hasil yang sesuai."
+      ],
+      "kesalahan_umum": [
+        "Menuliskan harga dalam tanda kutip (misal \"8000\") sehingga angka dianggap string dan tidak bisa dijumlahkan secara matematika.",
+        "Format teks cetakan tidak persis sama dengan contoh output (misalnya salah huruf kapital atau lupa spasi)."
+      ]
+    },
+    {
+      "id": 2,
+      "tingkat": "sedang",
+      "judul": "Rata-rata Nilai Ujian",
+      "cerita": "Wali kelas X RPL meminta bantuanmu membuat program pencetak rapor mini. Program menerima lima nilai ujian, menjumlahkannya, menghitung nilai rata-rata, lalu membulatkannya ke 1 angka di belakang koma menggunakan fungsi round().",
+      "instruksi": "Diberikan lima variabel nilai: mtk = 78, indo = 85, ing = 90, ipa = 72, dan ips = 88. Hitung variabel jumlah dari kelima nilai tersebut. Hitung variabel rata_rata dengan membagi jumlah dengan 5 lalu dibulatkan ke 1 angka di belakang koma memakai round(jumlah / 5, 1). Cetak 7 baris rapor mini persis seperti contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Rata-rata Nilai Ujian\n# Simulasi input (5 nilai mata pelajaran)\nmtk = 78\nindo = 85\ning = 90\nipa = 72\nips = 88\n\n# 1. Hitung jumlah dan rata_rata (gunakan round dengan 1 desimal)\n\n\n# 2. Cetak rapor mini sesuai format output yang diminta\nprint(\"=== RAPOR MINI ===\")",
+      "output_diharapkan": "=== RAPOR MINI ===\nMatematika : 78\nB. Indonesia: 85\nB. Inggris  : 90\nIPA         : 72\nIPS         : 88\nRata-rata   : 82.6",
+      "contoh_solusi": "# Solusi: Rata-rata Nilai Ujian\nmtk = 78\nindo = 85\ning = 90\nipa = 72\nips = 88\n\njumlah = mtk + indo + ing + ipa + ips\nrata_rata = round(jumlah / 5, 1)\n\nprint(\"=== RAPOR MINI ===\")\nprint(f\"Matematika : {mtk}\")\nprint(f\"B. Indonesia: {indo}\")\nprint(f\"B. Inggris  : {ing}\")\nprint(f\"IPA         : {ipa}\")\nprint(f\"IPS         : {ips}\")\nprint(f\"Rata-rata   : {rata_rata}\")",
+      "petunjuk": [
+        "Jumlahkan kelima variabel nilai terlebih dahulu dengan operator tambah (+).",
+        "Gunakan round(jumlah / 5, 1) untuk menghitung nilai rata-rata yang dibulatkan ke satu desimal.",
+        "Cetak setiap baris menggunakan print(f\"...\") dengan jumlah spasi sebelum titik dua yang persis sesuai contoh output."
+      ],
+      "kesalahan_umum": [
+        "Lupa membulatkan hasil pembagian dengan fungsi round() sehingga angka desimal memiliki terlalu banyak digit di belakang koma.",
+        "Salah menuliskan nama variabel mata pelajaran di dalam f-string."
+      ]
+    },
+    {
+      "id": 3,
+      "tingkat": "sulit",
+      "judul": "Konversi Waktu Detik",
+      "cerita": "Dalam pembuatan aplikasi timer produktivitas belajar, durasi waktu sering disimpan dalam satuan detik utuh. Kamu ditantang mengonversi total detik menjadi jam, menit, dan sisa detik menggunakan kombinasi operator pembagian bulat (//) dan modulo (%).",
+      "instruksi": "Diberikan variabel total_detik = 3665. Hitung jam dengan membagi bulat total_detik // 3600. Hitung sisa detik yang belum menjadi jam dengan total_detik % 3600. Hitung menit dengan membagi bulat sisa // 60. Hitung detik akhir dengan modulo sisa % 60. Cetak tepat satu baris hasil konversi persis seperti contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Konversi Waktu Detik\n# Simulasi input (total waktu dalam detik)\ntotal_detik = 3665\n\n# 1. Hitung jam menggunakan operator pembagian bulat (// 3600)\n\n\n# 2. Hitung sisa detik dengan operator modulo (% 3600)\n\n\n# 3. Hitung menit (// 60) dan sisa detik (% 60)\n\n\n# 4. Cetak hasil konversi menggunakan f-string",
+      "output_diharapkan": "3665 detik = 1 jam 1 menit 5 detik",
+      "contoh_solusi": "# Solusi: Konversi Waktu Detik\ntotal_detik = 3665\n\njam = total_detik // 3600\nsisa = total_detik % 3600\nmenit = sisa // 60\ndetik = sisa % 60\n\nprint(f\"{total_detik} detik = {jam} jam {menit} menit {detik} detik\")",
+      "petunjuk": [
+        "Ingat bahwa 1 jam setara dengan 3600 detik dan 1 menit setara dengan 60 detik.",
+        "Gunakan pembagian bulat (//) untuk mendapatkan bilangan jam dan menit utuh tanpa koma.",
+        "Gunakan operator modulo (%) untuk mengambil sisa detik: sisa = total_detik % 3600, lalu detik = sisa % 60. Cetak memakai f-string."
+      ],
+      "kesalahan_umum": [
+        "Menggunakan operator bagi biasa (/) alih-alih pembagian bulat (//) sehingga jam dan menit bernilai desimal (float).",
+        "Menghitung menit langsung dari total_detik // 60 tanpa mencari sisa detik setelah diambil jam terlebih dahulu."
+      ]
+    }
+  ]
+}

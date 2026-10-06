@@ -1,0 +1,62 @@
+{
+  "bab": "bab-5",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Tabel Perkalian Bilangan",
+      "cerita": "Guru matematika kejuruan meminta bantuan siswa jurusan RPL untuk membuat program tabel perkalian otomatis. Program menerima satu angka bilangan dasar, lalu mencetak tabel perkalian lengkap dari 1 hingga 10 untuk membantu adik kelas belajar berhitung.",
+      "instruksi": "Diberikan variabel bilangan = 7. Cetak baris judul: '=== TABEL PERKALIAN 7 ==='. Gunakan perulangan for dengan range(1, 11) untuk mengalikan bilangan dari angka 1 sampai 10. Di dalam loop, hitung hasil = bilangan * i lalu cetak setiap baris dengan format: '{bilangan} x {i} = {hasil}' persis sesuai contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Tabel Perkalian Bilangan\n# Simulasi input bilangan yang akan dikalikan\nbilangan = 7\n\n# 1. Cetak judul tabel perkalian menggunakan f-string\n\n\n# 2. Buat perulangan for dengan range(1, 11) untuk mencetak perkalian 1 sampai 10\n",
+      "output_diharapkan": "=== TABEL PERKALIAN 7 ===\n7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+      "contoh_solusi": "# Solusi: Tabel Perkalian Bilangan\nbilangan = 7\n\nprint(f\"=== TABEL PERKALIAN {bilangan} ===\")\nfor i in range(1, 11):\n    hasil = bilangan * i\n    print(f\"{bilangan} x {i} = {hasil}\")",
+      "petunjuk": [
+        "Periksa variabel bilangan yang sudah disiapkan di baris awal kode.",
+        "Gunakan range(1, 11) pada perulangan for agar putaran berjalan tepat dari angka 1 hingga 10.",
+        "Hitung hasil kali di dalam loop dengan hasil = bilangan * i lalu cetak menggunakan f-string: print(f\"{bilangan} x {i} = {hasil}\")."
+      ],
+      "kesalahan_umum": [
+        "Menuliskan range(1, 10) alih-alih range(1, 11) sehingga perkalian hanya tercetak sampai angka 9 karena batas akhir bersifat exclusive.",
+        "Lupa menuliskan tanda titik dua (:) di ujung baris for atau lupa memberi indentasi 4 spasi pada baris di dalam perulangan."
+      ]
+    },
+    {
+      "id": 2,
+      "tingkat": "sedang",
+      "judul": "Total Belanja Kantin dengan Label",
+      "cerita": "Pengurus koperasi siswa SMK ingin mendata belanjaan jajan dan menandai barang yang harganya cukup mahal. Program akan menghitung total belanja dari lima barang yang dibeli sekaligus memberikan tanda khusus [MAHAL] untuk barang dengan harga di atas Rp 10.000.",
+      "instruksi": "Diberikan lima variabel harga barang: harga_1 = 8000, harga_2 = 15000, harga_3 = 5000, harga_4 = 12000, dan harga_5 = 3000. Siapkan variabel total = 0 dan nomor = 0. Gunakan perulangan for harga in [harga_1, harga_2, harga_3, harga_4, harga_5]:. Di dalam loop, tambahkan nomor += 1 dan total += harga. Gunakan percabangan if harga > 10000 untuk mencetak: 'Item {nomor}: Rp {harga} [MAHAL]', dan pada else cetak: 'Item {nomor}: Rp {harga}'. Terakhir, cetak baris total di luar loop: 'Total: Rp {total}'.",
+      "kode_awal": "# Tantangan: Total Belanja Kantin dengan Label\n# Simulasi input 5 harga jajan kantin\nharga_1 = 8000\nharga_2 = 15000\nharga_3 = 5000\nharga_4 = 12000\nharga_5 = 3000\n\ntotal = 0\nnomor = 0\n\n# 1. Gunakan perulangan for harga in [harga_1, harga_2, harga_3, harga_4, harga_5]:\n\n\n# 2. Cetak total belanja di akhir program menggunakan f-string\n",
+      "output_diharapkan": "Item 1: Rp 8000\nItem 2: Rp 15000 [MAHAL]\nItem 3: Rp 5000\nItem 4: Rp 12000 [MAHAL]\nItem 5: Rp 3000\nTotal: Rp 43000",
+      "contoh_solusi": "# Solusi: Total Belanja Kantin dengan Label\nharga_1 = 8000\nharga_2 = 15000\nharga_3 = 5000\nharga_4 = 12000\nharga_5 = 3000\n\ntotal = 0\nnomor = 0\n\nfor harga in [harga_1, harga_2, harga_3, harga_4, harga_5]:\n    nomor += 1\n    total += harga\n    if harga > 10000:\n        print(f\"Item {nomor}: Rp {harga} [MAHAL]\")\n    else:\n        print(f\"Item {nomor}: Rp {harga}\")\n\nprint(f\"Total: Rp {total}\")",
+      "petunjuk": [
+        "Gunakan variabel akumulator total dan variabel counter nomor yang nilainya bertambah pada setiap putaran perulangan.",
+        "Gunakan struktur percabangan if harga > 10000: untuk membedakan format cetakan barang mahal dengan barang biasa.",
+        "Pastikan baris print(f\"Total: Rp {total}\") diletakkan sejajar di tepi kiri di luar blok perulangan agar hanya tercetak satu kali di akhir."
+      ],
+      "kesalahan_umum": [
+        "Menuliskan inisialisasi total = 0 di dalam badan perulangan for sehingga nilai akumulator ter-reset setiap putaran.",
+        "Meletakkan baris cetak total di dalam blok perulangan sehingga baris total tercetak berulang kali sebanyak 5 kali."
+      ]
+    },
+    {
+      "id": 3,
+      "tingkat": "sulit",
+      "judul": "Simulasi Game Tebak Angka",
+      "cerita": "Sebagai mini proyek penutup dari Bab 1 hingga Bab 5, kamu diminta membuat simulasi permainan tebak angka rahasia. Komputer menyimpan sebuah angka rahasia. Karena program di browser berjalan tanpa input langsung pengguna, daftar lima tebakan pemain disimulasikan sekaligus di awal kode. Program akan menguji tebakan satu per satu memakai perulangan while, memberikan umpan balik arah tebakan, dan langsung berhenti seketika dengan break saat angka rahasia berhasil ditebak!",
+      "instruksi": "Diberikan rahasia = 42 dan tebakan_semua = [30, 50, 40, 42, 35]. Siapkan counter percobaan = 0 dan penanda boolean menang = False. Gunakan perulangan while percobaan < len(tebakan_semua):. Di dalam loop, ambil tebak = tebakan_semua[percobaan], tambahkan percobaan += 1, lalu cetak teks awalan: print(f\"Tebakan ke-{percobaan}: {tebak} -> \", end=\"\"). Gunakan if tebak == rahasia: untuk mencetak 'BENAR! Kamu menang!', ubah menang = True, dan hentikan loop dengan break. Gunakan elif tebak < rahasia: untuk mencetak 'Terlalu kecil!' dan else untuk mencetak 'Terlalu besar!'. Di luar loop, gunakan if not menang: untuk mencetak 'Gagal! Angka rahasia adalah {rahasia}.', lalu cetak baris penutup: 'Jumlah percobaan: {percobaan}'.",
+      "kode_awal": "# Tantangan: Simulasi Game Tebak Angka\n# Simulasi input angka rahasia dan daftar tebakan pemain\nrahasia = 42\ntebakan_semua = [30, 50, 40, 42, 35]\n\npercobaan = 0\nmenang = False\n\n# 1. Buat perulangan while percobaan < len(tebakan_semua):\n\n\n# 2. Tampilkan status jika tidak menang dan cetak jumlah percobaan\n",
+      "output_diharapkan": "Tebakan ke-1: 30 -> Terlalu kecil!\nTebakan ke-2: 50 -> Terlalu besar!\nTebakan ke-3: 40 -> Terlalu kecil!\nTebakan ke-4: 42 -> BENAR! Kamu menang!\nJumlah percobaan: 4",
+      "contoh_solusi": "# Solusi: Simulasi Game Tebak Angka\nrahasia = 42\ntebakan_semua = [30, 50, 40, 42, 35]\n\npercobaan = 0\nmenang = False\n\nwhile percobaan < len(tebakan_semua):\n    tebak = tebakan_semua[percobaan]\n    percobaan += 1\n    print(f\"Tebakan ke-{percobaan}: {tebak} -> \", end=\"\")\n\n    if tebak == rahasia:\n        print(\"BENAR! Kamu menang!\")\n        menang = True\n        break\n    elif tebak < rahasia:\n        print(\"Terlalu kecil!\")\n    else:\n        print(\"Terlalu besar!\")\n\nif not menang:\n    print(f\"Gagal! Angka rahasia adalah {rahasia}.\")\n\nprint(f\"Jumlah percobaan: {percobaan}\")",
+      "petunjuk": [
+        "Perhatikan variabel percobaan sebagai counter perulangan while untuk mengakses setiap elemen tebakan_semua[percobaan].",
+        "Gunakan parameter end=\"\" pada print() teks awalan agar umpan balik tebakan tercetak menyambung di baris yang sama.",
+        "Gunakan perintah break di dalam blok if tebak == rahasia: agar perulangan langsung berhenti seketika saat tebakan benar ditemukan."
+      ],
+      "kesalahan_umum": [
+        "Lupa menambahkan counter percobaan += 1 di dalam perulangan while sehingga terjadi perulangan tanpa henti (infinite loop).",
+        "Lupa perintah break saat tebakan bernilai benar sehingga program terus menebak sisa angka berikutnya meskipun sudah menang."
+      ]
+    }
+  ]
+}

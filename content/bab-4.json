@@ -1,0 +1,125 @@
+{
+  "id": "bab-4",
+  "judul": "Percabangan: Pengambilan Keputusan dengan if, elif, dan else",
+  "tujuan": [
+    "Menjelaskan konsep percabangan sebagai alur pengambilan keputusan di dalam program komputer.",
+    "Menerapkan struktur if, if-else, dan if-elif-else dengan indentasi 4 spasi yang rapi dan benar.",
+    "Menggunakan operator logika and, or, not serta menangani percabangan bersarang untuk kondisi majemuk."
+  ],
+  "prasyarat": [
+    "Memahami operator perbandingan (==, !=, >, <, >=, <=) dan tipe data boolean dari Bab 3.",
+    "Mampu membuat variabel, menggunakan operasi hitung, dan menampilkan teks dengan f-string dari Bab 1 hingga Bab 3."
+  ],
+  "ringkasan": "Bab ini membahas alur pengambilan keputusan di program menggunakan percabangan if, elif, dan else. Kamu juga akan belajar aturan indentasi blok kode serta penggabungan kondisi memakai operator logika.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-4-1",
+      "judul": "Struktur if Sederhana dan Blok Indentasi",
+      "penjelasan": "Program Python biasanya berjalan berurutan dari baris paling atas ke bawah. Melalui percabangan (branching), program dapat mengambil keputusan untuk menjalankan atau melewati suatu perintah. Perintah if akan memeriksa sebuah kondisi boolean yang bernilai True atau False. Jika kondisi bernilai True, perintah di dalam blok kode akan dijalankan.",
+      "analogi": "Percabangan if mirip aturan piket kelas: 'Jika hari ini Senin, sapu lantai kelas.' Kalau hari ini bukan Senin, kamu langsung pulang tanpa perlu menyapu.",
+      "contoh_kode": "# Simulasi input nilai kuis siswa\nnilai = 85\n\nprint(\"Pemeriksaan kuis dimulai.\")\nif nilai >= 75:\n    print(\"Selamat, nilai kamu memenuhi batas tuntas!\")\n\nprint(\"Pemeriksaan kuis selesai.\")",
+      "output_contoh": "Pemeriksaan kuis dimulai.\nSelamat, nilai kamu memenuhi batas tuntas!\nPemeriksaan kuis selesai.",
+      "penjelasan_kode": [
+        "Baris 2: Variabel nilai disiapkan sebagai simulasi data masukan kuis siswa.",
+        "Baris 5: Perintah if memeriksa kondisi nilai >= 75 yang bernilai True.",
+        "Baris 6: Baris ini menjorok 4 spasi (indentasi) sehingga hanya berjalan saat kondisi if bernilai True.",
+        "Baris 8: Perintah print() kembali sejajar di tepi kiri sehingga selalu dijalankan oleh Python."
+      ],
+      "catatan_umum_salah": "Lupa menulis tanda titik dua (:) di ujung baris if atau lupa memberi indentasi 4 spasi pada baris di bawahnya.",
+      "coba_sendiri": "Ubah nilai menjadi 65 pada baris 2 lalu jalankan program. Perhatikan bahwa kalimat ucapan selamat tidak akan tercetak ke layar."
+    },
+    {
+      "id": "bab-4-2",
+      "judul": "Dua Jalur Keputusan dengan Struktur if-else",
+      "penjelasan": "Sering kali kita membutuhkan aksi cadangan saat kondisi if tidak terpenuhi. Struktur if-else menyediakan dua pilihan jalur terpisah bagi program. Jika kondisi if bernilai True, blok pertama akan dijalankan. Jika kondisi bernilai False, blok di bawah else yang akan berjalan.",
+      "analogi": "Aturan piket dua pilihan: 'Jika hari ini giliranmu, bersihkan ruang kelas. Selain itu (else), kamu boleh langsung istirahat di kantin.'",
+      "contoh_kode": "# Simulasi input hari piket kelas\nhari = \"Senin\"\n\nif hari == \"Senin\":\n    print(\"Hari ini kelompok A bertugas piket kelas.\")\nelse:\n    print(\"Hari ini bukan giliran kelompok A, silakan pulang.\")\n\nprint(\"Pemeriksaan piket selesai.\")",
+      "output_contoh": "Hari ini kelompok A bertugas piket kelas.\nPemeriksaan piket selesai.",
+      "penjelasan_kode": [
+        "Baris 2: Variabel hari menyimpan nama hari aktif untuk pengecekan tugas piket.",
+        "Baris 4: Operator perbandingan == memeriksa apakah isi variabel hari sama persis dengan teks 'Senin'.",
+        "Baris 5: Dijalankan karena kondisi bernilai True.",
+        "Baris 7: Blok else dilewati dan hanya akan berjalan jika hari bukan 'Senin'."
+      ],
+      "catatan_umum_salah": "Memakai tanda sama dengan tunggal (=) pada kondisi if. Ingat, tanda = untuk mengisi variabel, sedangkan tanda == untuk membandingkan.",
+      "coba_sendiri": "Ubah nilai variabel hari menjadi \"Selasa\" lalu jalankan program kembali. Amati bagaimana pesan di dalam blok else tercetak ke layar."
+    },
+    {
+      "id": "bab-4-3",
+      "judul": "Banyak Pilihan Jalur dengan if-elif-else",
+      "penjelasan": "Perintah elif adalah singkatan dari else if untuk menguji kondisi pilihan berikutnya. Kita bisa menambahkan banyak elif di antara perintah if dan else. Python mengecek setiap kondisi secara berurutan dari atas ke bawah. Saat satu kondisi cocok, blok kodenya dijalankan dan seluruh sisa kondisi berikutnya diabaikan.",
+      "analogi": "Aturan piket mingguan: 'Jika Senin kelompok A; jika Selasa kelompok B; jika Rabu kelompok C; selain itu (else) semua piket bersama.'",
+      "contoh_kode": "# Simulasi input nilai ujian pemrograman web\nnilai = 82\n\nif nilai >= 90:\n    predikat = \"A (Sangat Baik)\"\nelif nilai >= 80:\n    predikat = \"B (Baik)\"\nelif nilai >= 70:\n    predikat = \"C (Cukup)\"\nelse:\n    predikat = \"D (Perlu Bimbingan)\"\n\nprint(f\"Nilai ujian : {nilai}\")\nprint(f\"Predikat    : {predikat}\")",
+      "output_contoh": "Nilai ujian : 82\nPredikat    : B (Baik)",
+      "penjelasan_kode": [
+        "Baris 2: Variabel nilai menyimpan perolehan angka ujian siswa.",
+        "Baris 4: Python menguji kondisi nilai >= 90 dan menghasilkan nilai False.",
+        "Baris 6: Python lanjut menguji elif nilai >= 80 yang bernilai True, lalu mengisi variabel predikat.",
+        "Baris 8-11: Seluruh sisa blok elif dan else langsung dilewati karena kondisi baris 6 sudah terpenuhi."
+      ],
+      "catatan_umum_salah": "Menulis urutan kondisi terbalik, seperti meletakkan nilai >= 70 di atas nilai >= 90 sehingga nilai 95 keliru mendapat predikat C.",
+      "coba_sendiri": "Ubah nilai menjadi 95, kemudian 74, lalu 55. Jalankan program pada tiap perubahan untuk melihat perubahan predikat yang dicetak."
+    },
+    {
+      "id": "bab-4-4",
+      "judul": "Operator Logika and, or, not dan Percabangan Bersarang",
+      "penjelasan": "Operator logika digunakan untuk menggabungkan beberapa kondisi perbandingan menjadi satu kesatuan. Operator and mewajibkan semua kondisi bernilai True, sedangkan or cukup salah satu kondisi bernilai True. Operator not membalikkan nilai True menjadi False atau sebaliknya. Kita juga dapat meletakkan if di dalam if lain yang disebut percabangan bersarang (nested if).",
+      "analogi": "Syarat piket ganda: 'Piket jika hari Senin and kamu kelompok A.' Izin pulang: 'Boleh pulang jika sudah piket or sudah jam 4.'",
+      "contoh_kode": "# Simulasi input nilai teori, praktik, dan kartu lab\nnilai_teori = 80\nnilai_praktik = 75\npunya_kartu = True\n\n# Operator and mewajibkan kedua syarat bernilai True\nif nilai_teori >= 75 and nilai_praktik >= 75:\n    print(\"Status: Lulus uji kompetensi kejuruan.\")\n    # Percabangan bersarang (nested if) tingkat kedua\n    if punya_kartu:\n        print(\"Fasilitas: Boleh meminjam laptop laboratorium.\")\nelse:\n    print(\"Status: Belum lulus, silakan ikuti ujian remidi.\")\n\nprint(\"Pemeriksaan kompetensi selesai.\")",
+      "output_contoh": "Status: Lulus uji kompetensi kejuruan.\nFasilitas: Boleh meminjam laptop laboratorium.\nPemeriksaan kompetensi selesai.",
+      "penjelasan_kode": [
+        "Baris 7: Operator and memastikan nilai_teori dan nilai_praktik keduanya sama-sama mencapai angka minimal 75.",
+        "Baris 10: Percabangan bersarang memeriksa variabel punya_kartu di dalam blok kelulusan.",
+        "Baris 11: Baris ini menjorok 8 spasi karena berada di dalam dua tingkat blok if.",
+        "Baris 13: Blok else hanya berjalan jika salah satu atau kedua nilai ujian belum mencapai 75."
+      ],
+      "catatan_umum_salah": "Salah merapikan indentasi spasi pada percabangan bersarang sehingga Python memunculkan pesan IndentationError.",
+      "coba_sendiri": "Ubah nilai_praktik menjadi 70 lalu jalankan kembali kode. Perhatikan bahwa status langsung berpindah ke pesan belum lulus pada blok else."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Lengkapi program penentu kelulusan kuis pemrograman siswa kelas X RPL. Gunakan percabangan if dan else untuk mengecek variabel nilai. Jika nilai 75 ke atas, isi status dengan teks \"LULUS\". Jika di bawah 75, isi status dengan teks \"REMIDI\".",
+    "kode_awal": "# Simulasi input nilai kuis siswa\nnilai = 80\nstatus = \"BELUM DITENTUKAN\"\n\n# Tulis percabangan if dan else di bawah ini untuk mengisi variabel status\n\n\nprint(\"=== HASIL KUIS PEMROGRAMAN ===\")\nprint(f\"Nilai Siswa : {nilai}\")\nprint(f\"Status      : {status}\")",
+    "output_diharapkan": "=== HASIL KUIS PEMROGRAMAN ===\nNilai Siswa : 80\nStatus      : LULUS"
+  },
+  "poin_penting": [
+    "Percabangan if, elif, dan else mengatur alur program berdasarkan kondisi bernilai True atau False.",
+    "Blok kode di Python ditandai dengan tanda titik dua (:) dan indentasi 4 spasi yang rapi.",
+    "Gunakan tanda == untuk membandingkan kesamaan nilai dan operator and, or, not untuk menghubungkan kondisi."
+  ],
+  "istilah": [
+    {
+      "istilah": "percabangan (branching)",
+      "arti": "Mekanisme pemilihan jalur eksekusi kode program berdasarkan hasil pengujian kondisi tertentu."
+    },
+    {
+      "istilah": "kondisi (condition)",
+      "arti": "Ekspresi logika atau perbandingan yang menghasilkan nilai kebenaran True atau False."
+    },
+    {
+      "istilah": "if",
+      "arti": "Perintah percabangan untuk menjalankan blok kode tertentu hanya jika kondisi bernilai True."
+    },
+    {
+      "istilah": "else",
+      "arti": "Jalur alternatif dalam percabangan yang dijalankan jika semua kondisi sebelumnya bernilai False."
+    },
+    {
+      "istilah": "elif",
+      "arti": "Singkatan dari else if, digunakan untuk memeriksa kondisi alternatif lainnya setelah perintah if."
+    },
+    {
+      "istilah": "indentasi (indentation)",
+      "arti": "Spasi di awal baris kode (standar 4 spasi) yang menandai suatu blok perintah di Python."
+    },
+    {
+      "istilah": "operator logika",
+      "arti": "Operator (and, or, not) untuk menggabungkan beberapa kondisi perbandingan atau membalikkan nilai boolean."
+    },
+    {
+      "istilah": "percabangan bersarang (nested if)",
+      "arti": "Struktur perintah if yang diletakkan di dalam blok percabangan if lainnya."
+    }
+  ]
+}

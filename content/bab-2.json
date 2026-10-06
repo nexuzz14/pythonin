@@ -1,0 +1,126 @@
+{
+  "id": "bab-2",
+  "judul": "Variabel & Tipe Data: Menyimpan Nilai dan Mengenal Jenis Data",
+  "tujuan": [
+    "Membuat variabel dengan nama yang valid serta mengisinya dengan berbagai nilai data.",
+    "Membedakan dan menggunakan empat tipe data dasar: str, int, float, dan bool.",
+    "Menampilkan variabel memakai f-string serta mengecek dan mengonversi tipe data dengan type(), int(), float(), dan str()."
+  ],
+  "prasyarat": [
+    "Memahami cara kerja perintah print() dan komentar (#) dari Bab 1.",
+    "Mampu membaca dan memperbaiki pesan error sederhana seperti SyntaxError dan NameError."
+  ],
+  "ringkasan": "Bab ini membahas cara menyimpan nilai ke dalam variabel dan mengenal empat tipe data dasar. Kamu juga akan belajar menggabungkan variabel memakai f-string serta mengonversi tipe data.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-2-1",
+      "judul": "Mengenal Variabel dan Cara Mengisinya",
+      "penjelasan": "Variabel adalah tempat untuk menyimpan data di dalam program komputer. Kita membuat variabel dengan menuliskan namanya, lalu mengisi nilainya menggunakan tanda sama dengan (=). Nilai di dalam variabel bisa diubah kapan saja saat program sedang berjalan. Nama variabel ditulis dengan huruf kecil dan spasi diganti garis bawah atau snake_case.",
+      "analogi": "Variabel itu seperti kotak loker siswa di sekolah. Label pada pintu loker adalah nama variabelnya. Barang di dalam loker adalah nilai datanya. Kamu bisa mengganti isi loker kapan saja, tetapi label namanya tetap sama.",
+      "contoh_kode": "nama_siswa = \"Budi Santoso\"\nnomor_absen = 10\nprint(nama_siswa)\nprint(nomor_absen)\n\nnomor_absen = 12\nprint(nomor_absen)",
+      "output_contoh": "Budi Santoso\n10\n12",
+      "penjelasan_kode": [
+        "Baris 1-2: Membuat variabel nama_siswa dan nomor_absen, lalu mengisinya dengan teks dan angka.",
+        "Baris 3-4: Mencetak isi variabel ke layar output menggunakan perintah print().",
+        "Baris 6-7: Mengubah isi nomor_absen menjadi 12 lalu mencetak nilai terbarunya."
+      ],
+      "catatan_umum_salah": "Tanda = di Python adalah operator penugasan (assignment), bukan kesamaan matematika. Jangan gunakan spasi pada nama variabel, misalnya menulis nama siswa = \"Budi\".",
+      "coba_sendiri": "Buat variabel nama_panggilan dan umur dengan datamu sendiri. Cetak kedua variabel tersebut ke layar menggunakan perintah print()."
+    },
+    {
+      "id": "bab-2-2",
+      "judul": "Empat Tipe Data Dasar: str, int, float, dan bool",
+      "penjelasan": "Setiap data yang disimpan di dalam variabel memiliki tipe data (data type) tertentu. Python memiliki empat tipe dasar: str untuk teks, int untuk bilangan bulat, float untuk pecahan desimal, dan bool untuk nilai kebenaran. Teks wajib dibungkus tanda kutip, sedangkan angka dan boolean ditulis langsung tanpa kutip.",
+      "analogi": "Tipe data adalah jenis barang di dalam loker siswa. Tipe int seperti buku tulis yang dihitung satuan utuh. Tipe float seperti botol air 1.5 liter yang memiliki nilai pecahan. Tipe str seperti kertas surat berisi tulisan. Tipe bool seperti saklar lampu loker yang hanya punya dua kondisi: nyala (True) atau mati (False).",
+      "contoh_kode": "nama_jurusan = \"Rekayasa Perangkat Lunak\"\njumlah_komputer = 36\nberat_laptop = 1.8\nlab_aktif = True\n\nprint(nama_jurusan)\nprint(jumlah_komputer)\nprint(berat_laptop)\nprint(lab_aktif)",
+      "output_contoh": "Rekayasa Perangkat Lunak\n36\n1.8\nTrue",
+      "penjelasan_kode": [
+        "Baris 1: nama_jurusan bertipe str karena berisi teks di dalam tanda kutip.",
+        "Baris 2: jumlah_komputer bertipe int karena merupakan bilangan bulat tanpa koma.",
+        "Baris 3: berat_laptop bertipe float karena memuat angka desimal bertanda titik.",
+        "Baris 4: lab_aktif bertipe bool yang hanya menyimpan salah satu dari True atau False."
+      ],
+      "catatan_umum_salah": "Angka yang dibungkus tanda kutip seperti \"36\" dianggap sebagai teks (str), bukan bilangan bulat. Nilai boolean juga wajib diawali huruf kapital, yaitu True atau False.",
+      "coba_sendiri": "Buat variabel tinggi_badan bertipe float dengan nilai desimal dan variabel bawa_laptop bertipe bool. Cetak kedua variabel tersebut ke layar menggunakan print()."
+    },
+    {
+      "id": "bab-2-3",
+      "judul": "Menampilkan Variabel Menggunakan f-string",
+      "penjelasan": "Di Bab 1, kita mencetak teks langsung menggunakan tanda kutip di dalam print(). Sekarang kita bisa menggabungkan teks dan variabel dengan rapi memakai f-string (formatted string literal). Cukup tambahkan huruf f sebelum tanda kutip pembuka, lalu letakkan nama variabel di dalam kurung kurawal {}.",
+      "analogi": "f-string seperti formulir kartu pelajar yang memiliki kolom isian bertitik-titik. Kalimat pengantar kartu adalah teks tetap. Bagian di dalam kurung kurawal {} adalah kolom kosong yang otomatis diisi data dari loker variabelmu.",
+      "contoh_kode": "nama = \"Raka\"\nkelas = \"X RPL 1\"\nnilai = 90\n\nprint(f\"Halo, nama saya {nama}.\")\nprint(f\"Saya siswa kelas {kelas}.\")\nprint(f\"Nilai pemrograman saya adalah {nilai}.\")",
+      "output_contoh": "Halo, nama saya Raka.\nSaya siswa kelas X RPL 1.\nNilai pemrograman saya adalah 90.",
+      "penjelasan_kode": [
+        "Baris 1-3: Membuat variabel nama, kelas, dan nilai dengan tipe data masing-masing.",
+        "Baris 5-6: Huruf f di awal kutip membuat Python menyisipkan nilai variabel ke dalam teks.",
+        "Baris 7: Variabel angka nilai langsung disisipkan tanpa perlu diubah menjadi teks terlebih dahulu."
+      ],
+      "catatan_umum_salah": "Jangan lupa menuliskan huruf f sebelum tanda kutip pembuka. Tanpa huruf f, Python akan mencetak teks mentah {nama} apa adanya ke layar.",
+      "coba_sendiri": "Ubah nilai variabel di atas dengan namamu dan kelasmu sendiri. Tambahkan satu baris print() baru yang mencetak hobi favoritmu memakai f-string."
+    },
+    {
+      "id": "bab-2-4",
+      "judul": "Mengecek dan Mengonversi Tipe Data",
+      "penjelasan": "Kita bisa memeriksa tipe data suatu variabel menggunakan fungsi type(). Terkadang kita perlu mengubah satu tipe data ke tipe lainnya lewat konversi tipe (type casting). Fungsi int(), float(), dan str() membantu mengubah bentuk data sesuai kebutuhan perhitungan program.",
+      "analogi": "Fungsi type() seperti petugas yang memeriksa label barang bawaan di gerbang sekolah. Konversi tipe seperti menukar tiket kertas kantin bertuliskan angka menjadi uang koin sungguhan agar bisa dipakai belanja.",
+      "contoh_kode": "harga_teks = \"15000\"\nprint(type(harga_teks))\n\nharga_angka = int(harga_teks)\nprint(type(harga_angka))\n\nongkir = 5000\ntotal_bayar = harga_angka + ongkir\nprint(f\"Total bayar: Rp {total_bayar}\")",
+      "output_contoh": "<class 'str'>\n<class 'int'>\nTotal bayar: Rp 20000",
+      "penjelasan_kode": [
+        "Baris 1-2: Variabel harga_teks berisi teks angka di dalam kutip, sehingga type() menampilkan <class 'str'>.",
+        "Baris 4-5: Perintah int() mengubah teks menjadi bilangan bulat, sehingga type() menampilkan <class 'int'>.",
+        "Baris 7-9: Variabel harga_angka dijumlahkan dengan ongkir memakai tanda + lalu dicetak menggunakan f-string."
+      ],
+      "catatan_umum_salah": "Menggabungkan teks dan angka langsung dengan tanda + akan memicu TypeError. Kamu harus mengonversi angka ke teks dengan str() atau langsung memakai f-string.",
+      "coba_sendiri": "Buat variabel poin_teks = \"80\", lalu ubah nilainya menjadi int menggunakan int(). Tambahkan bonus 10 poin dan cetak hasilnya memakai f-string."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Buat kartu identitas siswa menggunakan variabel dan f-string. Lengkapi variabel nama, kelas, dan jurusan. Cetak kalimat perkenalan lengkap sesuai contoh output menggunakan f-string.",
+    "kode_awal": "# Lengkapi variabel dan cetak dengan f-string\nnama = \"Siti Nurhaliza\"\nkelas = \"X RPL 2\"\njurusan = \"Rekayasa Perangkat Lunak\"\n\n# Ganti bagian titik-titik dengan variabel yang sesuai\nprint(f\"Halo, nama saya {nama} dari kelas ..., jurusan ...\")",
+    "output_diharapkan": "Halo, nama saya Siti Nurhaliza dari kelas X RPL 2, jurusan Rekayasa Perangkat Lunak."
+  },
+  "poin_penting": [
+    "Variabel adalah wadah data yang dibuat dengan operator penugasan (=). Nilainya bisa diganti kapan saja.",
+    "Python memiliki empat tipe dasar: str untuk teks, int untuk bilangan bulat, float untuk desimal, dan bool untuk True atau False.",
+    "Gunakan f-string untuk menggabungkan teks dan variabel dengan rapi, serta type() untuk memeriksa jenis tipe data."
+  ],
+  "istilah": [
+    {
+      "istilah": "variabel",
+      "arti": "Wadah di dalam program untuk menyimpan nilai data yang bisa digunakan berulang kali."
+    },
+    {
+      "istilah": "operator penugasan (=)",
+      "arti": "Tanda sama dengan (=) untuk memasukkan nilai dari sisi kanan ke variabel di sisi kiri."
+    },
+    {
+      "istilah": "string (str)",
+      "arti": "Tipe data untuk teks, selalu dibungkus dengan tanda kutip tunggal atau ganda."
+    },
+    {
+      "istilah": "integer (int)",
+      "arti": "Tipe data untuk bilangan bulat positif maupun negatif tanpa tanda koma atau titik."
+    },
+    {
+      "istilah": "float",
+      "arti": "Tipe data untuk bilangan desimal atau pecahan yang ditulis menggunakan tanda titik."
+    },
+    {
+      "istilah": "boolean (bool)",
+      "arti": "Tipe data logika yang hanya memiliki dua kemungkinan nilai: True atau False."
+    },
+    {
+      "istilah": "f-string",
+      "arti": "Cara praktis menyisipkan variabel ke dalam teks menggunakan awalan huruf f dan kurung kurawal {}."
+    },
+    {
+      "istilah": "type()",
+      "arti": "Fungsi bawaan Python untuk memeriksa jenis tipe data dari suatu nilai atau variabel."
+    },
+    {
+      "istilah": "konversi tipe",
+      "arti": "Proses mengubah suatu nilai dari satu tipe data menjadi tipe data yang lain."
+    }
+  ]
+}

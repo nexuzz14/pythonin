@@ -1,0 +1,86 @@
+{
+  "bab": "bab-2",
+  "judul_kuis": "Kuis Bab 2 — Variabel & Tipe Data",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Membuat variabel dengan nama yang valid serta mengisinya dengan nilai data menggunakan operator penugasan (=).",
+      "pertanyaan": "Dalam pemrograman Python, apa fungsi utama dari tanda sama dengan (=) pada baris kode seperti nilai = 85?",
+      "kode": null,
+      "opsi": [
+        "Membandingkan apakah variabel nilai sama besarnya dengan angka 85",
+        "Menyimpan angka 85 ke dalam variabel nilai sebagai operator penugasan",
+        "Memeriksa apakah angka 85 memiliki tipe data yang cocok dengan nilai",
+        "Menghapus nilai lama dari memori komputer tanpa menyimpan nilai baru"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Tanda sama dengan (=) di Python adalah operator penugasan (assignment operator). Fungsinya untuk memasukkan atau menyimpan nilai di sebelah kanan (85) ke dalam variabel di sebelah kiri (nilai). Opsi A salah karena membandingkan kesamaan nilai menggunakan dua tanda sama dengan (==), bukan satu. Opsi C salah karena Python menentukan tipe data secara otomatis tanpa perlu pemeriksaan manual seperti itu. Opsi D salah karena tanda = justru menyimpan nilai baru ke dalam variabel, bukan menghapusnya.",
+      "petunjuk": "Ingat analogi loker siswa: tanda = digunakan untuk meletakkan barang ke dalam loker."
+    },
+    {
+      "id": 2,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan perbedaan tipe data dasar (str, int, float, bool) dan mengidentifikasi tipe data dari suatu nilai.",
+      "pertanyaan": "Manakah di antara nilai berikut yang memiliki tipe data float dalam Python?",
+      "kode": null,
+      "opsi": [
+        "\"3.14\"",
+        "314",
+        "True",
+        "3.14"
+      ],
+      "jawaban_benar": 3,
+      "pembahasan": "Nilai 3.14 bertipe float karena merupakan bilangan desimal yang ditulis menggunakan tanda titik desimal tanpa tanda kutip. Opsi A salah karena nilai \"3.14\" dibungkus tanda kutip ganda, sehingga Python menganggapnya sebagai string (str), bukan angka. Opsi B salah karena 314 adalah bilangan bulat tanpa titik desimal, sehingga bertipe integer (int). Opsi C salah karena True adalah nilai logika kebenaran yang bertipe boolean (bool).",
+      "petunjuk": "Perhatikan tanda titik desimal dan pastikan tidak dibungkus tanda kutip."
+    },
+    {
+      "id": 3,
+      "tingkat": "sedang",
+      "capaian": "Menampilkan isi variabel yang nilainya diperbarui menggunakan f-string.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "skor = 50\nskor = 80\nprint(f\"Skor akhir: {skor}\")",
+      "opsi": [
+        "Skor akhir: 80",
+        "Skor akhir: 50",
+        "Skor akhir: 130",
+        "Skor akhir: {skor}"
+      ],
+      "jawaban_benar": 0,
+      "pembahasan": "Pada awalnya variabel skor bernilai 50, tetapi pada baris kedua nilainya diganti (ditimpa) menjadi 80. Saat dicetak dengan f-string, Python mengganti {skor} dengan nilai terbarunya yaitu 80, menghasilkan 'Skor akhir: 80'. Opsi B salah karena nilai lama (50) sudah terhapus saat nilai baru (80) dimasukkan. Opsi C salah karena tanda = bukan menjumlahkan nilai, melainkan menimpa nilai lama. Opsi D salah karena f-string (ditandai huruf f di awal) akan mengganti kurung kurawal dengan nilai variabel, bukan mencetak teks mentah.",
+      "petunjuk": "Perhatikan baris kedua yang mengisi ulang variabel skor sebelum perintah print() dijalankan."
+    },
+    {
+      "id": 4,
+      "tingkat": "sedang",
+      "capaian": "Mengecek dan mengonversi tipe data teks ke angka menggunakan int() untuk operasi penjumlahan.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "poin_teks = \"25\"\npoin_angka = int(poin_teks)\ntotal = poin_angka + 5\nprint(total)",
+      "opsi": [
+        "255",
+        "25",
+        "30",
+        "TypeError"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Variabel poin_teks awalnya menyimpan teks \"25\". Fungsi int(poin_teks) mengubahnya menjadi bilangan bulat 25. Nilai 25 kemudian dijumlahkan dengan 5 sehingga menghasilkan 30. Opsi A salah karena penggabungan teks (\"25\" + \"5\" = \"255\") hanya terjadi jika kedua data masih berupa string. Opsi B salah karena nilai variabel telah dijumlahkan dengan 5, bukan dicetak tanpa perubahan. Opsi D salah karena data sudah dikonversi ke int, sehingga penjumlahan angka valid dan tidak memicu TypeError.",
+      "petunjuk": "Fungsi int() mengubah teks menjadi angka bulat sebelum dijumlahkan dengan angka 5."
+    },
+    {
+      "id": 5,
+      "tingkat": "sulit",
+      "capaian": "Memperbaiki kesalahan penulisan nama variabel yang tidak valid dalam program Python.",
+      "pertanyaan": "Kode berikut menghasilkan SyntaxError saat dijalankan. Apa penyebab error dan perbaikan yang tepat?",
+      "kode": "1siswa = \"Andi Pratama\"\nprint(1siswa)",
+      "opsi": [
+        "Tanda kutip pada \"Andi Pratama\" harus dihapus karena teks nama tidak boleh dibungkus kutip",
+        "Nama variabel tidak boleh diawali angka; ubah 1siswa menjadi siswa1 atau nama_siswa",
+        "Perintah print() tidak bisa mencetak variabel; harus diubah menjadi print(\"1siswa\")",
+        "Operator sama dengan (=) harus ditulis dua kali (==) untuk membuat variabel baru"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Python melarang nama variabel diawali angka. Penulisan 1siswa melanggar aturan penamaan sehingga Python memunculkan pesan SyntaxError: invalid decimal literal. Perbaikannya adalah meletakkan angka setelah huruf (misalnya siswa1) atau memakai huruf saja (nama_siswa). Opsi A salah karena teks nama wajib memakai tanda kutip agar dikenali sebagai string. Opsi C salah karena print() sangat bisa mencetak variabel jika namanya valid. Opsi D salah karena penugasan nilai variabel harus memakai satu tanda sama dengan (=), sedangkan (==) untuk perbandingan.",
+      "petunjuk": "Perhatikan karakter pertama pada nama variabel di baris 1."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "bab": "bab-3",
+  "judul_kuis": "Kuis Bab 3 — Input & Operator",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan alasan simulasi input menggunakan variabel pada lingkungan belajar di web browser.",
+      "pertanyaan": "Mengapa pada aplikasi latihan di web peramban (browser) ini kita menyimulasikan input data pengguna menggunakan variabel di baris awal kode?",
+      "kode": null,
+      "opsi": [
+        "Karena Python tidak memiliki perintah bawaan sama sekali untuk menerima input dari pengguna",
+        "Karena lingkungan web browser belum mendukung perintah input() interaktif, sehingga nilai masukan disimulasikan lewat variabel",
+        "Karena perintah input() hanya bisa dijalankan jika komputer terhubung ke jaringan internet berkecepatan tinggi",
+        "Karena variabel yang diisi di awal program nilainya tidak akan pernah bisa diubah lagi"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Di komputer lokal sungguhan, Python menyediakan perintah bawaan input() untuk menerima masukan langsung lewat papan ketik. Namun, editor latihan di web ini menggunakan teknologi Pyodide di peramban yang tidak mendukung jendela input interaktif langsung. Oleh sebab itu, kita menyimulasikan input menggunakan variabel agar siswa tetap leluasa mengubah nilai data. Opsi A salah karena Python memiliki perintah input() bawaan. Opsi C salah karena perintah input() tidak memerlukan koneksi internet khusus. Opsi D salah karena nilai variabel di Python selalu bisa diubah kapan saja.",
+      "petunjuk": "Ingat penjelasan di awal materi Bab 3 tentang keterbatasan peramban web dan bagaimana kita tetap bisa mengubah nilai di baris atas."
+    },
+    {
+      "id": 2,
+      "tingkat": "mudah",
+      "capaian": "Membedakan fungsi operator pembagian bulat (//) dan operator modulo (%) dalam konteks kehidupan sehari-hari.",
+      "pertanyaan": "Dalam analogi kasir kantin, kamu memiliki uang Rp 10.000 untuk membeli gorengan seharga Rp 3.000 per biji. Operator mana yang tepat untuk menghitung sisa uang koin kembalian yang tidak cukup membeli satu gorengan lagi?",
+      "kode": null,
+      "opsi": [
+        "Operator pembagian bulat (//) karena membuang angka desimal di belakang koma",
+        "Operator garis miring tunggal (/) karena membagi uang menjadi pecahan desimal",
+        "Operator bintang ganda (**) karena melipatgandakan sisa uang kembalian",
+        "Operator modulo (%) karena mencari sisa hasil pembagian bilangan bulat"
+      ],
+      "jawaban_benar": 3,
+      "pembahasan": "Operator modulo (%) digunakan khusus untuk mencari sisa hasil pembagian dua bilangan bulat. Pada ekspresi 10000 % 3000, hasilnya adalah 1000 yang merupakan sisa uang koin kembalian. Opsi A salah karena pembagian bulat (//) menghasilkan 3, yaitu jumlah biji gorengan yang berhasil dibeli, bukan uang sisa. Opsi B salah karena operator / menghasilkan pecahan float 3.333... bukan sisa uang utuh. Opsi C salah karena ** adalah operator pemangkatan (eksponen), bukan sisa bagi.",
+      "petunjuk": "Pikirkan operator yang mencari sisa bagi, bukan jumlah barang yang terbeli."
+    },
+    {
+      "id": 3,
+      "tingkat": "sedang",
+      "capaian": "Menghitung hasil ekspresi aritmatika dengan memperhatikan urutan operasi (operator precedence).",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "hasil = 10 + 3 * 2\nprint(hasil)",
+      "opsi": [
+        "16",
+        "26",
+        "60",
+        "13"
+      ],
+      "jawaban_benar": 0,
+      "pembahasan": "Berdasarkan aturan urutan operasi matematika (operator precedence), Python selalu mendahulukan perkalian (*) daripada penjumlahan (+). Operasi 3 * 2 dihitung terlebih dahulu menghasilkan 6, lalu 10 + 6 menghasilkan 16. Opsi B (26) adalah jebakan umum jika menghitung dari kiri ke kanan (10 + 3 = 13, lalu 13 * 2 = 26) tanpa memakai tanda kurung. Opsi C (60) salah karena mengalikan semua angka. Opsi D (13) salah karena mengabaikan operasi perkalian.",
+      "petunjuk": "Ingat aturan matematika: operasi mana yang harus dikerjakan lebih dulu antara tambah dan kali?"
+    },
+    {
+      "id": 4,
+      "tingkat": "sedang",
+      "capaian": "Menentukan hasil evaluasi operator perbandingan yang menghasilkan nilai bertipe boolean.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "uang_bayar = 20000\ntotal_belanja = 15000\ncek_cukup = uang_bayar >= total_belanja\nprint(cek_cukup)",
+      "opsi": [
+        "False",
+        "5000",
+        "True",
+        "20000"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Operator perbandingan >= memeriksa apakah nilai di sisi kiri lebih besar atau sama dengan nilai di sisi kanan. Karena uang_bayar bernilai 20000 dan total_belanja bernilai 15000, pernyataan 20000 >= 15000 bernilai benar, sehingga variabel cek_cukup menyimpan nilai boolean True. Opsi A (False) salah karena 20000 jelas lebih besar dari 15000. Opsi B (5000) salah karena operator perbandingan tidak menghitung selisih uang kembalian. Opsi D (20000) salah karena perbandingan menghasilkan boolean, bukan nilai angka aslinya.",
+      "petunjuk": "Operator perbandingan (>=) selalu menghasilkan nilai boolean: True atau False."
+    },
+    {
+      "id": 5,
+      "tingkat": "sulit",
+      "capaian": "Mendeteksi dan memperbaiki kesalahan penulisan operator persentase (SyntaxError) pada program Python.",
+      "pertanyaan": "Seorang siswa ingin menghitung diskon sebesar 10% dari harga barang, namun kode berikut menghasilkan SyntaxError saat dijalankan. Apa penyebab kesalahan tersebut dan bagaimana perbaikan yang tepat?",
+      "kode": "harga = 20000\ndiskon = 10%\ntotal = harga - diskon\nprint(total)",
+      "opsi": [
+        "Tanda kurung harus ditambahkan di sekitar angka 10% menjadi (10%) agar dikenali sebagai angka bulat",
+        "Tanda % di Python adalah operator modulo bukan lambang persen; hitung diskon dengan rumus matematika desimal seperti 0.10 * harga",
+        "Variabel harga harus diubah menjadi tipe string dengan menulis harga = \"20000\" sebelum dihitung diskon",
+        "Operator pengurangan (-) pada baris ketiga harus diganti dengan operator pembagian bulat (//)"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Di Python, simbol % bukanlah tanda persen, melainkan operator modulo yang memerlukan dua angka (misalnya a % b) untuk mencari sisa bagi. Menulis 10% tanpa angka di kanannya memicu SyntaxError: invalid syntax. Untuk menghitung persentase di Python, gunakan perhitungan matematika seperti (10 / 100) * harga atau 0.10 * harga. Opsi A salah karena membungkus dengan tanda kurung (10%) tetap menghasilkan SyntaxError. Opsi C salah karena mengubah harga menjadi string justru akan memicu TypeError saat dikurangi. Opsi D salah karena pengurangan harga dengan diskon sudah benar, letak kesalahannya ada pada penulisan 10%.",
+      "petunjuk": "Perhatikan simbol % pada baris 2. Ingat bahwa di Python % bukan simbol persen matematika."
+    }
+  ]
+}

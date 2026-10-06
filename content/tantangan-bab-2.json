@@ -1,0 +1,62 @@
+{
+  "bab": "bab-2",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Kartu Perkenalan Siswa",
+      "cerita": "Sebagai siswa baru jurusan Rekayasa Perangkat Lunak, kamu diminta membuat program perkenalan diri. Simpan data dirimu ke dalam variabel, lalu gabungkan ke dalam satu kalimat yang ramah menggunakan f-string.",
+      "instruksi": "Buat tiga variabel: nama bernilai \"Siti Nurhaliza\", kelas bernilai \"X RPL 2\", dan jurusan bernilai \"Rekayasa Perangkat Lunak\". Cetak tepat satu baris kalimat perkenalan persis seperti contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Buat variabel dan cetak perkenalan diri\nnama = \"Siti Nurhaliza\"\nkelas = \"X RPL 2\"\njurusan = \"Rekayasa Perangkat Lunak\"\n\n# Cetak satu kalimat perkenalan menggunakan f-string di bawah ini",
+      "output_diharapkan": "Halo, nama saya Siti Nurhaliza dari kelas X RPL 2, jurusan Rekayasa Perangkat Lunak.",
+      "contoh_solusi": "# Solusi: Kartu Perkenalan Siswa\nnama = \"Siti Nurhaliza\"\nkelas = \"X RPL 2\"\njurusan = \"Rekayasa Perangkat Lunak\"\nprint(f\"Halo, nama saya {nama} dari kelas {kelas}, jurusan {jurusan}.\")",
+      "petunjuk": [
+        "Periksa tiga variabel yang sudah ada di kode awal: nama, kelas, dan jurusan.",
+        "Gunakan perintah print() dengan awalan huruf f sebelum tanda kutip untuk membuat f-string.",
+        "Sisipkan setiap variabel di dalam kurung kurawal: print(f\"Halo, nama saya {nama} dari kelas {kelas}, jurusan {jurusan}.\")"
+      ],
+      "kesalahan_umum": [
+        "Lupa menuliskan huruf f sebelum tanda kutip pembuka sehingga kurung kurawal tercetak mentah apa adanya.",
+        "Tanda baca seperti koma atau titik tidak sesuai persis dengan contoh output yang diminta."
+      ]
+    },
+    {
+      "id": 2,
+      "tingkat": "sedang",
+      "judul": "Struk Jajan Kantin",
+      "cerita": "Kantin sekolah membutuhkan program pencatat struk belanja. Kamu diminta mencatat harga beberapa menu ke dalam variabel, menghitung total bayar, lalu mencetak struk secara rapi.",
+      "instruksi": "Simpan harga tiga menu ke dalam variabel: nasi_goreng = 12000, es_teh = 5000, dan gorengan = 3000. Buat variabel total yang menjumlahkan ketiga harga tersebut menggunakan operator +. Cetak struk 5 baris persis seperti contoh output menggunakan f-string untuk setiap item dan totalnya.",
+      "kode_awal": "# Tantangan: Cetak Struk Jajan Kantin\nnasi_goreng = 12000\nes_teh = 5000\ngorengan = 3000\n\n# 1. Hitung total harga jajan di bawah ini\n\n\n# 2. Cetak struk belanja menggunakan f-string\nprint(\"=== STRUK JAJAN ===\")",
+      "output_diharapkan": "=== STRUK JAJAN ===\nNasi Goreng : Rp 12000\nEs Teh      : Rp 5000\nGorengan    : Rp 3000\nTOTAL       : Rp 20000",
+      "contoh_solusi": "# Solusi: Struk Jajan Kantin\nnasi_goreng = 12000\nes_teh = 5000\ngorengan = 3000\ntotal = nasi_goreng + es_teh + gorengan\n\nprint(\"=== STRUK JAJAN ===\")\nprint(f\"Nasi Goreng : Rp {nasi_goreng}\")\nprint(f\"Es Teh      : Rp {es_teh}\")\nprint(f\"Gorengan    : Rp {gorengan}\")\nprint(f\"TOTAL       : Rp {total}\")",
+      "petunjuk": [
+        "Hitung total harga dengan menjumlahkan ketiga variabel menggunakan operator tambah (+).",
+        "Gunakan variabel total = nasi_goreng + es_teh + gorengan untuk menyimpan hasil penjumlahan.",
+        "Gunakan print(f\"Nasi Goreng : Rp {nasi_goreng}\") untuk mencetak baris pertama, lalu lanjutkan untuk menu lainnya dan TOTAL."
+      ],
+      "kesalahan_umum": [
+        "Menuliskan harga dalam tanda kutip (misalnya \"12000\") sehingga angka dianggap string dan tidak bisa dihitung matematikanya.",
+        "Jumlah spasi sebelum titik dua (:) tidak pas sehingga kolom titik dua tidak rata."
+      ]
+    },
+    {
+      "id": 3,
+      "tingkat": "sulit",
+      "judul": "Konversi Tipe Data Nilai",
+      "cerita": "Nilai ujian siswa pada database sekolah awalnya tersimpan dalam bentuk teks string \"85\". Guru meminta kamu mengonversinya menjadi bilangan bulat (int), menambahkan bonus keaktifan 5 poin, lalu menampilkan nilai awal, bonus, dan nilai akhir beserta tipe datanya.",
+      "instruksi": "Diberikan variabel nilai_str = \"85\" dan bonus = 5. Buat variabel nilai_int dengan mengonversi nilai_str menggunakan int(). Buat variabel nilai_akhir yang menjumlahkan nilai_int dengan bonus. Cetak tiga baris tepat seperti contoh output dengan format nilai beserta keterangan tipenya.",
+      "kode_awal": "# Tantangan: Konversi Tipe Data\nnilai_str = \"85\"\nbonus = 5\n\n# 1. Konversi nilai_str menjadi integer menggunakan int()\n\n\n# 2. Hitung nilai_akhir (nilai_int ditambah bonus)\n\n\n# 3. Cetak hasil sesuai format output menggunakan f-string",
+      "output_diharapkan": "Nilai awal  : 85 (tipe: str)\nBonus       : 5 (tipe: int)\nNilai akhir : 90 (tipe: int)",
+      "contoh_solusi": "# Solusi: Konversi Tipe Data Nilai\nnilai_str = \"85\"\nbonus = 5\nnilai_int = int(nilai_str)\nnilai_akhir = nilai_int + bonus\n\nprint(f\"Nilai awal  : {nilai_str} (tipe: str)\")\nprint(f\"Bonus       : {bonus} (tipe: int)\")\nprint(f\"Nilai akhir : {nilai_akhir} (tipe: int)\")",
+      "petunjuk": [
+        "Data nilai_str masih berupa teks (str) sehingga tidak bisa langsung dijumlahkan. Kamu perlu mengonversinya terlebih dahulu ke bilangan bulat (int).",
+        "Gunakan fungsi int(nilai_str) untuk mengubah teks menjadi angka, lalu simpan ke variabel baru nilai_int. Setelah itu, jumlahkan nilai_int + bonus.",
+        "Cetak tiga baris memakai f-string. Contoh baris pertama: print(f\"Nilai awal  : {nilai_str} (tipe: str)\"). Lakukan hal serupa untuk baris Bonus dan Nilai akhir."
+      ],
+      "kesalahan_umum": [
+        "Mencoba menjumlahkan nilai_str + bonus secara langsung sehingga muncul TypeError: can only concatenate str (not \"int\") to str.",
+        "Format teks atau jumlah spasi sebelum titik dua tidak sama persis dengan contoh output."
+      ]
+    }
+  ]
+}

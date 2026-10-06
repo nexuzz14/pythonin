@@ -1,0 +1,86 @@
+{
+  "bab": "bab-5",
+  "judul_kuis": "Kuis Bab 5 — Perulangan (for dan while)",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan batas awal dan batas akhir fungsi range() dalam perulangan for.",
+      "pertanyaan": "Berapakah urutan deret angka yang dihasilkan oleh perintah range(1, 5) saat digunakan di dalam perulangan for?",
+      "kode": null,
+      "opsi": [
+        "0, 1, 2, 3, 4",
+        "1, 2, 3, 4, 5",
+        "1, 2, 3, 4",
+        "2, 3, 4, 5"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Fungsi range(1, 5) menghasilkan urutan angka mulai dari batas awal 1 hingga tepat sebelum batas akhir 5 (bersifat exclusive). Oleh karena itu, angka yang dihasilkan adalah 1, 2, 3, dan 4. Opsi A salah karena perulangan dimulai dari angka 1, bukan dari 0. Opsi B salah karena angka 5 merupakan batas akhir yang tidak disertakan dalam perulangan. Opsi D salah karena angka 1 tetap disertakan sebagai nilai awal perulangan.",
+      "petunjuk": "Ingat bahwa nilai batas akhir pada fungsi range() tidak pernah diikutkan ke dalam perulangan."
+    },
+    {
+      "id": 2,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan bahaya perulangan tanpa henti (infinite loop) pada while jika lupa memperbarui variabel counter.",
+      "pertanyaan": "Apa yang akan terjadi jika kita membuat perulangan while, tetapi lupa menuliskan baris penambahan variabel counter di dalam badan loop?",
+      "kode": null,
+      "opsi": [
+        "Kondisi while selalu bernilai True sehingga terjadi infinite loop yang membuat program macet",
+        "Program otomatis berhenti setelah mengulang sebanyak sepuluh kali",
+        "Python otomatis menambahkan baris counter += 1 pada akhir perulangan",
+        "Perulangan while secara otomatis beralih menjadi perulangan for dengan range()"
+      ],
+      "jawaban_benar": 0,
+      "pembahasan": "Perulangan while terus berjalan selama kondisi pengujian bernilai True. Jika nilai variabel counter tidak pernah diubah di dalam loop, kondisi akan selalu bernilai True dan perulangan tidak pernah berhenti. Kondisi galat ini disebut infinite loop dan menyebabkan program membeku. Opsi B salah karena Python tidak memiliki batasan penghentian otomatis sepuluh kali. Opsi C salah karena Python tidak pernah menambahkan kode perbaikan secara otomatis. Opsi D salah karena tipe perulangan tidak dapat berganti secara otomatis.",
+      "petunjuk": "Pikirkan apa yang terjadi pada kondisi perulangan jika nilai variabel counter tidak pernah mengalami perubahan."
+    },
+    {
+      "id": 3,
+      "tingkat": "sedang",
+      "capaian": "Menelusuri alur perulangan for dengan variabel akumulator untuk menghitung nilai akhir.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "total = 0\n\nfor angka in range(1, 5):\n    total += angka\n\nprint(total)",
+      "opsi": [
+        "4",
+        "15",
+        "14",
+        "10"
+      ],
+      "jawaban_benar": 3,
+      "pembahasan": "Perulangan for berjalan untuk nilai angka = 1, 2, 3, dan 4. Nilai 5 tidak diikutkan karena batas akhir range() bersifat exclusive. Pada setiap putaran, nilai angka ditambahkan ke variabel total: 0 + 1 = 1, 1 + 2 = 3, 3 + 3 = 6, dan 6 + 4 = 10. Di akhir program, print(total) mencetak angka 10. Opsi A salah karena 4 adalah nilai angka pada putaran terakhir, bukan hasil penjumlahan akumulator. Opsi B (15) adalah jebakan umum jika salah mengira angka 5 ikut dijumlahkan. Opsi C salah karena kesalahan hitung penjumlahan deret.",
+      "petunjuk": "Hitung hasil penjumlahan variabel angka dari putaran 1 hingga putaran 4 ke dalam variabel total."
+    },
+    {
+      "id": 4,
+      "tingkat": "sedang",
+      "capaian": "Menelusuri pengaruh perintah continue terhadap alur eksekusi perulangan for.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "langkah = 0\n\nfor i in range(1, 6):\n    if i == 3:\n        continue\n    langkah += 1\n\nprint(langkah)",
+      "opsi": [
+        "3",
+        "4",
+        "5",
+        "2"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Fungsi range(1, 6) menghasilkan angka 1, 2, 3, 4, dan 5 (total 5 putaran). Ketika i bernilai 3, kondisi if i == 3 terpenuhi sehingga perintah continue dijalankan. Perintah continue langsung melompati sisa kode pada putaran tersebut (baris langkah += 1 dilewati) dan lanjut ke putaran berikutnya (i = 4). Akibatnya, variabel langkah hanya bertambah saat i bernilai 1, 2, 4, dan 5, menghasilkan total 4. Opsi A salah karena tertukar dengan break yang akan menghentikan loop di angka 3. Opsi C salah karena mengabaikan fungsi continue yang melewati satu putaran. Opsi D salah karena proses perulangan tetap berlanjut setelah angka 3 dilewati.",
+      "petunjuk": "Perhatikan apa yang dilakukan perintah continue saat variabel i bernilai 3: apakah keluar dari loop atau hanya melompati satu putaran?"
+    },
+    {
+      "id": 5,
+      "tingkat": "sulit",
+      "capaian": "Mendeteksi dan memperbaiki kesalahan NameError pada perulangan while akibat belum menginisialisasi variabel counter.",
+      "pertanyaan": "Seorang siswa ingin membuat hitung mundur dari angka 3 sampai 1 menggunakan while, namun kode berikut menghasilkan NameError saat dijalankan. Apa penyebab kesalahan tersebut dan bagaimana perbaikannya?",
+      "kode": "while hitungan > 0:\n    print(hitungan)\n    hitungan -= 1",
+      "opsi": [
+        "Tanda perbandingan > harus diubah menjadi < pada kondisi while",
+        "Variabel hitungan harus dibuat dan diisi nilai awal (misalnya hitungan = 3) sebelum baris while",
+        "Baris print(hitungan) harus diletakkan sejajar di luar blok perulangan while",
+        "Perintah hitungan -= 1 harus diganti dengan hitungan += 1"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Perulangan while mengevaluasi kondisi hitungan > 0 pada awal putaran. Karena variabel hitungan belum pernah dibuat sebelumnya, Python tidak mengenali nama tersebut dan memunculkan NameError. Perbaikannya adalah menyiapkan inisialisasi variabel counter, misalnya menuliskan hitungan = 3 di baris sebelum while. Opsi A salah karena mengubah tanda > menjadi < tidak menyelesaikan ketiadaan variabel. Opsi C salah karena perintah print() harus berada di dalam badan loop agar dicetak berulang kali. Opsi D salah karena mengubah tanda pengurangan menjadi penambahan justru salah arah untuk hitung mundur.",
+      "petunjuk": "Perhatikan baris pertama: apakah variabel hitungan sudah dibuat dan diberi nilai sebelum diuji oleh while?"
+    }
+  ]
+}

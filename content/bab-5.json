@@ -1,0 +1,134 @@
+{
+  "id": "bab-5",
+  "judul": "Perulangan: Mengulang Instruksi dengan for dan while",
+  "tujuan": [
+    "Menjelaskan perbedaan perulangan for dan while serta memilih jenis loop yang tepat sesuai kebutuhan program.",
+    "Menerapkan perulangan for dengan fungsi range() dan perulangan while dengan variabel counter secara aman.",
+    "Mengendalikan alur loop memakai break dan continue serta mencegah kesalahan infinite loop dan off-by-one."
+  ],
+  "prasyarat": [
+    "Memahami struktur percabangan if, elif, else dan aturan indentasi blok kode dari Bab 4.",
+    "Memahami operator perbandingan dan operator penugasan gabungan seperti += dan -= dari Bab 3."
+  ],
+  "ringkasan": "Bab ini membahas perintah perulangan for dan while untuk mengulang instruksi kode secara otomatis dan efisien. Kamu juga akan mempelajari penggunaan range(), pengendali loop break dan continue, serta teknik mencegah infinite loop.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-5-1",
+      "judul": "Konsep Perulangan dan Perintah for dengan range()",
+      "penjelasan": "Dalam pemrograman, kita sering perlu mengulang perintah yang sama berkali-kali. Menulis perintah print() berulang kali tentu melelahkan dan membuat kode panjang. Perintah for digunakan untuk mengulang blok kode sejumlah putaran tertentu. Fungsi range() membantu menentukan awal, akhir, dan langkah perulangan tersebut.",
+      "analogi": "Perulangan for mirip jadwal sekolah Senin sampai Jumat. Kamu tahu pasti batas mulainya hari Senin dan berakhir hari Jumat. Selama lima hari itu, kamu mengulang rutinitas yang sama.",
+      "contoh_kode": "# Mengulang sapaan latihan coding sebanyak 4 kali\nprint(\"Mulai latihan perulangan for:\")\nfor putaran in range(1, 5):\n    print(f\"Latihan ke-{putaran}: Baris kode berhasil dijalankan.\")\n\nprint(\"Latihan perulangan for selesai.\")",
+      "output_contoh": "Mulai latihan perulangan for:\nLatihan ke-1: Baris kode berhasil dijalankan.\nLatihan ke-2: Baris kode berhasil dijalankan.\nLatihan ke-3: Baris kode berhasil dijalankan.\nLatihan ke-4: Baris kode berhasil dijalankan.\nLatihan perulangan for selesai.",
+      "penjelasan_kode": [
+        "Baris 3: Perintah for memulai perulangan dan menyimpan angka putaran aktif ke variabel putaran.",
+        "Baris 3: Fungsi range(1, 5) menghasilkan urutan angka 1, 2, 3, dan 4.",
+        "Baris 4: Baris berindentasi 4 spasi ini diulang sebanyak 4 kali sesuai isi range().",
+        "Baris 6: Perintah print() di tepi kiri berjalan sekali setelah seluruh perulangan selesai."
+      ],
+      "catatan_umum_salah": "Mengira range(1, 5) menghasilkan angka sampai 5. Angka batas akhir pada range() tidak diikutkan, sehingga range(1, 5) berhenti di angka 4.",
+      "coba_sendiri": "Ubah range(1, 5) menjadi range(1, 6) lalu jalankan program. Amati bahwa latihan bertambah hingga ke-5."
+    },
+    {
+      "id": "bab-5-2",
+      "judul": "Perulangan while Berdasarkan Kondisi dan Variabel Counter",
+      "penjelasan": "Perulangan while menjalankan blok kode berulang kali selama suatu kondisi bernilai True. Kita menggunakan while saat jumlah pengulangan belum diketahui secara pasti di awal. Agar perulangan berhenti, kita membutuhkan variabel pencacah atau counter. Nilai counter harus diubah di dalam badan loop sampai kondisi menjadi False.",
+      "analogi": "Perulangan while mirip belajar sebelum ujian: 'Selama kamu belum paham materi, baca ulang catatannya.' Kamu mengulang sampai akhirnya kamu paham.",
+      "contoh_kode": "# Simulasi hitung mundur peluit praktik olahraga\ndetik = 3\n\nprint(\"Hitung mundur dimulai:\")\nwhile detik > 0:\n    print(f\"Waktu tersisa: {detik} detik\")\n    detik -= 1\n\nprint(\"Peluit berbunyi: Mulai praktik!\")",
+      "output_contoh": "Hitung mundur dimulai:\nWaktu tersisa: 3 detik\nWaktu tersisa: 2 detik\nWaktu tersisa: 1 detik\nPeluit berbunyi: Mulai praktik!",
+      "penjelasan_kode": [
+        "Baris 2: Variabel detik diatur bernilai 3 sebagai nilai awal counter.",
+        "Baris 5: Perintah while memeriksa apakah nilai detik masih lebih besar dari 0.",
+        "Baris 7: Perintah detik -= 1 mengurangi nilai detik sebesar 1 pada setiap putaran.",
+        "Baris 9: Saat nilai detik menjadi 0, kondisi bernilai False dan loop berhenti."
+      ],
+      "catatan_umum_salah": "Lupa menulis baris perubahan counter seperti detik -= 1. Akibatnya terjadi infinite loop, yaitu perulangan tanpa henti yang membuat program macet.",
+      "coba_sendiri": "Ubah nilai awal detik menjadi 5 pada baris kedua. Jalankan program untuk melihat hitung mundur dari angka 5."
+    },
+    {
+      "id": "bab-5-3",
+      "judul": "Mengendalikan Alur Loop dengan break dan continue",
+      "penjelasan": "Python menyediakan perintah khusus untuk mengubah alur normal perulangan. Perintah break berfungsi menghentikan perulangan seketika dan langsung keluar dari blok loop. Sementara itu, perintah continue melewati sisa perintah putaran saat ini lalu langsung melompat ke putaran berikutnya. Kedua perintah ini biasanya digabungkan dengan percabangan if.",
+      "analogi": "Perintah break mirip bel istirahat berbunyi mendadak sehingga kelas langsung bubar. Perintah continue mirip melewati soal ulangan yang sulit untuk mengerjakan soal berikutnya.",
+      "contoh_kode": "# Simulasi pemeriksaan antrean giliran instalasi software di lab\nprint(\"Pemeriksaan antrean komputer:\")\nfor nomor in range(1, 6):\n    if nomor == 2:\n        print(f\"Komputer {nomor}: Lewati sementara (sedang perbaikan hardware).\")\n        continue\n\n    if nomor == 5:\n        print(f\"Komputer {nomor}: Waktu lab habis, hentikan antrean!\")\n        break\n\n    print(f\"Komputer {nomor}: Instalasi software sistem operasi selesai.\")\n\nprint(\"Pemeriksaan antrean komputer selesai.\")",
+      "output_contoh": "Pemeriksaan antrean komputer:\nKomputer 1: Instalasi software sistem operasi selesai.\nKomputer 2: Lewati sementara (sedang perbaikan hardware).\nKomputer 3: Instalasi software sistem operasi selesai.\nKomputer 4: Instalasi software sistem operasi selesai.\nKomputer 5: Waktu lab habis, hentikan antrean!\nPemeriksaan antrean komputer selesai.",
+      "penjelasan_kode": [
+        "Baris 4: Perintah if mendeteksi saat giliran tiba di komputer nomor 2.",
+        "Baris 6: Perintah continue melompati perintah instalasi komputer 2 dan langsung lanjut ke komputer 3.",
+        "Baris 8: Perintah if memeriksa apakah komputer sudah mencapai nomor 5.",
+        "Baris 10: Perintah break langsung menghentikan seluruh perulangan tanpa mengecek komputer berikutnya."
+      ],
+      "catatan_umum_salah": "Menulis perintah kode setelah baris break di blok yang sama. Perintah di bawah break tidak akan pernah dijalankan karena perulangan sudah berhenti.",
+      "coba_sendiri": "Ganti kondisi nomor == 5 menjadi nomor == 4. Jalankan program untuk melihat perulangan yang berhenti lebih awal di komputer nomor 4."
+    },
+    {
+      "id": "bab-5-4",
+      "judul": "Perulangan Bersarang (Nested Loop) dan Variabel Akumulator",
+      "penjelasan": "Perulangan bersarang atau nested loop adalah struktur loop yang berada di dalam badan loop lain. Loop luar akan menjalankan seluruh putaran loop dalam sebelum berpindah ke putaran berikutnya. Kita juga sering menggunakan variabel akumulator untuk mengumpulkan jumlah total nilai dari setiap putaran. Variabel akumulator harus disiapkan di luar perulangan sebelum loop dimulai.",
+      "analogi": "Nested loop mirip jadwal piket harian: setiap hari Senin sampai Jumat (loop luar), kamu membersihkan 3 baris meja kelas (loop dalam).",
+      "contoh_kode": "# Simulasi pemeriksaan komputer di 2 baris meja laboratorium\ntotal_komputer = 0\n\nprint(\"Pemeriksaan laboratorium komputer:\")\nfor baris in range(1, 3):\n    for meja in range(1, 4):\n        total_komputer += 1\n        print(f\"Baris {baris} - Meja {meja}: Komputer ke-{total_komputer} normal.\")\n\nprint(f\"Pemeriksaan selesai. Total komputer dicek: {total_komputer}\")",
+      "output_contoh": "Pemeriksaan laboratorium komputer:\nBaris 1 - Meja 1: Komputer ke-1 normal.\nBaris 1 - Meja 2: Komputer ke-2 normal.\nBaris 1 - Meja 3: Komputer ke-3 normal.\nBaris 2 - Meja 1: Komputer ke-4 normal.\nBaris 2 - Meja 2: Komputer ke-5 normal.\nBaris 2 - Meja 3: Komputer ke-6 normal.\nPemeriksaan selesai. Total komputer dicek: 6",
+      "penjelasan_kode": [
+        "Baris 2: Variabel total_komputer disiapkan sebelum loop sebagai akumulator penghitung seluruh komputer.",
+        "Baris 5: Loop luar menentukan nomor baris meja dari 1 sampai 2.",
+        "Baris 6: Loop dalam menentukan nomor meja dari 1 sampai 3 untuk setiap baris meja.",
+        "Baris 7: Akumulator total_komputer bertambah 1 setiap kali satu meja berhasil diperiksa.",
+        "Baris 10: Hasil akhir akumulator dicetak sekali setelah seluruh perulangan selesai berjalan."
+      ],
+      "catatan_umum_salah": "Menulis inisialisasi total_komputer = 0 di dalam loop. Akibatnya nilai akumulator terhapus dan terulang dari awal pada setiap putaran perulangan.",
+      "coba_sendiri": "Ubah range(1, 3) pada loop baris menjadi range(1, 4). Jalankan program untuk melihat hasil pemeriksaan 3 baris meja dengan total 9 komputer."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Lengkapi program tabel perkalian bilangan 7 untuk siswa kelas X RPL. Gunakan perulangan for dengan range(1, 6) untuk mengalikan bilangan dari angka 1 sampai 5. Pada setiap putaran, hitung nilai perkalian lalu cetak dengan format: '{bilangan} x {i} = {hasil}'.",
+    "kode_awal": "# Simulasi bilangan perkalian\nbilangan = 7\n\nprint(f\"=== TABEL PERKALIAN {bilangan} ===\")\n# Tulis perulangan for dengan range(1, 6) di bawah ini\n# Kalikan bilangan dengan setiap angka lalu cetak hasilnya\n\n\nprint(\"Tabel perkalian selesai.\")",
+    "output_diharapkan": "=== TABEL PERKALIAN 7 ===\n7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\nTabel perkalian selesai."
+  },
+  "poin_penting": [
+    "Gunakan for dengan range() jika jumlah putaran sudah pasti, dan gunakan while jika perulangan bergantung pada kondisi tertentu.",
+    "Perulangan while wajib memiliki perubahan nilai counter agar tidak mengalami infinite loop yang membekukan program.",
+    "Perintah break menghentikan seluruh perulangan seketika, sedangkan continue hanya melompati putaran saat ini."
+  ],
+  "istilah": [
+    {
+      "istilah": "perulangan (loop)",
+      "arti": "Mekanisme pemrograman untuk mengeksekusi sekumpulan instruksi secara berulang selama syarat tertentu terpenuhi."
+    },
+    {
+      "istilah": "for",
+      "arti": "Perintah perulangan di Python untuk mengulang blok kode sebanyak jangkauan atau urutan data yang ditentukan."
+    },
+    {
+      "istilah": "range()",
+      "arti": "Fungsi bawaan Python untuk menghasilkan urutan deret angka dengan batas awal, akhir, dan langkah tertentu."
+    },
+    {
+      "istilah": "while",
+      "arti": "Perintah perulangan yang terus menjalankan blok kode selama kondisi pengujian bernilai True."
+    },
+    {
+      "istilah": "counter",
+      "arti": "Variabel pencacah yang nilainya diperbarui secara berkala pada setiap putaran perulangan."
+    },
+    {
+      "istilah": "infinite loop",
+      "arti": "Perulangan tanpa henti yang terjadi karena kondisi pengujian selalu bernilai True dan tidak pernah berhenti."
+    },
+    {
+      "istilah": "break",
+      "arti": "Perintah untuk menghentikan perulangan seketika dan langsung melompat keluar dari badan loop."
+    },
+    {
+      "istilah": "continue",
+      "arti": "Perintah untuk melompati sisa kode pada putaran saat ini dan langsung berpindah ke putaran berikutnya."
+    },
+    {
+      "istilah": "perulangan bersarang (nested loop)",
+      "arti": "Struktur perulangan yang diletakkan di dalam blok badan perulangan lainnya."
+    },
+    {
+      "istilah": "akumulator",
+      "arti": "Variabel penampung nilai yang terus bertambah atau berakumulasi sepanjang proses perulangan berlangsung."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "bab": "bab-4",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Cek Kelulusan Ujian Praktik",
+      "cerita": "Guru kejuruan RPL menetapkan standar batas kelulusan kuis pemrograman sebesar 75. Kamu diminta membuat program yang memeriksa nilai ujian siswa. Jika nilai mencapai 75 atau lebih, siswa dinyatakan LULUS. Selain itu, siswa dinyatakan TIDAK LULUS.",
+      "instruksi": "Diberikan variabel nilai = 80. Buat struktur percabangan if dan else untuk mengecek nilai tersebut. Jika nilai >= 75, cetak tepat: 'Nilai: 80 - LULUS'. Jika nilai di bawah 75, cetak: 'Nilai: {nilai} - TIDAK LULUS'. Gunakan f-string saat mencetak hasil.",
+      "kode_awal": "# Tantangan: Cek Kelulusan Ujian Praktik\n# Simulasi input nilai ujian siswa\nnilai = 80\n\n# Tulis percabangan if dan else di bawah ini\n",
+      "output_diharapkan": "Nilai: 80 - LULUS",
+      "contoh_solusi": "# Solusi: Cek Kelulusan Ujian Praktik\nnilai = 80\n\nif nilai >= 75:\n    print(f\"Nilai: {nilai} - LULUS\")\nelse:\n    print(f\"Nilai: {nilai} - TIDAK LULUS\")",
+      "petunjuk": [
+        "Periksa variabel nilai yang telah disiapkan di baris awal kode.",
+        "Gunakan operator perbandingan >= 75 pada baris kondisi if.",
+        "Cetak pesan kelulusan memakai f-string di dalam blok if dan blok else: print(f\"Nilai: {nilai} - LULUS\")."
+      ],
+      "kesalahan_umum": [
+        "Lupa menulis tanda titik dua (:) di ujung baris if atau else sehingga muncul pesan SyntaxError.",
+        "Lupa memberi indentasi 4 spasi pada baris print() di bawah pernyataan kondisi."
+      ]
+    },
+    {
+      "id": 2,
+      "tingkat": "sedang",
+      "judul": "Sistem Grading Rapor Produktif",
+      "cerita": "Sekolah menerapkan lima predikat nilai rapor produktif RPL: A (>= 90), B (>= 80), C (>= 70), D (>= 60), dan E (< 60). Kamu diminta membuat penentu predikat otomatis berdasarkan nilai ujian siswa.",
+      "instruksi": "Diberikan variabel nilai = 73. Buat struktur percabangan if-elif-else bertingkat dari predikat A hingga E. Simpan predikat ke variabel grade dan keterangan ke variabel keterangan ('Sangat Baik', 'Baik', 'Cukup', 'Kurang', 'Sangat Kurang'). Cetak tepat dua baris rapor persis seperti contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Sistem Grading Rapor Produktif\n# Simulasi input nilai ujian siswa\nnilai = 73\n\n# 1. Tentukan variabel grade dan keterangan dengan if-elif-else\n\n\n# 2. Cetak hasil sesuai format menggunakan f-string\n",
+      "output_diharapkan": "Nilai: 73\nGrade: C (Cukup)",
+      "contoh_solusi": "# Solusi: Sistem Grading Rapor Produktif\nnilai = 73\n\nif nilai >= 90:\n    grade = \"A\"\n    keterangan = \"Sangat Baik\"\nelif nilai >= 80:\n    grade = \"B\"\n    keterangan = \"Baik\"\nelif nilai >= 70:\n    grade = \"C\"\n    keterangan = \"Cukup\"\nelif nilai >= 60:\n    grade = \"D\"\n    keterangan = \"Kurang\"\nelse:\n    grade = \"E\"\n    keterangan = \"Sangat Kurang\"\n\nprint(f\"Nilai: {nilai}\")\nprint(f\"Grade: {grade} ({keterangan})\")",
+      "petunjuk": [
+        "Susun pengujian nilai mulai dari angka tertinggi (90) turun bertahap hingga blok else untuk nilai terendah.",
+        "Gunakan kata kunci elif untuk mengecek batas nilai 80, 70, dan 60 setelah baris if.",
+        "Di dalam setiap blok, isi variabel grade dan keterangan lalu cetak keduanya memakai f-string."
+      ],
+      "kesalahan_umum": [
+        "Menulis urutan kondisi terbalik (misalnya nilai >= 60 ditaruh paling atas) sehingga nilai tinggi keliru mendapat predikat D.",
+        "Lupa tanda kurung di sekitar variabel keterangan pada baris cetak print()."
+      ]
+    },
+    {
+      "id": 3,
+      "tingkat": "sulit",
+      "judul": "Kalkulator Tarif Parkir Sekolah",
+      "cerita": "Area parkir sekolah memiliki aturan tarif berbeda untuk motor dan mobil. Motor dikenakan Rp 2.000 untuk jam pertama dan ditambah Rp 1.000 per jam berikutnya. Mobil dikenakan Rp 5.000 untuk jam pertama dan ditambah Rp 2.000 per jam berikutnya. Kamu diminta menghitung total tarif parkir menggunakan percabangan bersarang (nested if).",
+      "instruksi": "Diberikan variabel jenis = 'motor' dan lama_jam = 3. Gunakan percabangan luar untuk memeriksa jenis kendaraan ('motor' atau 'mobil'). Di dalam setiap kendaraan, buat percabangan dalam untuk mengecek lama_jam. Jika lama_jam <= 1, kenakan tarif jam pertama. Jika lebih dari 1 jam, hitung tarif tambahan: tarif_awal + (lama_jam - 1) * tarif_per_jam. Cetak tepat tiga baris struk parkir persis sesuai contoh output menggunakan f-string.",
+      "kode_awal": "# Tantangan: Kalkulator Tarif Parkir Sekolah\n# Simulasi input jenis kendaraan dan lama parkir\njenis = \"motor\"\nlama_jam = 3\n\n# 1. Hitung variabel tarif menggunakan percabangan bersarang (nested if)\n\n\n# 2. Cetak rincian tarif parkir menggunakan f-string\n",
+      "output_diharapkan": "Jenis    : motor\nLama     : 3 jam\nTarif    : Rp 4000",
+      "contoh_solusi": "# Solusi: Kalkulator Tarif Parkir Sekolah\njenis = \"motor\"\nlama_jam = 3\n\nif jenis == \"motor\":\n    if lama_jam <= 1:\n        tarif = 2000\n    else:\n        tarif = 2000 + (lama_jam - 1) * 1000\nelif jenis == \"mobil\":\n    if lama_jam <= 1:\n        tarif = 5000\n    else:\n        tarif = 5000 + (lama_jam - 1) * 2000\nelse:\n    tarif = 0\n\nprint(f\"Jenis    : {jenis}\")\nprint(f\"Lama     : {lama_jam} jam\")\nprint(f\"Tarif    : Rp {tarif}\")",
+      "petunjuk": [
+        "Gunakan if jenis == 'motor': pada tingkat luar untuk membedakan aturan kendaraan.",
+        "Di dalam blok motor, buat if lama_jam <= 1: tarif = 2000 dan else: tarif = 2000 + (lama_jam - 1) * 1000.",
+        "Pastikan indentasi baris dalam menjorok 8 spasi, lalu cetak rincian 3 baris memakai f-string."
+      ],
+      "kesalahan_umum": [
+        "Memakai tanda sama dengan tunggal (=) alih-alih tanda perbandingan ganda (==) saat memeriksa jenis kendaraan.",
+        "Salah mengatur spasi indentasi pada percabangan bersarang (nested if) sehingga memicu IndentationError."
+      ]
+    }
+  ]
+}

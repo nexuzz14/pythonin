@@ -1,0 +1,86 @@
+{
+  "bab": "bab-4",
+  "judul_kuis": "Kuis Bab 4 — Percabangan (if / elif / else)",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan aturan indentasi dan tanda titik dua (:) sebagai penanda blok kode percabangan dalam Python.",
+      "pertanyaan": "Bagaimana aturan penulisan yang benar di Python untuk menandai baris perintah yang berada di dalam blok percabangan if?",
+      "kode": null,
+      "opsi": [
+        "Membungkus seluruh baris perintah di dalam blok menggunakan tanda kurung kurawal {}",
+        "Memberi tanda titik dua (:) di ujung baris if dan menulis baris perintah berikutnya menjorok (indentasi spasi)",
+        "Menuliskan kata kunci THEN di antara kondisi if dan baris perintah yang ingin dijalankan",
+        "Menambahkan tanda pagar (#) di awal setiap baris perintah yang masuk ke dalam blok if"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Di Python, blok kode tidak menggunakan tanda kurung kurawal. Blok ditandai dengan tanda titik dua (:) di akhir kondisi dan indentasi spasi pada baris berikutnya. Opsi A salah karena kurung kurawal {} digunakan pada bahasa seperti C atau Java, bukan di Python. Opsi C salah karena Python tidak mengenal kata kunci THEN. Opsi D salah karena tanda pagar (#) digunakan untuk membuat komentar yang diabaikan oleh program.",
+      "petunjuk": "Perhatikan tanda baca di ujung baris if serta posisi spasi pada baris perintah di bawahnya."
+    },
+    {
+      "id": 2,
+      "tingkat": "mudah",
+      "capaian": "Menggunakan operator logika and untuk menggabungkan dua kondisi yang keduanya wajib bernilai True.",
+      "pertanyaan": "Berdasarkan aturan jadwal piket kelas, seorang siswa wajib bertugas jika hari ini adalah hari 'Senin' DAN siswa tersebut terdaftar di 'Kelompok A'. Operator logika mana yang tepat digunakan pada kondisi if agar blok kode hanya berjalan jika kedua syarat tersebut terpenuhi?",
+      "kode": null,
+      "opsi": [
+        "Operator and karena mewajibkan kedua kondisi bernilai True secara bersamaan",
+        "Operator or karena cukup salah satu dari kedua kondisi yang bernilai True",
+        "Operator not karena membalikkan hasil kondisi False menjadi bernilai True",
+        "Operator tambah (+) karena menyambungkan dua buah teks kondisi menjadi satu"
+      ],
+      "jawaban_benar": 0,
+      "pembahasan": "Operator logika and digunakan ketika kita menginginkan seluruh kondisi bernilai True agar blok percabangan dijalankan. Jika salah satu kondisi saja bernilai False, maka keseluruhan kondisi dianggap False. Opsi B salah karena operator or akan bernilai True meskipun hanya satu syarat yang terpenuhi. Opsi C salah karena operator not bertugas membalikkan nilai boolean, bukan menghubungkan dua kondisi. Opsi D salah karena simbol + adalah operator aritmatika/penggabungan string, bukan operator logika perbandingan.",
+      "petunjuk": "Pilih operator logika yang menuntut SEMUA syarat harus sama-sama benar."
+    },
+    {
+      "id": 3,
+      "tingkat": "sedang",
+      "capaian": "Menelusuri alur eksekusi percabangan dua arah (if-else) untuk memprediksi output program.",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "skor = 70\n\nif skor >= 75:\n    print(\"Tuntas\")\nelse:\n    print(\"Remidi\")",
+      "opsi": [
+        "Tuntas",
+        "Tuntas\nRemidi",
+        "70",
+        "Remidi"
+      ],
+      "jawaban_benar": 3,
+      "pembahasan": "Variabel skor bernilai 70. Pada baris if skor >= 75:, kondisi dievaluasi dan bernilai False karena 70 tidak lebih besar atau sama dengan 75. Akibatnya, blok di dalam if dilewati dan Python mengeksekusi blok di bawah else:, sehingga mencetak 'Remidi'. Opsi A salah karena blok if hanya berjalan jika skor minimal 75. Opsi B salah karena struktur if-else hanya akan memilih satu di antara dua jalur, tidak mungkin menjalankan keduanya. Opsi C salah karena program mencetak teks hasil percabangan, bukan nilai variabel skor.",
+      "petunjuk": "Cek apakah nilai skor memenuhi syarat >= 75 atau tidak, lalu ikuti jalur percabangan yang sesuai."
+    },
+    {
+      "id": 4,
+      "tingkat": "sedang",
+      "capaian": "Menelusuri urutan evaluasi kondisi pada struktur percabangan banyak arah (if-elif-else).",
+      "pertanyaan": "Apa output dari kode program berikut?",
+      "kode": "nilai = 85\n\nif nilai >= 90:\n    grade = \"A\"\nelif nilai >= 80:\n    grade = \"B\"\nelif nilai >= 70:\n    grade = \"C\"\nelse:\n    grade = \"D\"\n\nprint(grade)",
+      "opsi": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "jawaban_benar": 1,
+      "pembahasan": "Python memeriksa kondisi dari atas ke bawah. Pertama, nilai >= 90 bernilai False (85 < 90). Kedua, elif nilai >= 80 bernilai True (85 >= 80), sehingga variabel grade diisi string 'B'. Karena kondisi kedua sudah terpenuhi, seluruh blok elif dan else berikutnya langsung diabaikan. Terakhir, print(grade) mencetak 'B'. Opsi A salah karena 85 belum mencapai 90. Opsi C salah karena meskipun 85 juga >= 70, kondisi elif di bawahnya tidak akan dieksekusi setelah ada kondisi di atasnya yang sudah cocok. Opsi D salah karena else hanya jalan jika semua kondisi if dan elif bernilai False.",
+      "petunjuk": "Ingat sifat percabangan if-elif-else: begitu satu kondisi di atas sudah cocok, kondisi di bawahnya akan dilewati."
+    },
+    {
+      "id": 5,
+      "tingkat": "sulit",
+      "capaian": "Mendeteksi dan memperbaiki kesalahan sintaksis akibat penggunaan operator penugasan (=) pada kondisi if yang memicu SyntaxError.",
+      "pertanyaan": "Seorang siswa membuat program untuk mengecek nilai sempurna, namun kode berikut menghasilkan SyntaxError saat dijalankan. Apa penyebab kesalahan tersebut dan bagaimana perbaikan yang tepat?",
+      "kode": "nilai = 100\n\nif nilai = 100:\n    print(\"Nilai Sempurna!\")",
+      "opsi": [
+        "Tanda titik dua (:) di akhir baris if harus dihapus agar baris print() dapat berjalan",
+        "Teks pada perintah print() harus dibungkus tanda kurung kurawal {} bukan tanda petik",
+        "Kondisi if harus memakai operator perbandingan ganda (==), bukan penugasan tunggal (=): if nilai == 100:",
+        "Indentasi pada baris print() harus dihilangkan agar sejajar kembali dengan baris if"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Di Python, tanda sama dengan tunggal (=) adalah operator penugasan untuk mengisi nilai ke variabel, bukan untuk membandingkan. Menuliskan tanda = di dalam pernyataan kondisi memicu SyntaxError. Untuk membandingkan kesamaan dua nilai, gunakan operator perbandingan ganda (==) sehingga menjadi if nilai == 100:. Opsi A salah karena tanda titik dua (:) justru wajib ada di akhir baris if. Opsi B salah karena string di dalam print() harus menggunakan tanda kutip, bukan kurung kurawal. Opsi D salah karena menghilangkan indentasi justru akan memicu IndentationError.",
+      "petunjuk": "Perhatikan tanda sama dengan pada baris 3. Apakah tanda itu untuk mengisi variabel atau membandingkan kesamaan dua nilai?"
+    }
+  ]
+}

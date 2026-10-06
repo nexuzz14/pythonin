@@ -1,0 +1,122 @@
+{
+  "id": "bab-3",
+  "judul": "Input & Operator: Simulasi Masukan dan Operasi Perhitungan",
+  "tujuan": [
+    "Mensimulasikan input data pengguna menggunakan variabel di lingkungan web browser.",
+    "Menggunakan operator aritmatika dasar dan khusus (+, -, *, /, //, %, **) serta mengatur urutan operasi dengan tanda kurung.",
+    "Menerapkan operator perbandingan dan assignment gabungan untuk membuat kalkulator perhitungan sederhana."
+  ],
+  "prasyarat": [
+    "Memahami cara membuat variabel dan mengenal tipe data int, float, str, dan bool dari Bab 2.",
+    "Mampu menampilkan variabel menggunakan print() dan f-string dari Bab 1 dan Bab 2."
+  ],
+  "ringkasan": "Bab ini membahas simulasi input pengguna dan penggunaan operator aritmatika untuk melakukan berbagai perhitungan. Kamu juga akan belajar urutan operasi matematika dan operator perbandingan yang menghasilkan nilai boolean.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-3-1",
+      "judul": "Mengenal Input dan Simulasinya Lewat Variabel",
+      "penjelasan": "Program komputer menjadi interaktif saat bisa menerima data masukan atau input dari pengguna. Di komputer biasa, Python memakai perintah input() untuk menerima ketikan papan ketik pengguna. Di web browser ini, program berjalan di lingkungan Pyodide yang tidak mendukung input interaktif langsung. Oleh karena itu, kita menyimulasikan input memakai variabel agar nilainya mudah kamu ganti secara langsung.",
+      "analogi": "Simulasi input ini seperti kasir kantin yang mencatat pesanan sebelum makanan diolah. Kasir memasukkan jenis dan jumlah pesanan ke daftar pesanan terlebih dahulu.",
+      "contoh_kode": "# Simulasi input: silakan ubah nilai variabel di bawah ini\nnama_pelanggan = \"Budi\"\njumlah_porsi = 2\nharga_satuan = 12000\n\ntotal_bayar = jumlah_porsi * harga_satuan\nprint(f\"Pesanan atas nama: {nama_pelanggan}\")\nprint(f\"Total bayar: Rp {total_bayar}\")",
+      "output_contoh": "Pesanan atas nama: Budi\nTotal bayar: Rp 24000",
+      "penjelasan_kode": [
+        "Baris 2-4: Variabel nama_pelanggan, jumlah_porsi, dan harga_satuan bertindak sebagai simulasi data input.",
+        "Baris 6: Operator perkalian (*) mengalikan jumlah porsi dengan harga satuan untuk mencari total bayar.",
+        "Baris 7-8: Perintah print() menampilkan hasil perhitungan memakai f-string yang telah kita pelajari di Bab 2."
+      ],
+      "catatan_umum_salah": "Lupa bahwa angka yang dibungkus tanda kutip dianggap teks string, bukan angka. Jika menulis harga_satuan = \"12000\", operasi perkalian dua akan menduplikasi teks menjadi \"1200012000\".",
+      "coba_sendiri": "Ubah jumlah_porsi menjadi 3 dan harga_satuan menjadi 15000 pada baris simulasi input. Jalankan kembali program untuk melihat total bayar yang baru."
+    },
+    {
+      "id": "bab-3-2",
+      "judul": "Operator Aritmatika Dasar dan Urutan Operasi",
+      "penjelasan": "Python menyediakan operator aritmatika dasar: tambah (+), kurang (-), kali (*), dan bagi (/). Operasi pembagian dengan garis miring (/) selalu menghasilkan tipe data float desimal. Python selalu mendahulukan perkalian dan pembagian sebelum penjumlahan dan pengurangan. Gunakan tanda kurung () jika kamu ingin memprioritaskan perhitungan tertentu terlebih dahulu.",
+      "analogi": "Urutan operasi hitung ini persis seperti aturan menghitung total belanja di kasir kantin. Jika kamu membeli dua mangkok bakso ditambah es teh, kasir mengalikan harga bakso dulu baru menambah es teh. Tanda kurung bertindak seperti perintah tegas ke kasir untuk menghitung bagian tersebut lebih awal.",
+      "contoh_kode": "uang_saku = 50000\nharga_makan = 15000\nharga_minum = 5000\njumlah_hari = 2\n\n# Tanda kurung mendahulukan penjumlahan sebelum perkalian\ntotal_jajan = (harga_makan + harga_minum) * jumlah_hari\nsisa_uang = uang_saku - total_jajan\nrata_jajan = total_jajan / jumlah_hari\n\nprint(f\"Total jajan: Rp {total_jajan}\")\nprint(f\"Sisa uang saku: Rp {sisa_uang}\")\nprint(f\"Rata-rata per hari: Rp {rata_jajan}\")",
+      "output_contoh": "Total jajan: Rp 40000\nSisa uang saku: Rp 10000\nRata-rata per hari: Rp 20000.0",
+      "penjelasan_kode": [
+        "Baris 7: Tanda kurung () mendahulukan penjumlahan harga_makan dan harga_minum sebelum dikali jumlah_hari.",
+        "Baris 8: Operator kurang (-) menghitung sisa uang saku dari selisih uang_saku dan total_jajan.",
+        "Baris 9: Operator bagi (/) selalu menghasilkan float, sehingga variabel rata_jajan bernilai 20000.0."
+      ],
+      "catatan_umum_salah": "Lupa menggunakan tanda kurung pada rumus perhitungan campuran. Tanpa tanda kurung, Python mengalikan harga_minum dengan jumlah_hari terlebih dahulu sehingga totalnya keliru.",
+      "coba_sendiri": "Hapus tanda kurung pada rumus total_jajan menjadi harga_makan + harga_minum * jumlah_hari. Jalankan kode dan perhatikan bagaimana hasilnya berubah drastis."
+    },
+    {
+      "id": "bab-3-3",
+      "judul": "Operator Pembagian Bulat, Modulo, dan Pangkat",
+      "penjelasan": "Python memiliki operator khusus yaitu pembagian bulat (//), modulo (%), dan pemangkatan (**). Pembagian bulat (//) membuang angka di belakang koma dan hanya menyisakan bilangan bulat. Operator modulo (%) mencari sisa pembagian bilangan bulat dan bukan berarti persentase. Kita juga dapat menggunakan fungsi round() untuk membulatkan bilangan desimal ke digit tertentu.",
+      "analogi": "Bayangkan kamu membawa uang 10 ribu untuk membeli gorengan seharga 3 ribu per biji di kantin. Operator // menghitung jumlah gorengan terbanyak yang kamu peroleh yaitu 3 biji. Operator % menghitung uang koin kembalian yang tersisa yaitu 1 ribu rupiah.",
+      "contoh_kode": "uang_modal = 10000\nharga_gorengan = 3000\n\njumlah_gorengan = uang_modal // harga_gorengan\nsisa_koin = uang_modal % harga_gorengan\nnilai_pangkat = 2 ** 3\nnilai_bulat = round(10 / 3, 2)\n\nprint(f\"Gorengan didapat: {jumlah_gorengan} biji\")\nprint(f\"Sisa kembalian: Rp {sisa_koin}\")\nprint(f\"Hasil 2 pangkat 3: {nilai_pangkat}\")\nprint(f\"Hasil round(10 / 3, 2): {nilai_bulat}\")",
+      "output_contoh": "Gorengan didapat: 3 biji\nSisa kembalian: Rp 1000\nHasil 2 pangkat 3: 8\nHasil round(10 / 3, 2): 3.33",
+      "penjelasan_kode": [
+        "Baris 4: Operator // membagi 10000 dengan 3000 dan membuang komanya sehingga menghasilkan bilangan bulat 3.",
+        "Baris 5: Operator % menghasilkan sisa bagi 1000 karena 9000 terpakai untuk membeli 3 gorengan.",
+        "Baris 6: Tanda bintang ganda (**) menghitung operasi pangkat, yaitu 2 dikalikan sebanyak 3 kali.",
+        "Baris 7: Fungsi round(10 / 3, 2) membulatkan hasil desimal menjadi dua angka di belakang koma (3.33)."
+      ],
+      "catatan_umum_salah": "Mengira bahwa tanda % adalah lambang persen diskon seperti pada matematika sekolah. Pada bahasa Python, tanda % adalah modulo untuk mencari sisa pembagian.",
+      "coba_sendiri": "Ubah uang_modal menjadi 17000 dan harga_gorengan menjadi 5000 pada contoh kode di atas. Jalankan program untuk melihat berapa gorengan yang didapat dan sisa kembaliannya."
+    },
+    {
+      "id": "bab-3-4",
+      "judul": "Operator Perbandingan dan Assignment Gabungan",
+      "penjelasan": "Operator perbandingan membandingkan dua nilai dan selalu menghasilkan tipe data boolean (True atau False). Contoh operator perbandingan mencakup sama dengan (==), tidak sama dengan (!=), serta lebih besar (>). Python juga menyediakan assignment gabungan seperti += dan -= untuk memperbarui isi variabel secara cepat. Pemahaman operator perbandingan ini akan menjadi fondasi penting saat kita mempelajari percabangan di Bab 4.",
+      "analogi": "Layar kasir memeriksa apakah uang bayar pembeli mencukupi total belanja. Hasil pemeriksaan kasir hanya ada dua kemungkinan: True jika cukup atau False jika kurang. Tombol tambah poin di mesin kasir bekerja mirip += untuk menambah saldo poin pelanggan.",
+      "contoh_kode": "total_tagihan = 25000\nuang_bayar = 30000\n\n# Operator perbandingan menghasilkan True atau False\napakah_cukup = uang_bayar >= total_tagihan\napakah_uang_pas = uang_bayar == total_tagihan\n\n# Assignment gabungan memperbarui isi variabel\npoin_member = 50\npoin_member += 10\n\nprint(f\"Uang mencukupi : {apakah_cukup}\")\nprint(f\"Uang pas       : {apakah_uang_pas}\")\nprint(f\"Poin sekarang  : {poin_member}\")",
+      "output_contoh": "Uang mencukupi : True\nUang pas       : False\nPoin sekarang  : 60",
+      "penjelasan_kode": [
+        "Baris 5: Operator >= memeriksa apakah uang_bayar lebih besar atau sama dengan total_tagihan (bernilai True).",
+        "Baris 6: Operator == memeriksa kesamaan nilai (bernilai False karena 30000 tidak sama dengan 25000).",
+        "Baris 10: Perintah poin_member += 10 adalah bentuk singkat dari poin_member = poin_member + 10."
+      ],
+      "catatan_umum_salah": "Tertukar antara tanda = dengan tanda ==. Gunakan tanda = untuk memberi nilai variabel, dan gunakan tanda == untuk membandingkan kesamaan dua nilai.",
+      "coba_sendiri": "Ubah nilai uang_bayar menjadi 25000 pada kode di atas lalu jalankan program. Amati perubahan nilai variabel apakah_uang_pas dari False menjadi True."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Buat kalkulator kasir kantin sekolah sederhana. Hitung total belanja dari pesanan nasi rames dan es jeruk. Setelah itu, hitung uang kembalian pembeli. Gunakan operator perkalian (*), penjumlahan (+), dan pengurangan (-) untuk melengkapi perhitungan.",
+    "kode_awal": "# Simulasi input data transaksi\nharga_nasi = 12000\njumlah_nasi = 2\nharga_es = 3000\njumlah_es = 2\nuang_bayar = 50000\n\n# Lengkapi rumus total belanja dan uang kembalian\ntotal_belanja = 0\nkembalian = 0\n\nprint(\"=== KASIR KANTIN SMK ===\")\nprint(f\"Total Belanja : Rp {total_belanja}\")\nprint(f\"Uang Bayar    : Rp {uang_bayar}\")\nprint(f\"Kembalian     : Rp {kembalian}\")",
+    "output_diharapkan": "=== KASIR KANTIN SMK ===\nTotal Belanja : Rp 30000\nUang Bayar    : Rp 50000\nKembalian     : Rp 20000"
+  },
+  "poin_penting": [
+    "Input data pengguna disimulasikan menggunakan variabel di baris awal agar program di browser berjalan fleksibel.",
+    "Operator aritmatika mengolah nilai angka; gunakan tanda kurung () jika ingin mendahulukan perhitungan tertentu.",
+    "Operator perbandingan (==, !=, >, <, >=, <=) menghasilkan nilai boolean True atau False."
+  ],
+  "istilah": [
+    {
+      "istilah": "input",
+      "arti": "Data atau nilai masukan yang diterima program komputer untuk diproses."
+    },
+    {
+      "istilah": "operator",
+      "arti": "Simbol khusus dalam bahasa pemrograman untuk melakukan operasi tertentu terhadap nilai data."
+    },
+    {
+      "istilah": "operator aritmatika",
+      "arti": "Simbol matematika (+, -, *, /, //, %, **) yang digunakan untuk perhitungan nilai angka."
+    },
+    {
+      "istilah": "pembagian bulat (//)",
+      "arti": "Operasi pembagian yang membulatkan hasil ke bawah dan membuang angka desimal di belakang koma."
+    },
+    {
+      "istilah": "modulo (%)",
+      "arti": "Operator matematika yang menghitung sisa hasil bagi dari dua bilangan bulat."
+    },
+    {
+      "istilah": "urutan operasi (precedence)",
+      "arti": "Aturan prioritas yang menentukan operator mana yang dihitung lebih dahulu oleh Python."
+    },
+    {
+      "istilah": "operator perbandingan",
+      "arti": "Simbol pembanding nilai (==, !=, >, <, >=, <=) yang menghasilkan tipe data boolean True atau False."
+    },
+    {
+      "istilah": "assignment gabungan",
+      "arti": "Penyingkatan operasi penugasan seperti += atau -= untuk menghitung sekaligus memperbarui nilai variabel."
+    }
+  ]
+}
