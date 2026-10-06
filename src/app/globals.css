@@ -3,12 +3,48 @@
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
+
+  /* Token Desain Visual Tahap 1B */
+  --color-brand-primary: #2563eb;
+  --color-brand-primary-hover: #1d4ed8;
+  --color-brand-accent: #d97706;
+  --color-brand-accent-bg: #fef3c7;
+  --color-brand-success: #16a34a;
+
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f8fafc;
+
+  --color-editor-bg: #0f172a;
+  --color-editor-header: #1e293b;
+
+  --color-text-main: #0f172a;
+  --color-text-muted: #475569;
+
+  --radius-card: 1rem;
+  --radius-btn: 0.75rem;
+  --radius-badge: 9999px;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
   line-height: 1.6;
   min-height: 100vh;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}
+
+/* Dukungan Penuh prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
