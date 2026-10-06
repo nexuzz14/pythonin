@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getKuisByBab } from '@/lib/content';
+import { getKuisDetail } from '@/lib/content';
+import KuisClientWrapper from '@/components/kuis/KuisClientWrapper';
+import KuisErrorView from '@/components/kuis/KuisErrorView';
 
 interface Props {
   params: Promise<{
@@ -8,76 +9,71 @@ interface Props {
   }>;
 }
 
+/**
+ * Static Generation untuk 5 bab kuis agar langsung siap dimuat
+ */
+export function generateStaticParams() {
+  return [
+    { bab: '1' },
+    { bab: '2' },
+    { bab: '3' },
+    { bab: '4' },
+    { bab: '5' },
+  ];
+}
+
+/**
+ * Metadata halaman dinamis berdasarkan judul kuis
+ */
 export async function generateMetadata({ params }: Props) {
   const { bab } = await params;
-  const kuisData = getKuisByBab(bab);
+  const result = getKuisDetail(bab);
 
-  if (!kuisData) {
+  if (result.status !== 'success') {
     return {
-      title: 'Kuis Tidak Ditemukan — Pythonin',
+      title: 'Kuis Pembelajaran — Pythonin',
+      description: 'Uji pemahaman dasar pemrograman Python untuk siswa SMK RPL.',
     };
   }
 
   return {
-    title: `${kuisData.judul_kuis} — Pythonin`,
+    title: `${result.data.judul_kuis} — Pythonin`,
+    description: `Uji pemahaman konsep Misi ${result.babNumber} dengan evaluasi instan dan pembahasan lengkap.`,
   };
 }
 
+/**
+ * Halaman Kuis Interaktif Bab (Tahap 4).
+ * Memuat konten kuis dari SSOT JSON di folder content/kuis-bab-X.json.
+ * Menyediakan penanganan 404 untuk ID tidak valid dan tampilan error ramah
+ * jika file tidak ditemukan atau sintaks JSON rusak.
+ */
 export default async function KuisDetailPage({ params }: Props) {
   const { bab } = await params;
-  const kuisData = getKuisByBab(bab);
+  const result = getKuisDetail(bab);
 
-  // Jika bab tidak valid atau file kuis tidak ditemukan, tampilkan 404
-  if (!kuisData) {
+  // Kebutuhan 8: Tampilkan 404 jika ID bab tidak ada / tidak valid (bukan 1..5)
+  if (result.status === 'not-found') {
     notFound();
   }
 
+  // Kebutuhan 8: Jika file JSON hilang atau rusak, tampilkan tampilan error yang ramah (tidak crash)
+  if (result.status === 'file-not-found' || result.status === 'corrupt') {
+    return (
+      <KuisErrorView
+        status={result.status}
+        babNumber={result.babNumber}
+        filename={result.filename}
+        errorMessage={result.errorMessage}
+      />
+    );
+  }
+
+  // Kebutuhan 1 s.d. 7, 9: Render sistem kuis interaktif penuh
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      {/* Breadcrumb */}
-      <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-        <Link href="/" className="hover:text-blue-600 transition-colors">
-          Beranda
-        </Link>
-        <span>/</span>
-        <Link href={`/materi/${bab}`} className="hover:text-blue-600 transition-colors">
-          Materi Misi {bab}
-        </Link>
-        <span>/</span>
-        <span className="text-slate-900 font-medium">Kuis</span>
-      </nav>
-
-      {/* Header Kuis */}
-      <div className="border-b border-slate-200 pb-6">
-        <span className="inline-block rounded-md bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 mb-2">
-          🎯 Kuis Pemahaman • {kuisData.soal.length} Soal Pilihan Ganda
-        </span>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          {kuisData.judul_kuis}
-        </h1>
-        <p className="mt-2 text-base text-slate-600">
-          Uji pemahaman konsepmu setelah mempelajari Misi {bab}.
-        </p>
-      </div>
-
-      {/* Penanda Tahap */}
-      <div className="mt-8 rounded-2xl border border-dashed border-amber-300 bg-amber-50/60 p-8 text-center">
-        <span className="text-4xl">📝</span>
-        <h2 className="mt-3 text-xl font-bold text-slate-900">
-          Sistem Kuis Interaktif
-        </h2>
-        <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-md mx-auto">
-          Halaman ini akan diisi pada tahap berikutnya (Tahap 4) dengan fitur 1 soal per layar, opsi teracak, evaluasi instan, petunjuk, dan pembahasan mendalam.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href={`/materi/${bab}`}
-            className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition min-h-[44px] flex items-center"
-          >
-            &larr; Kembali ke Materi Misi {bab}
-          </Link>
-        </div>
-      </div>
-    </div>
+    <KuisClientWrapper
+      kuisData={result.data}
+      babNumber={result.babNumber}
+    />
   );
 }

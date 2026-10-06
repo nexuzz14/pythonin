@@ -233,13 +233,136 @@ export function getAllBabSummaries(): BabSummary[] {
 }
 
 /**
+ * Validasi skema runtime untuk konten KuisBab.
+ * Mengembalikan string pesan error jika tidak sesuai skema, atau null jika valid.
+ */
+export function validateKuisBab(data: unknown): string | null {
+  if (!data || typeof data !== 'object') {
+    return 'Data kuis bukan merupakan objek JSON yang valid.';
+  }
+
+  const kuis = data as Partial<KuisBab>;
+
+  if (typeof kuis.bab !== 'string' || !kuis.bab.trim()) {
+    return 'Properti "bab" kuis tidak ditemukan atau bukan teks.';
+  }
+  if (typeof kuis.judul_kuis !== 'string' || !kuis.judul_kuis.trim()) {
+    return 'Properti "judul_kuis" kuis tidak ditemukan atau bukan teks.';
+  }
+  if (!Array.isArray(kuis.soal) || kuis.soal.length === 0) {
+    return 'Properti "soal" harus berupa daftar (array) soal dan tidak boleh kosong.';
+  }
+
+  for (let i = 0; i < kuis.soal.length; i++) {
+    const s = kuis.soal[i];
+    if (!s || typeof s !== 'object') {
+      return `Soal ke-${i + 1} bukan objek soal yang valid.`;
+    }
+    if (typeof s.id !== 'number') {
+      return `Soal ke-${i + 1} tidak memiliki properti "id" berupa angka.`;
+    }
+    if (!s.tingkat || !['mudah', 'sedang', 'sulit'].includes(s.tingkat)) {
+      return `Soal ke-${i + 1} memiliki "tingkat" kesulitan yang tidak valid.`;
+    }
+    if (typeof s.pertanyaan !== 'string' || !s.pertanyaan.trim()) {
+      return `Soal ke-${i + 1} tidak memiliki properti "pertanyaan" teks.`;
+    }
+    if (!Array.isArray(s.opsi) || s.opsi.length < 2) {
+      return `Soal ke-${i + 1} harus memiliki minimal 2 pilihan opsi jawaban.`;
+    }
+    if (
+      typeof s.jawaban_benar !== 'number' ||
+      !Number.isInteger(s.jawaban_benar) ||
+      s.jawaban_benar < 0 ||
+      s.jawaban_benar >= s.opsi.length
+    ) {
+      return `Soal ke-${i + 1} memiliki indeks "jawaban_benar" yang tidak valid (di luar rentang opsi).`;
+    }
+    if (typeof s.pembahasan !== 'string' || !s.pembahasan.trim()) {
+      return `Soal ke-${i + 1} tidak memiliki properti "pembahasan".`;
+    }
+  }
+
+  return null;
+}
+
+export type KuisDetailResult =
+  | { status: 'success'; data: KuisBab; babNumber: number }
+  | { status: 'not-found'; babParam: string }
+  | { status: 'file-not-found'; babNumber: number; filename: string; errorMessage: string }
+  | { status: 'corrupt'; babNumber: number; filename: string; errorMessage: string };
+
+/**
+ * Mengambil kuis bab dengan status rinci (sukses, id salah, file hilang, atau json rusak).
+ */
+export function getKuisDetail(babIdOrNumber: string | number): KuisDetailResult {
+  const babNum = normalizeBabNumber(babIdOrNumber);
+  if (!babNum) {
+    return {
+      status: 'not-found',
+      babParam: String(babIdOrNumber),
+    };
+  }
+
+  const filename = `kuis-bab-${babNum}.json`;
+  const filePath = path.join(CONTENT_DIR, filename);
+
+  if (!fs.existsSync(filePath)) {
+    return {
+      status: 'file-not-found',
+      babNumber: babNum,
+      filename,
+      errorMessage: `File kuis "${filename}" tidak ditemukan di direktori content.`,
+    };
+  }
+
+  let rawContent: string;
+  try {
+    rawContent = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    return {
+      status: 'file-not-found',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Gagal membaca file "${filename}": ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawContent);
+  } catch (err) {
+    return {
+      status: 'corrupt',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Sintaks JSON pada file "${filename}" tidak valid atau rusak: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  const schemaError = validateKuisBab(parsed);
+  if (schemaError) {
+    return {
+      status: 'corrupt',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Struktur data pada "${filename}" tidak sesuai: ${schemaError}`,
+    };
+  }
+
+  return {
+    status: 'success',
+    data: parsed as KuisBab,
+    babNumber: babNum,
+  };
+}
+
+/**
  * Mengambil kuis berdasarkan nomor atau id bab
  */
 export function getKuisByBab(babIdOrNumber: string | number): KuisBab | null {
-  const babNum = normalizeBabNumber(babIdOrNumber);
-  if (!babNum) return null;
-
-  return readJsonSafely<KuisBab>(`kuis-bab-${babNum}.json`);
+  const result = getKuisDetail(babIdOrNumber);
+  return result.status === 'success' ? result.data : null;
 }
 
 /**
