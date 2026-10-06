@@ -215,8 +215,8 @@ pythonin/
 
 | Tahap | Keterangan | Status | Tanggal Selesai | Commit |
 |---|---|---|---|---|
-| **0. Persiapan** | Pembacaan PRD, sinkronisasi skema konten, verifikasi script, penyusunan rencana | **Selesai** | 2026-10-06 | — |
-| **Tahap 1** | Inisialisasi Proyek, Layout Global, dan Footer Pembuat | Belum | — | — |
+| **0. Persiapan** | Pembacaan PRD, sinkronisasi skema konten, verifikasi script, penyusunan rencana | **Selesai** | 2026-10-06 | a795a6c |
+| **Tahap 1** | Inisialisasi Proyek, Layout Global, dan Footer Pembuat | **Selesai** | 2026-10-06 | diisi di commit berikutnya |
 | **Tahap 2** | Engine Eksekusi Python (Pyodide Worker) & Komponen Editor | Belum | — | — |
 | **Tahap 3** | Halaman Materi 5 Bab (Integrasi `content/bab-N.json`) | Belum | — | — |
 | **Tahap 4** | Sistem Kuis Interaktif (Integrasi `content/kuis-bab-N.json`) | Belum | — | — |
