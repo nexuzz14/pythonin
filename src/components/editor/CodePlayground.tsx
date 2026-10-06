@@ -45,6 +45,7 @@ export default function CodePlayground({
 
   const [runnerStatus, setRunnerStatus] = useState<RunnerStatus>('loading');
   const [runnerError, setRunnerError] = useState<string>('');
+  const [thisStatus, setThisStatus] = useState<'idle' | 'running' | 'done' | 'error' | 'timeout'>('idle');
 
   const insertSymbolRef = useRef<((symbol: string) => void) | null>(null);
 
@@ -69,6 +70,7 @@ export default function CodePlayground({
     setStdout('');
     setFriendlyError(null);
     setIsTruncated(false);
+    setThisStatus('running');
 
     try {
       const result = await pyodideRunner.runCode(code);
@@ -79,10 +81,14 @@ export default function CodePlayground({
       if (result.error) {
         const parsed = formatFriendlyError(result.error, code);
         setFriendlyError(parsed);
+        setThisStatus(result.error.type === 'Timeout' ? 'timeout' : 'error');
+      } else {
+        setThisStatus('done');
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       setFriendlyError(formatFriendlyError(msg, code));
+      setThisStatus('error');
     }
   };
 
@@ -92,6 +98,14 @@ export default function CodePlayground({
     setStdout('');
     setFriendlyError(null);
     setIsTruncated(false);
+    setThisStatus('idle');
+  };
+
+  const handleCodeChange = (newCode: string) => {
+    setCode(newCode);
+    if (thisStatus === 'done' || thisStatus === 'error') {
+      setThisStatus('idle');
+    }
   };
 
   // Handler Salin Kode
@@ -113,6 +127,23 @@ export default function CodePlayground({
       setCode((prev) => prev + symbol);
     }
   };
+
+  const effectiveStatus: RunnerStatus =
+    runnerStatus === 'loading'
+      ? 'loading'
+      : runnerStatus === 'error'
+      ? 'error'
+      : thisStatus === 'running'
+      ? 'running'
+      : runnerStatus === 'running'
+      ? 'running'
+      : thisStatus === 'done'
+      ? 'done'
+      : thisStatus === 'error'
+      ? 'error'
+      : thisStatus === 'timeout'
+      ? 'timeout'
+      : 'ready';
 
   return (
     <div className={`flex flex-col gap-3 rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-sm ${className}`}>
@@ -154,14 +185,14 @@ export default function CodePlayground({
       {/* Editor Kode CodeMirror 6 */}
       <CodeEditor
         initialCode={code}
-        onChange={setCode}
+        onChange={handleCodeChange}
         readOnly={readOnly}
         onInsertSymbolRef={insertSymbolRef}
       />
 
       {/* Kontrol Run, Reset, Salin */}
       <RunControls
-        status={runnerStatus}
+        status={effectiveStatus}
         onRun={handleRun}
         onReset={handleReset}
         onCopy={handleCopy}
@@ -174,7 +205,7 @@ export default function CodePlayground({
       {/* Panel Output */}
       <OutputPanel
         stdout={stdout}
-        isRunning={runnerStatus === 'running'}
+        isRunning={thisStatus === 'running'}
         truncated={isTruncated}
         onClear={() => setStdout('')}
       />
