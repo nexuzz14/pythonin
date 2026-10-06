@@ -108,3 +108,39 @@ export function getTantanganByBab(babIdOrNumber: string | number): TantanganBab 
 
   return readJsonSafely<TantanganBab>(`tantangan-bab-${babNum}.json`);
 }
+
+export interface ContohMateriItem {
+  id: string;
+  babNomor: number;
+  babJudul: string;
+  bagianJudul: string;
+  label: string;
+  contoh_kode: string;
+  output_contoh: string;
+}
+
+/**
+ * Mengambil seluruh contoh kode dari semua bab dan bagiannya untuk dropdown playground
+ */
+export function getAllContohMateri(): ContohMateriItem[] {
+  const allBab = getAllBab();
+  const list: ContohMateriItem[] = [];
+
+  allBab.forEach((bab, babIndex) => {
+    const babNomor = babIndex + 1;
+    bab.bagian.forEach((bag, bagIndex) => {
+      list.push({
+        id: `${bab.id}-bag-${bagIndex + 1}`,
+        babNomor,
+        babJudul: bab.judul,
+        bagianJudul: bag.judul,
+        label: `Misi ${babNomor}: ${bag.judul}`,
+        contoh_kode: bag.contoh_kode,
+        output_contoh: bag.output_contoh,
+      });
+    });
+  });
+
+  return list;
+}
+
