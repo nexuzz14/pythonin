@@ -1,10 +1,10 @@
-# PRD — PyMisi: Media Belajar Dasar Pemrograman Python untuk Siswa SMK RPL Kelas X
+# PRD — Pythonin: Media Belajar Dasar Pemrograman Python untuk Siswa SMK RPL Kelas X
 
 | | |
 |---|---|
 | **Versi** | 1.1 (revisi setelah review: konsistensi, AC terukur, estimasi, keamanan) |
-| **Pembuat** | Caesar Abrisam Ghanim Abbad (2604130063), Muhammad Nabil Cahya Firdaus (2604130156) |
-| **Nama kerja produk** | PyMisi (sementara; tidak memengaruhi spesifikasi) |
+| **Pembuat** | Muhammad Nabil Cahya Firdaus (2604130156), Caesar Abrisam Ghanim Abbad (2604130063) |
+| **Nama produk** | Pythonin |
 | **Batas waktu** | 2 hari kerja (≈ 32 jam kerja untuk 2 orang) |
 | **Stack** | Next.js (App Router, TypeScript), Tailwind CSS, Pyodide di Web Worker, CodeMirror 6, localStorage, Gemini API via API route Next.js, Vercel |
 
@@ -16,7 +16,7 @@
 
 ## 1. Ringkasan Produk
 
-PyMisi adalah media pembelajaran berbasis web untuk siswa SMK jurusan RPL kelas X yang belum pernah menulis kode. Siswa mempelajari dasar pemrograman Python lewat 5 bab bertema "misi" (Halo Python, Variabel dan tipe data, Operator–input–f-string, Percabangan, Perulangan plus mini proyek). Setiap bab memuat tujuan belajar, penjelasan singkat, contoh interaktif (tebak–jalankan–ubah), praktik, tantangan dengan cek otomatis, dan kuis, dengan editor kode yang menjalankan Python langsung di browser (tanpa instalasi) di HP maupun laptop sekolah berspesifikasi terbatas. Produk menyelesaikan masalah umum pemula: instalasi Python yang menyulitkan di perangkat sekolah, pesan error berbahasa Inggris yang membingungkan, dan kurangnya umpan balik langsung saat berlatih. Seluruh pembuatan produk dilakukan lewat AI dan didokumentasikan sebagai log proses.
+Pythonin adalah media pembelajaran berbasis web untuk siswa SMK jurusan RPL kelas X yang belum pernah menulis kode. Siswa mempelajari dasar pemrograman Python lewat 5 bab bertema "misi" (Halo Python, Variabel dan tipe data, Operator–input–f-string, Percabangan, Perulangan plus mini proyek). Setiap bab memuat tujuan belajar, penjelasan singkat, contoh interaktif (tebak–jalankan–ubah), praktik, tantangan dengan cek otomatis, dan kuis, dengan editor kode yang menjalankan Python langsung di browser (tanpa instalasi) di HP maupun laptop sekolah berspesifikasi terbatas. Produk menyelesaikan masalah umum pemula: instalasi Python yang menyulitkan di perangkat sekolah, pesan error berbahasa Inggris yang membingungkan, dan kurangnya umpan balik langsung saat berlatih. Seluruh pembuatan produk dilakukan lewat AI dan didokumentasikan sebagai log proses.
 
 ---
 
@@ -42,14 +42,14 @@ PyMisi adalah media pembelajaran berbasis web untuk siswa SMK jurusan RPL kelas 
 | I-3 | Pyodide siap dipakai | **Diukur di spike hari 1** (4G dan Fast 3G). Batas awal: ≤ 15 dtk (4G), ≤ 60 dtk (Fast 3G), ≤ 5 dtk (cache). Target direvisi setelah pengukuran dan dicatat di log | DevTools Network + log waktu `ready` |
 | I-4 | Indikator loading terlihat selama Pyodide belum siap | 100% kasus; tombol Run berlabel "Menyiapkan Python…" | Uji manual |
 | I-5 | Kode loop tak hingga dihentikan | ≤ 5 detik, UI tetap responsif, pesan ramah muncul | Uji `while True: pass` |
-| I-6 | Kebenaran contoh kode | 100% contoh menghasilkan output sama dengan `outputDiharapkan` | `npm run verify` |
-| I-7 | Kebenaran cek tantangan | Tiap tantangan: ≥ 3 jawaban benar lulus dan ≥ 3 salah ditolak | `npm run verify` |
+| I-6 | Kebenaran contoh kode | 100% contoh menghasilkan output sama dengan `output_contoh` | `python scripts/verifikasi_konten.py` |
+| I-7 | Kebenaran cek tantangan | 100% `contoh_solusi` tantangan menghasilkan output cocok dengan `output_diharapkan` | `python scripts/verifikasi_konten.py` |
 | I-8 | Penyelesaian bab oleh pengguna uji | ≥ 2 dari 3 pengguna menyelesaikan ≥ 1 bab penuh | Catatan uji coba |
 | I-9 | Skor kuis rata-rata pengguna uji, percobaan pertama | ≥ 60% (indikator awal, bukan penilaian efektivitas formal) | Data uji coba |
 | I-10 | Kegagalan chatbot tidak merusak media | 100%: media inti berfungsi saat API key dikosongkan | Uji dengan env var kosong |
 | I-11 | Footer nama dan NIM pembuat | Tampil di 100% route | Uji semua route |
 | I-12 | Kelengkapan log AI | Tiap tahap punya ≥ 1 entri lengkap (prompt, revisi, verifikasi, kesalahan AI bila ada); 100% contoh dan tantangan punya catatan verifikasi | Periksa log + `VERIFIKASI.md` |
-| I-13 | Semua tujuan belajar terpetakan | 100% `tujuan` punya ≥ 1 soal kuis dan ≥ 1 tantangan | `npm run verify` |
+| I-13 | Semua konten bab terverifikasi | 100% materi, kuis (5 soal/bab), dan tantangan (3 tantangan/bab) terverifikasi | `python scripts/verifikasi_konten.py` |
 
 ---
 
@@ -137,21 +137,21 @@ Total estimasi belajar: ± 3 jam 50 menit per siswa (di luar mengulang).
 
 | ID | Fitur | Deskripsi | Alasan | Kriteria penerimaan (terukur) |
 |---|---|---|---|---|
-| M1 | Materi 5 bab | Alur: pemantik → penjelasan → contoh (tebak, jalankan, ubah) → praktik → tantangan → kuis; dari JSON `content/` | Inti pembelajaran | (a) 5 bab tampil di `/materi`; (b) tiap bab menampilkan bagian dengan urutan persis: pemantik → penjelasan → contoh → praktik → tantangan → tautan kuis (daftar cek per bab); (c) tiap bab ≥ 3 contoh runnable; (d) tidak ada konten materi hardcode di komponen |
-| M2 | Tujuan belajar di awal bab | Kartu "Setelah bab ini kamu mampu…" | Syarat tidak boleh dipotong | (a) tiap `/materi/[bab]` menampilkan 1–2 tujuan sebelum konten lain; (b) `npm run verify` membuktikan tiap `tujuan` punya ≥ 1 soal kuis dan ≥ 1 tantangan (I-13) |
+| M1 | Materi 5 bab | Alur: tujuan → prasyarat → bagian materi (penjelasan, analogi, contoh kode, penjelasan kode, catatan salah, coba sendiri) → latihan editor → poin penting → istilah; dari JSON `content/` | Inti pembelajaran | (a) 5 bab tampil di `/materi`; (b) tiap bab menampilkan struktur lengkap sesuai `content/`: tujuan → prasyarat → bagian materi → latihan editor → poin penting → istilah → tantangan & kuis; (c) tiap bab memiliki 4 bagian materi dengan contoh runnable; (d) tidak ada konten materi hardcode di komponen |
+| M2 | Tujuan belajar di awal bab | Kartu "Tujuan Pembelajaran" dan "Prasyarat" di awal bab | Syarat tidak boleh dipotong | (a) tiap `/materi/[bab]` menampilkan tujuan dan prasyarat sebelum konten materi; (b) `python scripts/verifikasi_konten.py` membuktikan 100% konten bab terverifikasi (I-13) |
 | M3 | Live code editor + Run | CodeMirror 6 + Pyodide di Web Worker, timeout 5 detik | Pemula langsung mencoba | (a) `print("Halo")` menampilkan `Halo` di URL produksi; (b) `while True: pass` dihentikan ≤ 5 dtk dengan pesan ramah dan Run bisa dipakai lagi; (c) selama eksekusi 5 detik, siswa tetap bisa mengetik di editor dan menggulir halaman; (d) kode kosong → pesan "Tulis kode dulu, lalu klik Run" tanpa memanggil worker |
-| M4 | Kotak input program | Textarea; `input()` membaca baris per baris | Menangani `input()` tanpa SharedArrayBuffer | (a) `input()` membaca baris 1, 2, dst.; (b) prompt dan nilai dicetak di output (mis. `Nama: Raka`); (c) input habis → pesan ramah, bukan `EOFError` mentah |
+| M4 | Penanganan input program | Simulasi input via variabel di materi & tantangan (§8.4); input() interaktif tidak wajib | Sesuai kurikulum & batasan Pyodide browser | (a) Seluruh materi dan tantangan kurikulum memakai simulasi input via inisialisasi variabel; (b) Jika fungsi `input()` dipanggil oleh kode siswa, sistem memberikan pesan ramah bahwa input disimulasikan via variabel (atau penanganan fallback ramah) |
 | M5 | Pesan error ramah | Terjemahan dan penjelasan error umum + baris | Mengurangi frustrasi | (a) ≥ 8 jenis error dipetakan (§8.5); (b) nomor baris tampil; (c) pesan asli bisa dibuka; (d) kutip melengkung terdeteksi (§8.7) |
 | M6 | Tombol simbol HP | `:`, `( )`, `" "`, `Tab` | Mengetik simbol di HP sulit | (a) tiap tombol menyisipkan karakter di posisi kursor; (b) `Tab` = 4 spasi; (c) ukuran ≥ 44×44 px; (d) tampil di lebar ≤ 768 px |
-| M7 | Tantangan koding + cek otomatis | 2–3 per bab; tombol **Periksa** terpisah dari **Run**; hint bertahap | Umpan balik instan | (a) Periksa memakai `stdin` test case, Run memakai Kotak Input; (b) output dinormalisasi (§9.1); (c) 3 hint bertingkat, dibuka satu per satu; (d) `npm run verify` hijau (≥ 3 benar + ≥ 3 salah per tantangan); (e) hasil benar/salah memakai ikon + teks |
-| M8 | Kuis per bab | 3–5 soal pilihan ganda + pembahasan | Mengukur capaian | (a) skor tampil di akhir; (b) pembahasan tampil setelah menjawab; (c) bisa diulang tanpa batas; (d) tiap soal punya `tujuanId` valid |
+| M7 | Tantangan koding + cek otomatis | 3 per bab bertingkat (mudah, sedang, sulit); tombol **Periksa**; petunjuk bertahap | Umpan balik instan | (a) Periksa mengevaluasi output kode terhadap `output_diharapkan`; (b) output dinormalisasi (§9.1); (c) 3 tingkat petunjuk bertahap dari field `petunjuk`, dibuka satu per satu; (d) lolos verifikasi `python scripts/verifikasi_konten.py` (`contoh_solusi` cocok 100%); (e) hasil benar/salah memakai ikon + teks |
+| M8 | Kuis per bab | 5 soal pilihan ganda per bab + pembahasan | Mengukur capaian | (a) skor tampil di akhir; (b) pembahasan tampil setelah menjawab; (c) bisa diulang tanpa batas; (d) tiap soal memiliki opsi, `jawaban_benar` (0–3), dan pembahasan yang valid |
 | M9 | Progress belajar | localStorage | Kontinuitas tanpa login | Lulus 4 skenario uji: (1) key kosong, (2) JSON tidak valid, (3) `version` tak dikenal, (4) id bab/tantangan tak ada di konten. Tidak ada halaman putih; data rusak → progress awal + banner. Tutup/buka browser mempertahankan progress. Reset berfungsi |
 | M10 | Footer pembuat | Nama dan NIM kedua pembuat | Kebutuhan tugas | Terlihat di `/`, `/materi`, `/materi/1`, `/latihan`, `/kuis/1`, `/progress`, dan halaman 404 |
 | M11 | Deploy Vercel | Situs publik | Demo | URL produksi terbuka; **daftar cek produksi** berisi AC M1–M15 dijalankan di URL Vercel dan semuanya dicentang di dokumen uji |
 | M12 | Log proses AI | Prompt, revisi, verifikasi, kesalahan AI | Syarat penilaian | (a) tiap entri memuat: tanggal, tahap, prompt, ringkasan keluaran AI, tindakan verifikasi, hasil (benar/salah), perbaikan; (b) 100% contoh kode dan tantangan punya catatan verifikasi (dihasilkan `VERIFIKASI.md`); (c) kesalahan AI dicatat apa adanya, tanpa kuota minimum |
 | M13 | Uji coba 3 pengguna | Uji ke 3 siswa/teman sebaya | Tidak boleh dipotong | 3 catatan memakai templat seragam: kode pengguna, perangkat, durasi kode pertama, kendala, bagian membingungkan, perbaikan yang dilakukan |
 | M14 | Render aman | Konten tak tepercaya dirender sebagai teks | Mencegah XSS | Tidak ada `dangerouslySetInnerHTML` pada output program, materi, dan jawaban chatbot; `print("<script>alert(1)</script>")` tampil sebagai teks dan tidak mengeksekusi apa pun |
-| M15 | Mode baca (fallback) | Jika Pyodide gagal, contoh menampilkan hasil statis | Perangkat lemah/jaringan buruk | Dengan Pyodide diblokir di DevTools: `/materi/1` tetap terbaca penuh; tiap contoh menampilkan `outputDiharapkan` berlabel "Hasil contoh (belum dijalankan)"; tampil pesan "Python gagal dimuat" dan tombol "Coba lagi" |
+| M15 | Mode baca (fallback) | Jika Pyodide gagal, contoh menampilkan hasil statis | Perangkat lemah/jaringan buruk | Dengan Pyodide diblokir di DevTools: `/materi/1` tetap terbaca penuh; tiap contoh menampilkan `output_contoh` berlabel "Hasil contoh (belum dijalankan)"; tampil pesan "Python gagal dimuat" dan tombol "Coba lagi" |
 
 ### 5.2 Should have
 
@@ -205,7 +205,7 @@ Database/login/dashboard guru; modul selain Python dasar; PWA/offline; penampil 
 
 | Route | Isi | Komponen utama |
 |---|---|---|
-| `/` | Hero: judul, 1 kalimat manfaat, tombol "Mulai Misi 1", daftar 5 bab ringkas, mini editor "Coba sekarang" (print Halo) | `Hero`, `ChapterCard`, `MiniEditor` |
+| `/` | Hero: judul, 1 kalimat manfaat, tombol "Mulai Misi 1", daftar 5 bab ringkas | `Hero`, `ChapterCard` (MiniEditor opsional jika waktu cukup) |
 | `/materi` | Daftar 5 bab: judul, tujuan ringkas, durasi, status (belum/sedang/selesai) | `ChapterCard`, `ProgressBadge` |
 | `/materi/[bab]` (`[bab]` = nomor 1–5) | Tujuan belajar → pemantik → penjelasan → contoh → praktik → tantangan (inline) → tautan kuis | `ObjectiveCard`, `LessonSection`, `CodeRunner`, `ChallengeCard`, `Hint`, `NextPrev` |
 | `/latihan` | Editor bebas (playground) + daftar semua tantangan dan statusnya | `CodeRunner`, `ChallengeList` |
@@ -217,7 +217,7 @@ Route tidak ada atau nomor bab di luar 1–5 → halaman 404 sederhana (dengan f
 
 ### 7.2 Komponen global
 - **Navbar:** logo, Materi, Latihan, Progress; mobile = hamburger ≥ 44 px; tautan aktif ditandai.
-- **Footer pembuat:** "Dibuat oleh Caesar Abrisam Ghanim Abbad (2604130063) dan Muhammad Nabil Cahya Firdaus (2604130156)"; dari `layout.tsx` sehingga tampil di semua halaman.
+- **Footer pembuat:** "Dibuat oleh Muhammad Nabil Cahya Firdaus (2604130156) dan Caesar Abrisam Ghanim Abbad (2604130063)"; dari `layout.tsx` sehingga tampil di semua halaman.
 - **Tombol chatbot:** melayang kanan-bawah (di HP tidak menutupi tombol Run); membuka panel chat; dimuat lazy.
 
 ### 7.3 Alur pengguna (teks)
@@ -238,20 +238,19 @@ Route tidak ada atau nomor bab di luar 1–5 → halaman 404 sederhana (dengan f
 ## 8. Spesifikasi Code Editor dan Eksekusi Python
 
 ### 8.1 Pemuatan Pyodide
-- **Versi:** dipin ke satu versi stabil (diputuskan saat spike; dicatat di log). **[ASUMSI]**
-- **Kapan mulai memuat:** di `/materi/[bab]` dan `/latihan`: saat komponen editor mount. Di `/`: setelah interaksi pertama dengan mini editor (fokus/klik) atau saat idle ≥ 3 detik, supaya I-2 terjaga dan pengunjung yang hanya melihat-lihat tidak mengunduh Pyodide.
-- **Sumber file:** CDN jsDelivr dengan versi dipin (rekomendasi, hemat waktu dan ukuran repo); alternatif self-host di `public/`. Keputusan final setelah spike.
-- **Spike hari 1 (≤ 45 menit):** buktikan di URL Vercel: jenis worker (classic/module), sumber Pyodide, `print`, `input` lewat Kotak Input, timeout + recreate. Hasil dan ukuran unduhan dicatat di log; I-3 direvisi dari hasil ini.
+- **Keputusan Pemuatan:** Pyodide dimuat dari CDN (jsDelivr) dengan versi dipin secara **lazy** saat komponen editor pertama kali diakses (di `/materi/[bab]` atau `/latihan`). Di beranda (`/`), pemuatan ditunda hingga interaksi pertama atau idle agar I-2 terjaga. Pilihan CDN menjaga ukuran repositori tetap ringan dan mempercepat build/deploy Vercel.
+- **Versi:** dipin ke satu versi stabil (mis. v0.26.4 / v0.27.x).
+- **Spike hari 1 (≤ 45 menit):** buktikan di URL Vercel: jenis worker (classic/module), sumber Pyodide CDN, `print`, timeout + recreate. Hasil dan ukuran unduhan dicatat di log; I-3 direvisi dari hasil ini.
 - **Indikator loading:** teks "Menyiapkan Python… (hanya sekali)" + progress bar indeterminate; Run nonaktif berlabel "Menyiapkan…" sampai worker mengirim `ready`.
 - **Koneksi lambat:** setelah 30 detik tampil "Koneksi lambat, mohon tunggu atau coba muat ulang" + tombol "Coba lagi"; jika gagal total → mode baca (M15).
 - **Singleton:** satu worker bersama untuk seluruh editor di halaman.
 - **Cache:** cache HTTP browser; tanpa service worker (PWA out of scope).
 
 ### 8.2 Eksekusi di Web Worker dan timeout
-- Kode dikirim ke worker via `postMessage({id, code, stdin})`.
+- Kode dikirim ke worker via `postMessage({id, code})`.
 - **Satu worker per halaman, dipakai ulang.** Tiap eksekusi memakai **namespace global baru** (dict kosong) dan modul buatan pengguna dibersihkan. Worker dibuat ulang hanya saat timeout atau tombol Stop.
 - **Antrean global:** satu eksekusi aktif; semua tombol Run/Periksa lain nonaktif sampai selesai (mencegah dua editor berebut worker).
-- **Timeout 5 detik per eksekusi**, dihitung sejak pesan `run` dikirim (setelah status `ready`). Pada **Periksa**, tiap test case punya timeout sendiri; timeout menghentikan sisa test case.
+- **Timeout 5 detik per eksekusi**, dihitung sejak pesan `run` dikirim (setelah status `ready`).
 - **Saat timeout:** `worker.terminate()` → buat worker baru → pesan "Programmu berjalan terlalu lama (> 5 detik). Mungkin ada perulangan yang tidak berhenti." → status `ready` lagi setelah Pyodide dimuat dari cache (target ≤ 5 dtk).
 - Tombol "Stop" memakai prosedur yang sama.
 - **Kode kosong/hanya spasi/komentar:** Run menampilkan "Tulis kode dulu, lalu klik Run" tanpa memanggil worker.
@@ -266,11 +265,11 @@ Route tidak ada atau nomor bab di luar 1–5 → halaman 404 sederhana (dengan f
 
 | Opsi | Cara kerja | Kelebihan | Kekurangan |
 |---|---|---|---|
-| A. Kotak "Input program" (baris-per-baris) | Siswa mengisi textarea sebelum Run; `input()` mengambil baris berikutnya | Sederhana, deterministik (cocok cek otomatis), tanpa header khusus, aman di HP | Kurang realistis; siswa harus tahu jumlah input |
-| B. `SharedArrayBuffer` + `Atomics.wait` | Worker menunggu input interaktif dari UI | Pengalaman seperti terminal | Butuh header COOP/COEP (rawan konflik CDN/Vercel), kompleks, sulit diuji dalam 2 hari |
-| C. `window.prompt()` | Dialog bawaan | Sangat mudah | Tidak bisa dari Worker; buruk di HP; tidak bisa dicek otomatis |
+| A. Simulasi lewat variabel (Kurikulum `content/`) | Input disimulasikan lewat inisialisasi variabel di baris awal kode (mis. `nama = "Andi"`, `harga = 15000`) | 100% konsisten dengan materi & tantangan di `content/`, deterministik, tidak butuh header khusus, bebas kendala worker di browser HP | Siswa mengubah data langsung di kode, bukan mengetik di konsol interaktif |
+| B. Kotak "Input program" (textarea baris-per-baris) | Siswa mengisi textarea sebelum Run; `input()` mengambil baris berikutnya | Sederhana, tanpa header khusus | Siswa harus tahu urutan dan jumlah input sebelumnya |
+| C. `SharedArrayBuffer` + `Atomics.wait` | Worker menunggu input interaktif dari UI | Pengalaman seperti terminal | Butuh header COOP/COEP (rawan konflik CDN/Vercel), kompleks, sulit diuji dalam 2 hari |
 
-**Rekomendasi: Opsi A.** Tidak ada risiko header/deploy, deterministik untuk cek tantangan, muat di waktu 2 hari. Penyempurnaan: prompt `input("Nama: ")` dicetak ke output beserta nilai yang dibaca ("Nama: Raka"); jika input habis → pesan ramah. Materi menjelaskan bahwa input diisi di kotak sebelum Run.
+**Keputusan:** Di konten kurikulum (`content/`), seluruh input disimulasikan lewat variabel di baris awal kode (misal `jajan_1 = 8000`), sesuai outline kurikulum SMK di `docs/outline-bab.md` dan verifikasi konten yang sudah lolos 90 pengujian. Pyodide di browser tidak mendukung `input()` interaktif blocking tanpa SharedArrayBuffer. Oleh karena itu, editor **tidak wajib mendukung `input()` asli pada versi ini** (dapat menjadi peningkatan jika sempat). Jika siswa menjalankan kode yang memanggil fungsi `input()`, editor menampilkan pesan ramah bahwa di media pembelajaran ini masukan disimulasikan melalui variabel.
 
 ### 8.5 Pesan error ramah
 
@@ -309,41 +308,40 @@ Nomor baris diambil dari traceback (`<exec>`, line N); sembunyikan frame interna
 ## 9. Spesifikasi Tantangan Koding
 
 ### 9.1 Mekanisme pengecekan
-- **Dua tombol:** **Run** memakai Kotak Input siswa; **Periksa** memakai `stdin` tiap `testCase` dan tidak mengubah Kotak Input.
-- Untuk tiap `testCase`: jalankan kode (namespace baru) dengan `stdin` test case → ambil stdout → normalisasi → bandingkan dengan `expectedOutputs` yang juga dinormalisasi.
-- **Normalisasi (berurutan):** (1) `\r\n` → `\n`; (2) hapus spasi/tab di akhir tiap baris; (3) hapus baris kosong di awal dan akhir; (4) jika `caseSensitive: false`, ubah ke huruf kecil; (5) jika `collapseSpaces: true`, ganti spasi beruntun dalam baris dengan satu spasi. **Spasi di dalam baris tidak diubah secara default.**
-- Lulus jika **semua** test case cocok dan tanpa error. Opsional `requiredPatterns` (regex pada kode, mis. wajib `for`) dan `forbiddenPatterns`; dipakai hemat.
-- **Catatan:** pengecekan terjadi di klien, jadi kunci jawaban dapat dilihat lewat DevTools. Diterima karena tujuannya pembelajaran, bukan penilaian resmi.
+- **Dua tombol:** **Run** untuk menjalankan dan melihat output kode secara bebas; **Periksa** mengevaluasi output kode siswa terhadap `output_diharapkan`.
+- Kode siswa dijalankan di Web Worker (namespace bersih).
+- Ambil stdout → lakukan normalisasi teks: (1) `\r\n` → `\n`; (2) hapus spasi/tab di akhir tiap baris (`rstrip`); (3) hapus baris kosong di awal dan akhir teks (persis sesuai fungsi `normalize()` pada `scripts/verifikasi_konten.py`).
+- Bandingkan dengan `output_diharapkan` (yang juga dinormalisasi).
+- Lulus jika output cocok persis dan eksekusi berjalan tanpa error runtime.
+- **Catatan:** pengecekan terjadi di klien, jadi kunci jawaban dapat dilihat lewat DevTools. Diterima karena tujuannya pembelajaran mandiri siswa SMK, bukan ujian resmi bersertifikasi.
 
-### 9.2 Banyak jawaban benar
-`expectedOutputs` per test case berupa **array** (output boleh salah satu dari beberapa varian). Tantangan dirancang agar jawaban ditentukan oleh output, bukan gaya kode.
+### 9.2 Nilai output yang diharapkan
+Nilai acuan diambil langsung dari field `output_diharapkan` pada objek tantangan di `tantangan-bab-N.json`. Karena input disimulasikan lewat variabel di `kode_awal`, tidak diperlukan mekanisme multi-test-case berbasis `stdin`.
 
 ### 9.3 Tampilan hasil
-- **Benar:** kartu hijau + ikon centang + "Benar! Semua tes lulus (n/n)".
-- **Salah:** kartu oranye + ikon silang + "Belum tepat: tes ke-k belum sesuai"; tampilkan input, output diharapkan vs output kamu (kecuali `hideExpected: true`).
+- **Benar:** kartu hijau + ikon centang + "Benar! Tantangan selesai".
+- **Salah:** kartu oranye + ikon silang + "Belum tepat: hasil belum sesuai target"; tampilkan output diharapkan vs output yang dihasilkan kode siswa.
 - **Error/timeout:** pesan error ramah; tidak dihitung sebagai hukuman.
 - Warna selalu dibarengi ikon/teks; hasil diumumkan lewat `aria-live`.
 
 ### 9.4 Petunjuk bertahap
-3 level: (1) arah pikiran (konsep), (2) bagian kode kunci/pola, (3) kerangka hampir lengkap (bukan jawaban akhir). Dibuka satu per satu; jumlah hint yang dibuka disimpan.
+3 level petunjuk diambil dari field `petunjuk` (array berisi tepat 3 string) pada `tantangan-bab-N.json`: (1) petunjuk konsep/arah berpikir, (2) petunjuk sintaks/bagian kode kunci, (3) contoh penulisan konkret. Dibuka satu per satu; jumlah petunjuk yang dibuka dicatat.
 
 ### 9.5 Aturan determinisme
-- Tanpa `random`, waktu sistem, atau data eksternal.
-- Setiap test case mendefinisikan `stdin` eksplisit.
-- Output tidak bergantung versi/lokal (hindari cetak dict/set tak berurutan dan float tak tepat).
-- Tiap tantangan wajib lulus uji "≥ 3 benar + ≥ 3 salah" lewat `npm run verify` (§13.4) dan sekali dicoba di produksi.
+- Tanpa `random`, waktu sistem, atau library eksternal.
+- Setiap tantangan mendefinisikan nilai data awal di variabel pada `kode_awal`.
+- Tiap tantangan wajib lulus verifikasi `contoh_solusi` vs `output_diharapkan` lewat `python scripts/verifikasi_konten.py`.
 
 ---
 
 ## 10. Spesifikasi Kuis
 
-- **Format soal:** pilihan ganda 4 opsi, satu benar; boleh memuat cuplikan kode read-only. 3–5 soal per bab.
-- **Perilaku:** urutan soal tetap; urutan opsi **diacak** tiap percobaan (kecuali `shuffleOptions: false`); satu soal per layar; klik opsi → langsung diperiksa → benar/salah + pembahasan → "Lanjut"; tanpa batas waktu; **bisa diulang** tanpa batas.
-- **Terputus (refresh di tengah):** percobaan tidak dihitung; mulai dari soal 1.
+- **Format soal:** pilihan ganda 4 opsi dari field `opsi: string[]` di `kuis-bab-N.json`. Tepat satu opsi benar berdasarkan indeks numerik `jawaban_benar` (0, 1, 2, atau 3). Setiap bab memiliki tepat 5 soal.
+- **Field per soal:** `id` (nomor urut 1–5), `tingkat` (`mudah`, `sedang`, `sulit`), `capaian` (deskripsi tujuan belajar), `pertanyaan`, `kode` (cuplikan kode atau null), `opsi` (4 string), `jawaban_benar` (indeks 0–3), `pembahasan` (analisis mendalam opsi benar dan miskonsepsi opsi salah), dan `petunjuk` (clue jika siswa ragu).
+- **Perilaku:** urutan soal tetap (1–5); urutan posisi opsi dapat diacak di antarmuka; satu soal per layar; klik opsi → langsung diperiksa → tampil penanda benar/salah, pembahasan, dan petunjuk → tombol "Lanjut"; tanpa batas waktu; **bisa diulang** tanpa batas.
+- **Terputus (refresh di tengah):** percobaan tidak dihitung; kuis mengulang dari soal 1.
 - **Skor:** "Skor kamu 4 dari 5 (80%)", daftar soal dengan status benar/salah, tombol "Ulangi Kuis" dan "Lanjut ke Misi berikutnya".
-- **Pembahasan:** 1–3 kalimat; bila salah, jelaskan mengapa jawaban benar dan miskonsepsi yang dipilih.
 - **Disimpan:** skor terakhir, skor terbaik, jumlah percobaan, waktu terakhir (ISO). Jawaban per soal tidak disimpan.
-- Setiap soal punya `tujuanId` (`CP{bab}.{n}`).
 
 ---
 
@@ -351,7 +349,7 @@ Nomor baris diambil dari traceback (`<exec>`, line N); sembunyikan frame interna
 
 ### 11.1 Struktur localStorage
 
-Satu key utama: `pymisi:v1:progress`.
+Satu key utama: `pythonin:v1:progress`.
 
 ```json
 {
@@ -361,27 +359,28 @@ Satu key utama: `pymisi:v1:progress`.
     "bab-1": {
       "opened": true,
       "challenges": {
-        "t1-1": { "passed": true, "attempts": 2, "hintsUsed": 1, "passedAt": "2026-01-01T10:05:00.000Z" }
+        "1": { "passed": true, "attempts": 2, "hintsUsed": 1, "passedAt": "2026-01-01T10:05:00.000Z" },
+        "2": { "passed": true, "attempts": 1, "hintsUsed": 0, "passedAt": "2026-01-01T10:08:00.000Z" }
       },
-      "quiz": { "lastScore": 3, "bestScore": 4, "total": 4, "attempts": 2, "lastAt": "2026-01-01T10:10:00.000Z" }
+      "quiz": { "lastScore": 4, "bestScore": 5, "total": 5, "attempts": 2, "lastAt": "2026-01-01T10:15:00.000Z" }
     }
   }
 }
 ```
 
-- Status "selesai" **tidak disimpan**; dihitung saat dibaca: semua tantangan bab lulus **dan** `quiz.attempts ≥ 1` (daftar tantangan dari konten).
+- Status "selesai" **tidak disimpan**; dihitung saat dibaca: semua 3 tantangan bab lulus **dan** `quiz.attempts ≥ 1`.
 - Draf editor tidak disimpan (kode siswa hilang saat pindah halaman; diterima).
 
 ### 11.2 Data kosong, rusak, dan kasus khusus
 - `loadProgress()` membungkus `JSON.parse` dengan try/catch dan memvalidasi `version` dan bentuk objek.
-- Kosong → progress awal. Rusak/versi tak dikenal → progress awal; data lama disalin ke `pymisi:v1:backup` sekali; banner "Data progresmu tidak terbaca, dimulai dari awal".
+- Kosong → progress awal. Rusak/versi tak dikenal → progress awal; data lama disalin ke `pythonin:v1:backup` sekali; banner "Data progresmu tidak terbaca, dimulai dari awal".
 - **ID tidak dikenal** (bab/tantangan sudah tidak ada di konten) diabaikan saat tampil dan tidak menimbulkan error.
 - `localStorage` tidak tersedia (mode privat) → progress di memori sesi + peringatan "Progres tidak akan tersimpan".
 - Penyimpanan penuh → tangkap `QuotaExceededError` + peringatan.
 - **Dua tab terbuka:** perubahan terakhir menang (tanpa sinkronisasi).
 
 ### 11.3 Reset dan perangkat bersama
-Tombol "Reset progress" di `/progress` → dialog konfirmasi ("Semua progres akan dihapus dari browser ini.") → hapus semua key `pymisi:*` → muat ulang state. `/progress` menampilkan banner tetap: "Memakai laptop bersama? Tekan **Reset** sebelum pergantian pengguna."
+Tombol "Reset progress" di `/progress` → dialog konfirmasi ("Semua progres akan dihapus dari browser ini.") → hapus semua key `pythonin:*` → muat ulang state. `/progress` menampilkan banner tetap: "Memakai laptop bersama? Tekan **Reset** sebelum pergantian pengguna."
 
 ### 11.4 Privasi
 Tidak ada data pribadi yang diminta atau dikirim ke server. Progress hanya di browser. Hanya pertanyaan chatbot (dan kode jika siswa mencentang opsinya) yang dikirim ke server dan Gemini. Tanpa analitik/pelacakan.
@@ -434,132 +433,188 @@ Panel chat selalu menampilkan: "Jawaban AI bisa salah. Selalu uji kodenya dengan
 
 ## 13. Struktur Data Konten
 
+Sumber kebenaran tunggal (*Single Source of Truth*) skema adalah file aktual yang tersimpan di direktori `content/`:
+
 ```
 content/
-  bab-1/materi.json   bab-1/kuis.json   bab-1/tantangan.json   bab-1/tantangan.uji.json
-  bab-2/ ... bab-5/
+  bab-1.json         kuis-bab-1.json         tantangan-bab-1.json
+  bab-2.json         kuis-bab-2.json         tantangan-bab-2.json
+  bab-3.json         kuis-bab-3.json         tantangan-bab-3.json
+  bab-4.json         kuis-bab-4.json         tantangan-bab-4.json
+  bab-5.json         kuis-bab-5.json         tantangan-bab-5.json
 ```
 
-### 13.1 Skema materi bab (`materi.json`)
+### 13.1 Skema materi bab (`bab-N.json`)
 
 | Field | Tipe | Wajib | Keterangan |
 |---|---|---|---|
-| `id` | string | Ya | `"bab-1"` |
-| `nomor` | number | Ya | 1–5 (juga slug route) |
-| `judul` | string | Ya | |
-| `ringkasan` | string | Ya | untuk kartu bab |
-| `durasiMenit` | number | Ya | |
-| `tujuan` | array | Ya | 1–2 objek `{ id: "CP1.1", teks: string, bloom: "C3" }` (satu level) |
-| `bagian` | array | Ya | urutan tampil |
-| `bagian[].tipe` | enum | Ya | `pemantik` \| `penjelasan` \| `contoh` \| `praktik` \| `proyek` |
-| `bagian[].judul` | string | Ya | |
-| `bagian[].teks` | string | Ya | markdown sederhana (disanitasi) |
-| `bagian[].kode` | string | Wajib untuk `contoh`, `praktik`, `proyek` | kode awal/contoh |
-| `bagian[].tebak` | object | Opsional | `{ pertanyaan, jawaban }` untuk `contoh` |
-| `bagian[].stdin` | string | Opsional | isi awal Kotak Input |
-| `bagian[].outputDiharapkan` | string | **Wajib untuk `contoh` dan `proyek`** | output nyata dari menjalankan kode; dipakai verifikasi (I-6) dan mode baca (M15) |
-| `miskonsepsi` | array<string> | Opsional | ditampilkan sebagai "Hati-hati" |
-| `tantanganIds` | array<string> | Ya | |
-| `kuisId` | string | Ya | |
+| `id` | string | Ya | `"bab-1"` s.d. `"bab-5"` |
+| `judul` | string | Ya | Judul lengkap bab |
+| `tujuan` | array<string> | Ya | 3 butir capaian pembelajaran bab |
+| `prasyarat` | array<string> | Ya | Prasyarat materi sebelum memulai bab |
+| `ringkasan` | string | Ya | Ringkasan pengantar bab untuk kartu dan header |
+| `durasi_menit` | number | Ya | Estimasi durasi belajar mandiri (30 menit) |
+| `bagian` | array<object> | Ya | Daftar subtopik materi (4 bagian per bab) |
+| `bagian[].id` | string | Ya | ID unik subtopik (mis. `"bab-1-1"`) |
+| `bagian[].judul` | string | Ya | Judul subtopik |
+| `bagian[].penjelasan` | string | Ya | Teks penjelasan konsep dasar |
+| `bagian[].analogi` | string | Ya | Analogi kontekstual kehidupan siswa SMK |
+| `bagian[].contoh_kode` | string | Ya | Kode Python contoh yang dapat dijalankan di editor |
+| `bagian[].output_contoh` | string | Ya | Output nyata dari `contoh_kode`, dipakai verifikasi dan mode baca (M15) |
+| `bagian[].penjelasan_kode` | array<string> | Ya | Penjelasan baris per baris kode contoh |
+| `bagian[].catatan_umum_salah` | string | Ya | Catatan miskonsepsi & jebakan error pemula |
+| `bagian[].coba_sendiri` | string | Ya | Latihan instruksi modifikasi kode untuk siswa |
+| `latihan_editor` | object | Ya | Latihan koding penutup materi bab |
+| `latihan_editor.instruksi` | string | Ya | Instruksi pengerjaan latihan |
+| `latihan_editor.kode_awal` | string | Ya | Kode awal di editor latihan |
+| `latihan_editor.output_diharapkan` | string | Ya | Target output dari latihan editor |
+| `poin_penting` | array<string> | Ya | Rangkuman 3 poin penting materi bab |
+| `istilah` | array<object> | Ya | Glosarium istilah penting (`[{ istilah, arti }]`) |
 
-**Contoh mini:**
+**Contoh mini (`content/bab-1.json`):**
 ```json
 {
-  "id": "bab-1", "nomor": 1, "judul": "Misi 1: Halo Python",
-  "ringkasan": "Tulis program pertamamu dengan print().", "durasiMenit": 35,
-  "tujuan": [{ "id": "CP1.1", "teks": "Menuliskan program yang menampilkan teks dengan print()", "bloom": "C3" }],
-  "bagian": [
-    { "tipe": "pemantik", "judul": "Bagaimana komputer 'bicara'?", "teks": "Kamu bisa menyuruh komputer menampilkan pesan..." },
-    { "tipe": "contoh", "judul": "Program pertama", "teks": "Tebak dulu hasilnya, lalu klik Run.",
-      "kode": "print(\"Halo, dunia!\")", "tebak": { "pertanyaan": "Apa yang tampil?", "jawaban": "Halo, dunia!" },
-      "outputDiharapkan": "Halo, dunia!" }
+  "id": "bab-1",
+  "judul": "Pengenalan Python: print(), Komentar, dan Membaca Error",
+  "tujuan": [
+    "Menulis program pertama menggunakan print() dengan teks satu baris maupun beberapa baris.",
+    "Menjelaskan fungsi komentar (#) sebagai catatan untuk manusia yang diabaikan Python.",
+    "Membedakan kode yang benar dan kode yang error, lalu memperbaiki kesalahan sederhana (SyntaxError, NameError)."
   ],
-  "miskonsepsi": ["Huruf besar-kecil berpengaruh: Print tidak sama dengan print."],
-  "tantanganIds": ["t1-1", "t1-2"], "kuisId": "kuis-1"
+  "prasyarat": [
+    "Tidak ada — ini bab pertama. Cukup bisa membuka browser dan mengetik."
+  ],
+  "ringkasan": "Bab ini mengajarkan cara mencetak teks ke layar dengan print(), menulis catatan di kode dengan komentar (#), dan membaca pesan error.",
+  "durasi_menit": 30,
+  "bagian": [
+    {
+      "id": "bab-1-1",
+      "judul": "Perintah print() — Mencetak Teks ke Layar",
+      "penjelasan": "print() adalah perintah pertama yang akan kamu pelajari...",
+      "analogi": "print() itu seperti speaker pengumuman di sekolah...",
+      "contoh_kode": "print(\"Halo, selamat datang di Python!\")\nprint('Saya siswa SMK kelas X.')",
+      "output_contoh": "Halo, selamat datang di Python!\nSaya siswa SMK kelas X.",
+      "penjelasan_kode": [
+        "Baris 1: print(\"...\") — mencetak teks yang ada di dalam tanda kutip ganda.",
+        "Baris 2: print('...') — sama saja, tapi pakai tanda kutip tunggal."
+      ],
+      "catatan_umum_salah": "Kesalahan paling sering: lupa tanda kutip...",
+      "coba_sendiri": "Ganti teks di dalam print() dengan nama lengkapmu..."
+    }
+  ],
+  "latihan_editor": {
+    "instruksi": "Buat kartu identitas siswa. Cetak tiga baris: nama, kelas, dan jurusan...",
+    "kode_awal": "# Tulis programmu di bawah ini\nprint(\"Nama   : \")\nprint(\"Kelas  : \")\nprint(\"Jurusan: \")",
+    "output_diharapkan": "Nama   : Andi Pratama\nKelas  : X RPL 1\nJurusan: Rekayasa Perangkat Lunak"
+  },
+  "poin_penting": [
+    "print() mencetak teks ke layar. Teks harus dibungkus tanda kutip (\" atau ').",
+    "Komentar (#) adalah catatan di kode yang tidak dijalankan Python.",
+    "Pesan error adalah petunjuk, bukan hukuman."
+  ],
+  "istilah": [
+    { "istilah": "print()", "arti": "Perintah Python untuk mencetak teks atau nilai ke layar output." }
+  ]
 }
 ```
 
-### 13.2 Skema kuis (`kuis.json`)
+### 13.2 Skema kuis (`kuis-bab-N.json`)
 
 | Field | Tipe | Wajib | Keterangan |
 |---|---|---|---|
-| `id` | string | Ya | `"kuis-1"` |
-| `babId` | string | Ya | `"bab-1"` |
-| `shuffleOptions` | boolean | Opsional | default `true` |
-| `soal` | array | Ya | 3–5 |
-| `soal[].id` | string | Ya | |
-| `soal[].tujuanId` | string | Ya | rujuk `tujuan[].id` (`CP1.1`) |
-| `soal[].pertanyaan` | string | Ya | |
-| `soal[].kode` | string | Opsional | cuplikan kode |
-| `soal[].opsi` | array<{id,teks}> | Ya | tepat 4 |
-| `soal[].jawabanId` | string | Ya | id opsi benar |
-| `soal[].pembahasan` | string | Ya | |
+| `bab` | string | Ya | `"bab-1"` s.d. `"bab-5"` |
+| `judul_kuis` | string | Ya | Judul kuis bab |
+| `soal` | array<object> | Ya | 5 butir soal pilihan ganda |
+| `soal[].id` | number | Ya | Nomor urut soal (1–5) |
+| `soal[].tingkat` | enum | Ya | `"mudah"` \| `"sedang"` \| `"sulit"` |
+| `soal[].capaian` | string | Ya | Deskripsi capaian pembelajaran yang diukur |
+| `soal[].pertanyaan` | string | Ya | Teks pertanyaan |
+| `soal[].kode` | string \| null | Ya | Cuplikan kode Python (null jika soal konsep murni) |
+| `soal[].opsi` | array<string> | Ya | Tepat 4 opsi pilihan jawaban |
+| `soal[].jawaban_benar` | number | Ya | Indeks opsi jawaban benar (0, 1, 2, atau 3) |
+| `soal[].pembahasan` | string | Ya | Penjelasan kunci jawaban dan pembahasan miskonsepsi opsi salah |
+| `soal[].petunjuk` | string | Ya | Petunjuk pemandu berpikir jika siswa ragu |
 
-**Contoh mini:**
+**Contoh mini (`content/kuis-bab-1.json`):**
 ```json
 {
-  "id": "kuis-1", "babId": "bab-1", "shuffleOptions": true,
-  "soal": [{
-    "id": "k1-1", "tujuanId": "CP1.1", "pertanyaan": "Perintah mana yang menampilkan teks ke layar?",
-    "opsi": [{"id":"a","teks":"show(\"Hai\")"},{"id":"b","teks":"print(\"Hai\")"},{"id":"c","teks":"echo \"Hai\""},{"id":"d","teks":"Print(\"Hai\")"}],
-    "jawabanId": "b", "pembahasan": "Python memakai print() dengan huruf kecil semua."
-  }]
+  "bab": "bab-1",
+  "judul_kuis": "Kuis Bab 1 — print(), Komentar, dan Membaca Error",
+  "soal": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "capaian": "Menjelaskan fungsi komentar (#) sebagai catatan untuk manusia yang diabaikan Python.",
+      "pertanyaan": "Apa yang terjadi saat Python menemukan tanda pagar (#) di dalam kode?",
+      "kode": null,
+      "opsi": [
+        "Python mencetak teks setelah tanda # ke layar",
+        "Python menganggap baris itu perintah penting yang harus didahulukan",
+        "Python mengabaikan semua teks setelah tanda # pada baris itu",
+        "Python menghapus baris itu dari file kode secara permanen"
+      ],
+      "jawaban_benar": 2,
+      "pembahasan": "Tanda pagar (#) membuat Python mengabaikan semua teks setelahnya pada baris itu...",
+      "petunjuk": "Ingat analogi catatan pensil di pinggir naskah pengumuman."
+    }
+  ]
 }
 ```
 
-### 13.3 Skema tantangan (`tantangan.json`)
+### 13.3 Skema tantangan (`tantangan-bab-N.json`)
 
 | Field | Tipe | Wajib | Keterangan |
 |---|---|---|---|
-| `id` | string | Ya | `"t1-1"` |
-| `babId` | string | Ya | |
-| `tujuanId` | string | Ya | `CP1.1` |
-| `judul` | string | Ya | |
-| `instruksi` | string | Ya | |
-| `kodeAwal` | string | Opsional | starter code |
-| `caseSensitive` | boolean | Opsional | default `true` |
-| `collapseSpaces` | boolean | Opsional | default `false` |
-| `testCases` | array | Ya | ≥ 1 |
-| `testCases[].stdin` | string | Opsional | default `""` |
-| `testCases[].expectedOutputs` | array<string> | Ya | varian output benar |
-| `testCases[].hideExpected` | boolean | Opsional | |
-| `requiredPatterns` | array<string> | Opsional | regex pada kode |
-| `forbiddenPatterns` | array<string> | Opsional | |
-| `hints` | array<string> | Ya | tepat 3 (bertahap) |
-| `tingkat` | enum | Opsional | `dasar` \| `lanjut` |
+| `bab` | string | Ya | `"bab-1"` s.d. `"bab-5"` |
+| `tantangan` | array<object> | Ya | 3 butir tantangan bertingkat (mudah, sedang, sulit) |
+| `tantangan[].id` | number | Ya | Nomor urut tantangan (1–3) |
+| `tantangan[].tingkat` | enum | Ya | `"mudah"` \| `"sedang"` \| `"sulit"` |
+| `tantangan[].judul` | string | Ya | Judul tantangan |
+| `tantangan[].cerita` | string | Ya | Narasi skenario dunia nyata siswa SMK |
+| `tantangan[].instruksi` | string | Ya | Instruksi spesifik apa yang harus dikerjakan |
+| `tantangan[].kode_awal` | string | Ya | Starter code di editor (memuat simulasi variabel) |
+| `tantangan[].output_diharapkan` | string | Ya | Output tepat yang harus dihasilkan kode |
+| `tantangan[].contoh_solusi` | string | Ya | Solusi referensi (dipakai verifikasi otomatis) |
+| `tantangan[].petunjuk` | array<string> | Ya | Tepat 3 petunjuk bertahap (konsep, pola, contoh) |
+| `tantangan[].kesalahan_umum` | array<string> | Ya | Daftar miskonsepsi/kesalahan yang umum dilakukan |
 
-**Contoh mini:**
+**Contoh mini (`content/tantangan-bab-1.json`):**
 ```json
 {
-  "id": "t1-1", "babId": "bab-1", "tujuanId": "CP1.1", "judul": "Sapa dirimu",
-  "instruksi": "Tampilkan tepat: Halo, Python!", "kodeAwal": "# tulis kodemu di bawah\n",
-  "testCases": [{ "stdin": "", "expectedOutputs": ["Halo, Python!"] }],
-  "hints": ["Gunakan perintah untuk menampilkan teks.", "Teks ditulis di dalam tanda kutip dan tanda kurung.", "Bentuknya: print(\"...\")"]
+  "bab": "bab-1",
+  "tantangan": [
+    {
+      "id": 1,
+      "tingkat": "mudah",
+      "judul": "Kartu Identitas Siswa",
+      "cerita": "Guru wali kelas memintamu membuat program yang mencetak kartu identitas siswa di layar...",
+      "instruksi": "Cetak tiga baris teks tepat seperti contoh output...",
+      "kode_awal": "# Tantangan: Cetak kartu identitas siswa\nprint(\"Nama   : \")\nprint(\"Kelas  : \")\nprint(\"Jurusan: \")",
+      "output_diharapkan": "Nama   : Andi Pratama\nKelas  : X RPL 1\nJurusan: Rekayasa Perangkat Lunak",
+      "contoh_solusi": "# Kartu Identitas Siswa\nprint(\"Nama   : Andi Pratama\")\nprint(\"Kelas  : X RPL 1\")\nprint(\"Jurusan: Rekayasa Perangkat Lunak\")",
+      "petunjuk": [
+        "Setiap baris data cukup dicetak dengan satu perintah print().",
+        "Teks di dalam tanda kutip harus sudah lengkap termasuk nama, kelas, dan jurusan.",
+        "Contoh baris pertama: print(\"Nama   : Andi Pratama\"). Lakukan hal serupa untuk dua baris lainnya."
+      ],
+      "kesalahan_umum": [
+        "Jumlah spasi sebelum tanda titik dua tidak sama persis dengan contoh output.",
+        "Lupa tanda kutip penutup di akhir teks sehingga muncul SyntaxError."
+      ]
+    }
+  ]
 }
 ```
 
-### 13.4 Fixture uji dan skrip verifikasi
+### 13.4 Verifikasi Konten Otomatis
 
-File `content/bab-N/tantangan.uji.json` (**tidak diimpor ke klien**) menyimpan jawaban uji tiap tantangan:
-
-```json
-{
-  "t1-1": {
-    "solusiReferensi": "print(\"Halo, Python!\")",
-    "benar": ["print(\"Halo, Python!\")", "print('Halo, Python!')", "print(  \"Halo, Python!\"  )"],
-    "salah": ["print(\"halo, python!\")", "print(Halo, Python!)", "Print(\"Halo, Python!\")"]
-  }
-}
-```
-
-`npm run verify` (skrip `scripts/verify-content`, wajib hijau sebelum deploy) memeriksa:
-1. JSON valid dan semua `tujuanId`/`kuisId`/`tantanganIds` merujuk ke id yang ada;
-2. tiap `tujuan` punya ≥ 1 soal dan ≥ 1 tantangan (I-13);
-3. semua `contoh` dan `proyek` dijalankan dan outputnya sama dengan `outputDiharapkan` (I-6);
-4. tiap tantangan: ≥ 3 jawaban `benar` lulus dan ≥ 3 `salah` ditolak (I-7);
-5. hasilnya ditulis ke `VERIFIKASI.md` sebagai bahan log (M12).
-
-Skrip boleh memakai CPython lokal; perbedaan dengan Pyodide pada Python dasar diabaikan, tetapi tiap tantangan tetap dicoba sekali di produksi.
+Verifikasi konten dijalankan oleh skrip Python `scripts/verifikasi_konten.py` (dapat dipanggil via `python scripts/verifikasi_konten.py`):
+1. **Validitas JSON & Field:** Memeriksa seluruh field wajib top-level dan sub-objek pada `bab-N.json`, `kuis-bab-N.json`, dan `tantangan-bab-N.json`.
+2. **Kesesuaian Contoh Kode:** Mengeksekusi seluruh `contoh_kode` materi dan memastikan outputnya cocok 100% dengan `output_contoh`, serta melarang pemanggilan `input()` pada materi (karena simulasi variabel).
+3. **Kesesuaian Latihan Editor:** Mengeksekusi `kode_awal` pada `latihan_editor` untuk memastikan berjalan tanpa runtime error.
+4. **Validitas Kuis:** Memastikan setiap soal memiliki 4 opsi, nilai `jawaban_benar` adalah indeks valid (0–3), dan cuplikan `kode` dieksekusi tanpa error yang tidak disengaja.
+5. **Kesesuaian Tantangan:** Mengeksekusi seluruh `contoh_solusi` tantangan dan memastikan outputnya cocok 100% dengan `output_diharapkan`.
+6. Seluruh 90 pengujian wajib menghasilkan status **LOLOS** (exit code 0) sebelum deploy.
 
 ---
 
@@ -595,7 +650,7 @@ Skrip boleh memakai CPython lokal; perbedaan dengan Pyodide pada Python dasar di
 
 ## 16. Risiko dan Mitigasi
 
-Pemilik (usulan; **[ASUMSI]**): **C** = Caesar, **N** = Nabil, **C+N** = bersama.
+Pemilik (usulan; **[ASUMSI]**): **N** = Nabil, **C** = Caesar, **N+C** = bersama.
 
 | # | Risiko | Dampak | Kemungkinan | Mitigasi | Pemilik |
 |---|---|---|---|---|---|
@@ -620,7 +675,7 @@ Pemilik (usulan; **[ASUMSI]**): **C** = Caesar, **N** = Nabil, **C+N** = bersama
 | 19 | `/api/chat` disalahgunakan langsung / kuota dikuras | Sedang | Sedang | Cek Origin, batas global harian, batas IP longgar | C |
 | 20 | Worker Pyodide bermasalah di Next.js/Vercel (tipe worker, CDN) | Tinggi | Sedang | Spike hari 1; keputusan tercatat | N |
 | 21 | Data siswa di bawah umur terkirim ke layanan AI | Sedang | Sedang | Kode opsional (default mati), notice privasi, cek ketentuan data | C |
-| 22 | Verifikasi konten manual tidak sempat | Tinggi | Tinggi | Skrip `verify-content` | C+N |
+| 22 | Verifikasi konten manual tidak sempat | Tinggi | Tinggi | Skrip `verifikasi_konten.py` | C+N |
 
 ---
 
@@ -632,57 +687,56 @@ Pemilik (usulan; **[ASUMSI]**): **C** = Caesar, **N** = Nabil, **C+N** = bersama
 |---|---|---|
 | 1. Setup + layout + footer | 2 | |
 | 2. Editor Pyodide (+ spike 45 menit di awal) | 5 | |
-| 3. Halaman materi + konten bab 1–5 | 5 | Konten dibuat paralel dengan tahap 2 |
+| 3. Halaman materi + konten bab 1–5 | 5 | Konten dibaca langsung dari `content/` |
 | 4. Kuis | 2,5 | |
 | 5. Tantangan + progress | 5 | |
-| 5b. Skrip `verify-content` + review hasil | 3 | Menggantikan verifikasi manual |
+| 5b. Skrip `verifikasi_konten.py` + review hasil | 3 | Menggantikan verifikasi manual (90 cek lolos) |
 | 6. Chatbot | 3 | **Bersyarat** (Gerbang C); jika gagal, jam ini jadi buffer |
 | 7. Polish + deploy + daftar cek produksi | 2,5 | |
 | 8. Uji coba 3 pengguna + perbaikan | 2 | 3 pengguna diuji paralel |
 | 9. Log, laporan, video cadangan | 2 | Log tetap dicatat berjalan di tiap tahap |
 
-**Pembagian kerja (usulan [ASUMSI]):** Caesar = konten, kuis, tantangan, skrip verifikasi, chatbot; Nabil = editor/worker, progress, deploy, uji kinerja.
+**Pembagian kerja (usulan [ASUMSI]):** Nabil = editor/worker, progress, deploy, uji kinerja; Caesar = konten, kuis, tantangan, skrip verifikasi, chatbot.
 
 **Gerbang keputusan:**
 - **Gerbang A (akhir hari 1):** DoD tahap 2 lulus di URL produksi **dan** bab 1–3 terverifikasi. Jika gagal: terapkan pemotongan #3 dan #5.
-- **Gerbang B (hari 2, ±5 jam sebelum akhir):** konten dibekukan dan `npm run verify` hijau. Jika gagal: pemotongan #4 (chatbot dibuang).
+- **Gerbang B (hari 2, ±5 jam sebelum akhir):** konten dibekukan dan `python scripts/verifikasi_konten.py` hijau. Jika gagal: pemotongan #4 (chatbot dibuang).
 - **Gerbang C (hari 2, ±8 jam sebelum akhir):** chatbot hanya dikerjakan jika Gerbang A dan B lulus.
 
 ### Tahap 1 — Setup, Layout, dan Footer
-- **Tujuan:** kerangka aplikasi yang bisa dijalankan dan dideploy.
-- **Tugas:** inisialisasi Next.js (App Router, TS, Tailwind); layout global (navbar, footer, tombol chatbot placeholder); route kosong; tema warna; repo + deploy Vercel pertama; `AI-LOG.md` dibuat.
+- **Tujuan:** kerangka aplikasi yang bisa dijalankan dan dideploy. Beranda hanya menampilkan Hero dan 5 kartu bab dari `content/` (tanpa MiniEditor).
+- **Tugas:** inisialisasi Next.js menggunakan `create-next-app` versi terbaru di folder sementara lalu salin hasilnya ke root (App Router, TS, Tailwind, ESLint, `src/`, alias `@/*`) tanpa menimpa file eksis; layout global (navbar, footer, tombol chatbot placeholder); beranda (hero + 5 kartu bab); route kosong; tema warna; repo + deploy Vercel pertama; `AI-LOG.md` dibuat.
 - **File:** `app/layout.tsx`, `components/Navbar`, `components/Footer`, `app/*/page.tsx`, `content/`, `README.md`, `AI-LOG.md`.
-- **DoD:** (1) `npm run build` sukses; (2) semua route §7.1 terbuka dan 404 punya footer; (3) footer berisi 2 nama dan NIM di semua route; (4) URL Vercel dapat dibuka; (5) entri log tahap 1 ada.
+- **DoD:** (1) `npm run build` dan `npm run lint` sukses tanpa error; (2) `python scripts/verifikasi_konten.py` tetap lolos 90 pengecekan; (3) semua route §7.1 terbuka dan 404 punya footer; (4) footer berisi nama dan NIM kedua pembuat (Nabil & Caesar) di semua route; (5) URL Vercel dapat dibuka; (6) entri log tahap 1 ada.
 
 ### Tahap 2 — Editor Pyodide
-- **Tujuan:** menjalankan Python aman dan stabil.
-- **Tugas:** spike (§8.1); worker; antarmuka pesan; loading; antrean; timeout + terminate/recreate; stdout/stderr; Kotak Input; pesan error ramah (+ kutip melengkung); CodeMirror (atribut keyboard, auto-indent); tombol simbol; mode baca (M15).
+- **Tujuan:** menjalankan Python aman dan stabil. Inti pengerjaan: Run, output, timeout 5 detik, SymbolBar, dan error ramah. Mode baca (M15) dan MiniEditor di beranda ditandai opsional jika waktu cukup.
+- **Tugas:** spike (§8.1); worker; antarmuka pesan; loading; antrean; timeout + terminate/recreate; stdout/stderr; simulasi input; pesan error ramah (+ kutip melengkung); CodeMirror (atribut keyboard, auto-indent); tombol simbol.
 - **File:** `workers/pyodide.worker.ts`, `lib/python-runner.ts`, `lib/error-friendly.ts`, `components/CodeRunner`, `components/SymbolBar`.
-- **DoD:** (1) keputusan spike dan hasil ukur I-3 tercatat di log; (2) `print("Halo")` benar di URL produksi; (3) `while True: pass` berhenti ≤ 5 dtk, editor tetap bisa diketik selama itu, Run bisa dipakai lagi; (4) `input()` membaca dari Kotak Input; (5) ≥ 8 jenis error → pesan ramah, kutip melengkung terdeteksi; (6) tombol simbol di 360 px berfungsi; (7) dengan Pyodide diblokir, mode baca tampil; (8) uji Fast 3G dicatat.
+- **DoD:** (1) keputusan spike dan hasil ukur I-3 tercatat di log; (2) `print("Halo")` benar di URL produksi; (3) `while True: pass` berhenti ≤ 5 dtk, editor tetap bisa diketik selama itu, Run bisa dipakai lagi; (4) simulasi input via variabel berjalan baik; (5) ≥ 8 jenis error → pesan ramah, kutip melengkung terdeteksi; (6) tombol simbol di 360 px berfungsi; (7) *(opsional jika waktu cukup)* mode baca tampil saat Pyodide diblokir serta MiniEditor di beranda; (8) uji Fast 3G dicatat.
 
 ### Tahap 3 — Halaman Materi
 - **Tujuan:** 5 bab terbaca dengan alur lengkap.
-- **Tugas:** loader konten JSON; komponen bagian; tujuan belajar; contoh runnable; navigasi antarbab; konten bab 1–5 (dibuat AI, diverifikasi).
-- **File:** `content/bab-*/materi.json`, `app/materi/[bab]/page.tsx`, `components/LessonSection`, `ObjectiveCard`, `ChapterCard`.
-- **DoD:** (1) 5 bab tampil dengan tujuan di awal dan urutan bagian sesuai M1(b); (2) semua `contoh`/`proyek` punya `outputDiharapkan` dan lulus verifikasi; (3) tidak ada konten hardcode di komponen; (4) log verifikasi diperbarui.
-- **[RISIKO WAKTU]:** penulisan 5 bab. Versi ringan: bab 4–5 ringkas (§17.2).
+- **Tugas:** loader konten JSON; komponen bagian; tujuan belajar & prasyarat; contoh runnable; latihan editor; navigasi antarbab; konten bab 1–5 dibaca dari `content/`.
+- **File:** `content/bab-*.json`, `app/materi/[bab]/page.tsx`, `components/LessonSection`, `ObjectiveCard`, `ChapterCard`.
+- **DoD:** (1) 5 bab tampil dengan tujuan & prasyarat di awal dan urutan bagian sesuai M1(b); (2) semua contoh punya `output_contoh` dan lolos verifikasi; (3) tidak ada konten hardcode di komponen; (4) log verifikasi diperbarui.
 
 ### Tahap 4 — Kuis
 - **Tujuan:** kuis per bab berfungsi dan tersimpan.
-- **Tugas:** komponen kuis, acak opsi, skor, pembahasan, ulang; konten 3–5 soal/bab.
-- **File:** `content/bab-*/kuis.json`, `app/kuis/[bab]/page.tsx`, `components/QuizCard`, `QuizResult`.
-- **DoD:** (1) 5 kuis dapat dikerjakan; (2) kunci jawaban diperiksa manual dan oleh AI kedua; (3) skor tampil dan dapat diulang; (4) tiap soal punya `tujuanId` valid.
+- **Tugas:** komponen kuis, acak opsi, skor, pembahasan, petunjuk, ulang; konten 5 soal/bab dari `content/kuis-bab-*.json`.
+- **File:** `content/kuis-bab-*.json`, `app/kuis/[bab]/page.tsx`, `components/QuizCard`, `QuizResult`.
+- **DoD:** (1) 5 kuis dapat dikerjakan; (2) kunci jawaban diperiksa manual dan oleh skrip verifikasi; (3) skor tampil dan dapat diulang; (4) tiap soal memiliki opsi, `jawaban_benar`, dan pembahasan valid; (5) pengecekan jawaban kuis tetap akurat setelah opsi diacak (diuji untuk skenario semua benar, semua salah, dan campuran).
 
 ### Tahap 5 — Tantangan dan Progress
 - **Tujuan:** cek otomatis dan penyimpanan progress.
-- **Tugas:** modul normalisasi dan pengecekan; tombol Periksa; `ChallengeCard` + hint; progress store + validasi; `/progress`; reset + banner perangkat bersama; konten 2–3 tantangan/bab beserta fixture uji.
-- **File:** `lib/check-challenge.ts`, `lib/progress.ts`, `components/ChallengeCard`, `Hint`, `app/progress/page.tsx`, `content/bab-*/tantangan.json`, `content/bab-*/tantangan.uji.json`.
-- **DoD:** (1) hint 3 level muncul bertahap; (2) 4 skenario uji progress (M9) lulus; (3) tutup/buka browser mempertahankan progress; (4) reset menghapus progress; (5) kondisi kosong `/progress` tampil.
+- **Tugas:** modul normalisasi dan pengecekan; tombol Periksa; `ChallengeCard` + hint bertahap; progress store + validasi; `/progress`; reset + banner perangkat bersama; 3 tantangan/bab dari `content/tantangan-bab-*.json`.
+- **File:** `lib/check-challenge.ts`, `lib/progress.ts`, `components/ChallengeCard`, `HintAccordion`, `app/progress/page.tsx`, `content/tantangan-bab-*.json`.
+- **DoD:** (1) petunjuk 3 level muncul bertahap; (2) 4 skenario uji progress (M9) lulus; (3) tutup/buka browser mempertahankan progress; (4) reset menghapus progress; (5) kondisi kosong `/progress` tampil.
 
 ### Tahap 5b — Skrip Verifikasi Konten
 - **Tujuan:** bukti kebenaran konten otomatis.
-- **Tugas:** `scripts/verify-content` (§13.4); jalankan, perbaiki temuan, review hasil `VERIFIKASI.md`.
-- **DoD:** `npm run verify` hijau; `VERIFIKASI.md` menjadi lampiran log (M12); tiap tantangan dicoba sekali di URL produksi.
+- **Tugas:** `scripts/verifikasi_konten.py` (§13.4); jalankan, review hasil 90 pengecekan, hasil ditulis ke `VERIFIKASI.md`.
+- **DoD:** `python scripts/verifikasi_konten.py` hijau 100% (exit code 0); `VERIFIKASI.md` menjadi lampiran log (M12); tiap tantangan dicoba di URL produksi.
 
 ### Tahap 6 — Chatbot (bersyarat Gerbang C)
 - **Tujuan:** chatbot mode petunjuk yang aman.
@@ -740,16 +794,16 @@ Pemilik (usulan; **[ASUMSI]**): **C** = Caesar, **N** = Nabil, **C+N** = bersama
 - **[ASUMSI]** Uji coba 3 pengguna (siswa/teman sebaya) dicatat sebagai temuan di laporan.
 - **[ASUMSI]** Nilai batas (timeout 5 dtk, 500 karakter chat, 30 permintaan/hari klien, 200/10 menit/IP, 1.500/hari global) adalah titik awal dan disesuaikan setelah uji.
 - **[ASUMSI]** Cek jawaban di sisi klien diterima (kunci terlihat di DevTools) karena tujuannya pembelajaran.
-- **[ASUMSI]** Pembagian pemilik risiko dan pembagian kerja Caesar/Nabil hanya usulan.
+- **[ASUMSI]** Pembagian pemilik risiko dan pembagian kerja Nabil/Caesar hanya usulan.
 - **[ASUMSI]** Pyodide dari CDN jsDelivr dengan versi dipin, jenis worker diputuskan setelah spike.
 - **[ASUMSI]** `maxDuration` fungsi Vercel dan ketentuan data tier gratis Gemini untuk pengguna di bawah umur dicek sebelum demo.
-- **[ASUMSI]** Nama produk "PyMisi" sementara.
+- **[ASUMSI]** Nama produk "Pythonin".
 
 ### Pertanyaan terbuka (perlu diputuskan)
 1. Apakah aturan "full AI" mengizinkan penyuntingan manual kecil (mis. typo) atau semua perubahan harus lewat prompt?
 2. Format dan tempat log AI? Disarankan `AI-LOG.md` di repo + `VERIFIKASI.md` hasil skrip.
 3. Siapa 3 pengguna uji dan kapan jadwalnya (tahap 8, hari 2)?
-4. Pyodide via CDN atau self-host, dan jenis worker (classic/module)? Diputuskan setelah spike.
+4. Pyodide via CDN atau self-host? **[SUDAH DIPUTUSKAN: CDN (jsDelivr) dengan versi dipin secara lazy; jenis worker diuji pada spike]**.
 5. Apakah demo ke dosen memakai laptop sendiri atau laptop kampus (menentukan uji perangkat)?
 6. Apakah footer cukup nama + NIM, atau juga nama kampus/mata kuliah?
 7. Apakah f-string di bab 3 boleh dipersingkat jika waktu mepet (diperlukan di mini proyek bab 5)?
