@@ -83,21 +83,23 @@ export default function BagianMateri({
         </p>
       </div>
 
-      {/* 3. Analogi Dunia Nyata */}
+      {/* 3. Analogi Dunia Nyata (Siswa SMK) */}
       {bagian.analogi && (
-        <div className="rounded-2xl border border-sky-200/90 bg-gradient-to-br from-sky-50/70 via-blue-50/30 to-indigo-50/30 p-4 sm:p-5 shadow-2xs">
+        <div className="relative overflow-hidden rounded-2xl border-2 border-sky-200/90 bg-gradient-to-br from-sky-50/90 via-blue-50/40 to-indigo-50/30 p-4 sm:p-5 shadow-xs">
           <div className="flex items-start gap-3">
             <span
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800 text-lg shadow-2xs"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-200/80 text-sky-900 text-xl shadow-2xs"
               aria-hidden="true"
             >
               💡
             </span>
             <div className="flex-1">
-              <span className="block text-xs font-bold uppercase tracking-wider text-sky-900 mb-1">
-                Analogi Dunia Nyata:
-              </span>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="rounded-md bg-sky-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-sky-900">
+                  Analogi Kontekstual SMK
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">
                 {bagian.analogi}
               </p>
             </div>
@@ -191,10 +193,10 @@ export default function BagianMateri({
           type="button"
           onClick={onToggleRead}
           aria-pressed={isRead}
-          className={`inline-flex items-center gap-1.5 text-xs font-semibold py-2 px-3 rounded-lg transition-colors cursor-pointer ${
+          className={`inline-flex items-center gap-2 text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors cursor-pointer min-h-[44px] ${
             isRead
-              ? 'text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
-              : 'text-slate-500 hover:text-blue-600 hover:bg-blue-50'
+              ? 'text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200'
+              : 'text-slate-600 hover:text-blue-600 hover:bg-blue-50 border border-slate-200'
           }`}
         >
           <span>{isRead ? '✓ Kamu sudah membaca bagian ini' : 'Selesai membaca? Tandai sudah dibaca &rarr;'}</span>

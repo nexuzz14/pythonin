@@ -39,7 +39,7 @@ export default function KuisCodeBlock({ code }: KuisCodeBlockProps) {
           type="button"
           onClick={handleCopy}
           aria-label={copied ? 'Kode tersalin ke clipboard' : 'Salin kode cuplikan'}
-          className="inline-flex items-center gap-1.5 rounded-md bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-slate-300 transition hover:bg-slate-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-2 text-xs font-medium text-slate-300 transition hover:bg-slate-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 min-h-[44px]"
         >
           {copied ? (
             <>

@@ -15,10 +15,10 @@ export default function ChatButton({ isOpen, onClick, unreadCount = 0 }: ChatBut
       onClick={onClick}
       aria-label={isOpen ? 'Tutup panel tutor Python' : 'Buka panel tanya tutor AI'}
       aria-expanded={isOpen}
-      className={`fixed bottom-5 right-5 z-40 flex h-14 w-14 sm:h-14 sm:w-14 items-center justify-center rounded-2xl shadow-lg transition-all duration-200 focus:outline-hidden focus:ring-4 focus:ring-blue-300 active:scale-95 ${
+      className={`fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-4 sm:right-6 z-40 h-14 w-14 items-center justify-center rounded-2xl shadow-lg transition-all duration-200 focus:outline-hidden focus:ring-4 focus:ring-blue-300 active:scale-95 ${
         isOpen
-          ? 'bg-slate-800 text-white shadow-slate-900/20 rotate-90'
-          : 'bg-gradient-to-tr from-blue-600 via-blue-700 to-indigo-600 text-white shadow-blue-500/30 hover:shadow-blue-500/40 hover:-translate-y-0.5'
+          ? 'hidden sm:flex bg-slate-800 text-white shadow-slate-900/20 rotate-90'
+          : 'flex bg-gradient-to-tr from-blue-600 via-blue-700 to-indigo-600 text-white shadow-blue-500/30 hover:shadow-blue-500/40 hover:-translate-y-0.5'
       }`}
     >
       {isOpen ? (

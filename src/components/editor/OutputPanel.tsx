@@ -37,7 +37,7 @@ export default function OutputPanel({
           <button
             type="button"
             onClick={onClear}
-            className="inline-flex items-center rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer min-h-[32px]"
+            className="inline-flex items-center justify-center rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer min-h-[44px]"
             title="Bersihkan teks output"
           >
             Bersihkan
@@ -47,7 +47,7 @@ export default function OutputPanel({
 
       {/* Konten Output - Teks Murni (Mencegah XSS, tanpa dangerouslySetInnerHTML) */}
       <div
-        className="max-h-64 min-h-[96px] overflow-y-auto p-4 font-mono text-xs sm:text-sm text-slate-800 bg-slate-900 text-slate-100 leading-relaxed"
+        className="max-h-64 min-h-[96px] overflow-y-auto p-4 font-mono text-xs sm:text-sm bg-slate-900 text-slate-100 leading-relaxed"
         aria-live="polite"
         aria-atomic="true"
         role="region"

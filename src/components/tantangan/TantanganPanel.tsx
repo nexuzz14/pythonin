@@ -180,7 +180,7 @@ export default function TantanganPanel({
             <button
               type="button"
               onClick={onBackToList}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 transition min-h-[40px]"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 transition min-h-[44px]"
             >
               <span>&larr;</span>
               <span>Daftar Tantangan</span>
@@ -203,7 +203,7 @@ export default function TantanganPanel({
                   key={num}
                   type="button"
                   onClick={() => onSelectChallenge(num)}
-                  className={`h-9 w-9 rounded-xl text-xs font-bold transition flex items-center justify-center ${
+                  className={`min-h-[44px] min-w-[44px] h-11 w-11 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center cursor-pointer ${
                     active
                       ? 'bg-blue-600 text-white shadow-xs scale-105'
                       : isChPassed
@@ -320,7 +320,7 @@ export default function TantanganPanel({
               type="button"
               onClick={handleResetCode}
               disabled={isExecuting}
-              className="text-xs font-semibold text-slate-400 hover:text-white transition px-2.5 py-1 rounded-lg border border-slate-700 hover:border-slate-500 min-h-[36px]"
+              className="inline-flex items-center justify-center text-xs font-semibold text-slate-300 hover:text-white transition px-3 py-2 rounded-xl border border-slate-700 hover:border-slate-500 min-h-[44px] cursor-pointer"
               title="Kembalikan ke kode awal"
             >
               🔄 Reset Kode
@@ -389,7 +389,7 @@ export default function TantanganPanel({
       <div aria-live="polite" className="space-y-4">
         {/* Kasus 1: Lolos Berhasil (Kartu Hijau) */}
         {checkResult && checkResult.isCorrect && (
-          <div className="rounded-2xl border-2 border-emerald-400 bg-emerald-50 p-5 sm:p-6 shadow-md animate-fadeIn">
+          <div className="rounded-2xl border-2 border-emerald-400 bg-emerald-50 p-5 sm:p-6 shadow-md animate-celebrate">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white text-2xl shadow-sm">

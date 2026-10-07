@@ -50,6 +50,19 @@ export default function HomePage() {
         {/* Dekorasi Visual SVG Latar Belakang (Inline, Ringan, Tanpa Gambar Eksternal) */}
         <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl" aria-hidden="true" />
         <div className="pointer-events-none absolute -bottom-16 -left-16 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl" aria-hidden="true" />
+        <svg
+          className="pointer-events-none absolute -right-10 -top-10 h-72 w-72 text-blue-600/5 opacity-80"
+          viewBox="0 0 200 200"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="100" cy="100" r="50" stroke="currentColor" strokeWidth="1" />
+          <path d="M70 90L50 100L70 110" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M130 90L150 100L130 110" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M105 85L95 115" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
         
         <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Sisi Kiri: Narasi dan Call to Action */}
@@ -73,28 +86,28 @@ export default function HomePage() {
             </div>
 
             {/* Statistik Riil dari SSOT content/ */}
-            <div className="mt-7 grid grid-cols-3 gap-3 max-w-md border-y border-slate-200/80 py-4">
+            <div className="mt-7 grid grid-cols-3 gap-1.5 sm:gap-3 max-w-md border-y border-slate-200/80 py-4">
               <div className="text-center sm:text-left">
-                <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                <div className="text-xl sm:text-3xl font-extrabold text-blue-600">
                   {totalMisi}
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-slate-600">
+                <div className="text-[11px] sm:text-sm font-medium text-slate-600 leading-tight mt-0.5">
                   Misi Belajar
                 </div>
               </div>
-              <div className="text-center sm:text-left border-x border-slate-200 px-2 sm:px-4">
-                <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+              <div className="text-center sm:text-left border-x border-slate-200 px-1.5 sm:px-4">
+                <div className="text-xl sm:text-3xl font-extrabold text-blue-600">
                   {totalTantangan}
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-slate-600">
+                <div className="text-[11px] sm:text-sm font-medium text-slate-600 leading-tight mt-0.5">
                   Tantangan Koding
                 </div>
               </div>
               <div className="text-center sm:text-left">
-                <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                <div className="text-xl sm:text-3xl font-extrabold text-blue-600">
                   {totalSoal}
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-slate-600">
+                <div className="text-[11px] sm:text-sm font-medium text-slate-600 leading-tight mt-0.5">
                   Soal Kuis
                 </div>
               </div>

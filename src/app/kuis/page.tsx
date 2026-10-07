@@ -58,13 +58,13 @@ export default function KuisIndexPage() {
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
               <Link
                 href={`/materi/${bab}`}
-                className="text-xs font-semibold text-slate-600 hover:text-blue-600 transition"
+                className="inline-flex items-center text-xs font-semibold text-slate-600 hover:text-blue-600 transition min-h-[44px] px-2"
               >
                 Baca Materi
               </Link>
               <Link
                 href={`/kuis/${bab}`}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white hover:bg-blue-700 transition shadow-xs"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-blue-700 transition shadow-xs min-h-[44px]"
               >
                 <span>Mulai Kuis</span>
                 <span>&rarr;</span>

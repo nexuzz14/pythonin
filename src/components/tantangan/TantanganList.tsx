@@ -97,7 +97,7 @@ export default function TantanganList({
                 setFilterBab(e.target.value === 'all' ? 'all' : parseInt(e.target.value, 10))
               }
               aria-label="Pilih Bab"
-              className="rounded-xl border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-800 shadow-2xs focus:border-blue-500 focus:outline-none min-h-[38px] cursor-pointer"
+              className="rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-800 shadow-2xs focus:border-blue-500 focus:outline-none min-h-[44px] cursor-pointer"
             >
               <option value="all">Semua Misi (1-5)</option>
               {groups.map((g) => (
@@ -112,7 +112,7 @@ export default function TantanganList({
               value={filterTingkat}
               onChange={(e) => setFilterTingkat(e.target.value)}
               aria-label="Pilih Tingkat Kesulitan"
-              className="rounded-xl border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-800 shadow-2xs focus:border-blue-500 focus:outline-none min-h-[38px] cursor-pointer"
+              className="rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-800 shadow-2xs focus:border-blue-500 focus:outline-none min-h-[44px] cursor-pointer"
             >
               <option value="all">Semua Tingkat</option>
               <option value="mudah">Mudah</option>
@@ -122,13 +122,13 @@ export default function TantanganList({
           </div>
 
           {/* Filter Status Tab */}
-          <div className="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold self-start md:self-auto">
+          <div className="flex overflow-x-auto max-w-full rounded-xl bg-slate-100 p-1 text-xs font-semibold self-start md:self-auto scrollbar-none">
             {(['all', 'belum', 'dicoba', 'selesai'] as const).map((st) => (
               <button
                 key={st}
                 type="button"
                 onClick={() => setFilterStatus(st)}
-                className={`rounded-lg px-3 py-1.5 transition ${
+                className={`rounded-lg px-3.5 py-2 min-h-[44px] transition flex items-center justify-center shrink-0 cursor-pointer ${
                   filterStatus === st
                     ? 'bg-white text-blue-700 shadow-2xs font-bold'
                     : 'text-slate-600 hover:text-slate-900'

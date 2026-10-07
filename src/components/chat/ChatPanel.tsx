@@ -71,58 +71,71 @@ export default function ChatPanel({
   };
 
   return (
-    <section
-      aria-label="Panel Asisten Belajar Python"
-      className="fixed inset-x-2 bottom-2 top-14 sm:top-auto sm:bottom-20 sm:right-6 sm:inset-x-auto sm:w-[410px] sm:h-[580px] z-50 flex flex-col rounded-2xl border border-slate-200/90 bg-white shadow-2xl shadow-slate-900/15 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
-    >
-      {/* 1. Header Panel */}
-      <header className="flex items-center justify-between border-b border-slate-200/80 bg-slate-900 px-4 py-3 text-white">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-500 font-mono font-bold text-white shadow-xs">
-            🐍
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <h2 className="text-sm font-bold leading-tight">Tutor Python AI</h2>
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400" title="Online" />
+    <>
+      {/* Backdrop overlay di layar ponsel */}
+      <div
+        className="fixed inset-0 bg-slate-900/50 backdrop-blur-2xs z-50 sm:hidden animate-fadeIn"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      <section
+        aria-label="Panel Asisten Belajar Python"
+        className="fixed inset-x-0 bottom-0 sm:bottom-20 sm:right-6 sm:inset-x-auto sm:w-[420px] h-[85dvh] sm:h-[580px] sm:max-h-[580px] z-50 flex flex-col rounded-t-3xl sm:rounded-2xl border-t sm:border border-slate-200/90 bg-white shadow-2xl shadow-slate-900/20 overflow-hidden animate-fadeIn"
+      >
+        {/* Drag handle untuk HP */}
+        <div className="sm:hidden bg-slate-900 pt-2 pb-0.5 flex justify-center">
+          <div className="w-12 h-1 bg-slate-600 rounded-full" />
+        </div>
+
+        {/* 1. Header Panel */}
+        <header className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-3 text-white">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-500 font-mono font-bold text-white shadow-xs">
+              🐍
             </div>
-            <p className="text-[11px] text-slate-400">SMK RPL Kelas X • Siap Bantu</p>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h2 className="text-sm font-bold leading-tight">Tutor Python AI</h2>
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400" title="Online" />
+              </div>
+              <p className="text-[11px] text-slate-400">SMK RPL Kelas X • Siap Bantu</p>
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center gap-1">
-          {/* Tombol Percakapan Baru */}
-          <button
-            type="button"
-            onClick={onResetConversation}
-            disabled={isLoading}
-            className="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-[11px] font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white focus:outline-hidden focus:ring-1 focus:ring-blue-400 disabled:opacity-50"
-            title="Hapus riwayat dan mulai percakapan baru"
-          >
-            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-            <span className="hidden sm:inline">Reset</span>
-          </button>
+          <div className="flex items-center gap-1">
+            {/* Tombol Percakapan Baru */}
+            <button
+              type="button"
+              onClick={onResetConversation}
+              disabled={isLoading}
+              className="flex items-center gap-1 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white focus:outline-hidden focus:ring-1 focus:ring-blue-400 disabled:opacity-50 min-h-[44px]"
+              title="Hapus riwayat dan mulai percakapan baru"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              <span>Reset</span>
+            </button>
 
-          {/* Tombol Tutup Panel */}
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-800 hover:text-white focus:outline-hidden focus:ring-1 focus:ring-blue-400"
-            aria-label="Tutup panel chat"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </header>
+            {/* Tombol Tutup Panel */}
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-11 w-11 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-slate-800 hover:text-white focus:outline-hidden focus:ring-1 focus:ring-blue-400 min-h-[44px] min-w-[44px]"
+              aria-label="Tutup panel chat"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </header>
 
       {/* 2. Catatan / Disclaimer Singkat */}
       <div className="border-b border-amber-200/70 bg-amber-50/90 px-3 py-1.5 text-center text-[11px] text-amber-900 flex items-center justify-center gap-1.5">
@@ -213,7 +226,7 @@ export default function ChatPanel({
       )}
 
       {/* 5. Input Area */}
-      <footer className="border-t border-slate-200/90 bg-white p-3">
+      <footer className="border-t border-slate-200/90 bg-white p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -233,17 +246,17 @@ export default function ChatPanel({
               disabled={isLoading}
               placeholder="Tanya seputar Python (misal: apa itu variabel?)..."
               maxLength={maxLength + 10} // Beri sedikit toleransi agar hitungan terlihat merah jika lewat
-              className="w-full resize-none rounded-xl border border-slate-300 bg-slate-50/50 p-2.5 pr-12 text-xs sm:text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-100 disabled:opacity-60"
+              className="w-full resize-none rounded-xl border border-slate-300 bg-slate-50/50 p-2.5 pr-14 text-xs sm:text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-100 disabled:opacity-60 min-h-[52px]"
             />
             {/* Tombol Kirim Melayang di Dalam Box */}
             <button
               type="submit"
               disabled={isInputEmpty || isOverLimit || isLoading}
               aria-label="Kirim pertanyaan"
-              className="absolute right-2 bottom-2.5 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white transition-all hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-400 disabled:opacity-30 disabled:pointer-events-none active:scale-95"
+              className="absolute right-1.5 bottom-1.5 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl bg-blue-600 text-white transition-all hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-400 disabled:opacity-30 disabled:pointer-events-none active:scale-95 shadow-xs"
             >
               {isLoading ? (
-                <svg className="h-4 w-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
                   <circle
                     className="opacity-25"
                     cx="12"
@@ -259,7 +272,7 @@ export default function ChatPanel({
                   />
                 </svg>
               ) : (
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -291,5 +304,6 @@ export default function ChatPanel({
         </form>
       </footer>
     </section>
+  </>
   );
 }

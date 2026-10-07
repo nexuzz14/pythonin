@@ -34,7 +34,7 @@ export default function Navbar() {
           </span>
           <div className="flex flex-col">
             <span className="leading-tight font-extrabold text-slate-900">Pythonin</span>
-            <span className="text-[10px] font-medium text-slate-500 leading-none">SMK RPL Kelas X</span>
+            <span className="text-xs font-semibold text-slate-500 leading-none">SMK RPL Kelas X</span>
           </div>
         </Link>
 
@@ -93,7 +93,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="border-t border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-4 md:hidden shadow-lg">
+        <div className="border-t border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-4 md:hidden shadow-lg animate-fadeIn">
           <nav className="flex flex-col gap-1.5" aria-label="Navigasi Menu Mobile">
             {navItems.map((item) => {
               const active = isLinkActive(item.href);

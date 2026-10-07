@@ -35,8 +35,10 @@ export function getChatMessagesSnapshot(): ChatMessage[] {
   return memoryMessages;
 }
 
+const SERVER_SNAPSHOT: ChatMessage[] = [INITIAL_MESSAGE];
+
 export function getChatServerSnapshot(): ChatMessage[] {
-  return [INITIAL_MESSAGE];
+  return SERVER_SNAPSHOT;
 }
 
 export function updateChatMessages(newMessages: ChatMessage[]): void {

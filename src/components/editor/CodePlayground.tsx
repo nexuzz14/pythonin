@@ -14,8 +14,18 @@ import type { FriendlyError, RunnerStatus } from '@/types/runner';
 const CodeEditor = dynamic(() => import('./CodeEditor'), {
   ssr: false,
   loading: () => (
-    <div className="flex h-52 w-full items-center justify-center rounded-xl border border-slate-700 bg-slate-900 text-slate-400 font-mono text-xs sm:text-sm">
-      <span className="animate-pulse">Menyiapkan editor kode...</span>
+    <div className="flex flex-col h-56 w-full rounded-xl border border-slate-700/80 bg-slate-900 overflow-hidden font-mono text-xs shadow-inner">
+      <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-950 px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-slate-700 animate-pulse" />
+        <span className="h-2.5 w-2.5 rounded-full bg-slate-700 animate-pulse" />
+        <span className="h-2.5 w-2.5 rounded-full bg-slate-700 animate-pulse" />
+        <span className="ml-2 text-slate-500 font-sans text-xs">Menyiapkan editor...</span>
+      </div>
+      <div className="flex-1 p-4 space-y-2.5 animate-shimmer">
+        <div className="h-3 w-3/4 rounded bg-slate-800/80" />
+        <div className="h-3 w-1/2 rounded bg-slate-800/60" />
+        <div className="h-3 w-2/3 rounded bg-slate-800/70" />
+      </div>
     </div>
   ),
 });
@@ -171,7 +181,7 @@ export default function CodePlayground({
             <button
               type="button"
               onClick={() => pyodideRunner.retry()}
-              className="shrink-0 rounded-lg bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-rose-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 min-h-[36px]"
+              className="shrink-0 inline-flex items-center justify-center rounded-xl bg-rose-600 px-4 py-2 text-xs font-bold text-white hover:bg-rose-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 min-h-[44px]"
             >
               Coba Lagi
             </button>

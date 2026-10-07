@@ -72,7 +72,7 @@ export default function ProgressClientView({
           <button
             type="button"
             onClick={() => setResetSuccessMessage(false)}
-            className="text-xs font-bold text-emerald-700 hover:text-emerald-900 px-2 py-1"
+            className="text-xs font-bold text-emerald-700 hover:text-emerald-900 px-3 py-2 min-h-[44px] inline-flex items-center"
           >
             Tutup
           </button>
@@ -138,6 +138,30 @@ export default function ProgressClientView({
           </div>
         </div>
       </div>
+
+      {/* Friendly Empty State if No Progress Yet */}
+      {isHydrated && stats.overallPercentage === 0 && (
+        <div className="rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50/90 via-indigo-50/50 to-white p-6 sm:p-8 text-center shadow-xs animate-fadeIn">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white text-2xl shadow-sm mb-4">
+            🚀
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+            Mulai Petualangan Koding Python-mu!
+          </h3>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
+            Kamu belum memiliki riwayat belajar yang tercatat. Selesaikan bagian materi, pecahkan tantangan koding interaktif, dan raih skor kuis terbaik untuk memenuhi progres belajarmu!
+          </p>
+          <div className="mt-5 flex justify-center">
+            <Link
+              href="/materi/1"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-blue-700 active:scale-[0.98] transition min-h-[44px]"
+            >
+              <span>Mulai Belajar Misi 1 Sekarang</span>
+              <span>&rarr;</span>
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Kartu Ringkasan Persentase & Metrik Utama (Kebutuhan 9) */}
       <div className="rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-7 shadow-xs">
@@ -286,7 +310,7 @@ export default function ProgressClientView({
                     </div>
                     <Link
                       href={`/materi/${bab.nomor}`}
-                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 pt-1"
+                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 min-h-[44px] py-2"
                     >
                       <span>Buka Materi Misi {bab.nomor} &rarr;</span>
                     </Link>
@@ -303,22 +327,22 @@ export default function ProgressClientView({
                       </span>
                     </div>
 
-                    <div className="space-y-1 pt-1">
+                    <div className="space-y-1 pt-1 divide-y divide-slate-100">
                       {tantanganList.map((t) => {
                         const st = isHydrated ? getChallengeStatus(bab.nomor, t.id) : 'belum';
                         return (
                           <div
                             key={t.id}
-                            className="flex items-center justify-between text-[11px] text-slate-700"
+                            className="flex items-center justify-between text-xs text-slate-700 min-h-[44px] py-1"
                           >
                             <Link
                               href={`/latihan?bab=${bab.nomor}&id=${t.id}`}
-                              className="hover:text-blue-600 truncate max-w-[150px]"
+                              className="hover:text-blue-600 truncate max-w-[170px] sm:max-w-[210px] font-medium min-h-[44px] inline-flex items-center"
                             >
                               #{t.id} {t.judul}
                             </Link>
                             <span
-                              className={`px-1.5 py-0.2 rounded font-bold text-[10px] ${
+                              className={`px-2 py-0.5 rounded-md font-bold text-[11px] shrink-0 ${
                                 st === 'selesai'
                                   ? 'text-emerald-800 bg-emerald-100'
                                   : st === 'dicoba'
@@ -335,7 +359,7 @@ export default function ProgressClientView({
 
                     <Link
                       href={`/latihan?bab=${bab.nomor}`}
-                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 pt-1"
+                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 min-h-[44px] py-2"
                     >
                       <span>Kerjakan Tantangan &rarr;</span>
                     </Link>
@@ -368,7 +392,7 @@ export default function ProgressClientView({
 
                     <Link
                       href={`/kuis/${bab.nomor}`}
-                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 pt-1"
+                      className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 min-h-[44px] py-2"
                     >
                       <span>{quizData ? 'Ulangi Kuis &rarr;' : 'Mulai Kuis &rarr;'}</span>
                     </Link>

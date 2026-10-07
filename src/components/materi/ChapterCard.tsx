@@ -87,17 +87,17 @@ export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
         {/* Tujuan Ringkas */}
         {bab.tujuan && bab.tujuan.length > 0 && (
           <div className="mt-4 pt-3 border-t border-slate-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
               🎯 Fokus Pembelajaran:
             </span>
-            <ul className="space-y-1">
+            <ul className="space-y-1.5">
               {bab.tujuan.slice(0, 2).map((t, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-1.5 text-xs text-slate-700 leading-normal"
+                  className="flex items-start gap-2 text-xs text-slate-700 leading-relaxed"
                 >
-                  <span className="text-emerald-600 font-bold">✓</span>
-                  <span className="line-clamp-1">{t}</span>
+                  <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>{t}</span>
                 </li>
               ))}
             </ul>
@@ -107,17 +107,17 @@ export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
 
       {/* Tombol Aksi Bawah */}
       <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-1">
           <Link
             href={`/latihan?bab=${bab.nomor}`}
-            className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition min-h-[36px] flex items-center gap-1"
+            className="text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition min-h-[44px] px-2.5 rounded-lg flex items-center gap-1"
           >
             <span>🧩 Tantangan ({passedChallengesCount}/3)</span>
           </Link>
-          <span className="text-slate-300">•</span>
+          <span className="text-slate-300 hidden sm:inline">•</span>
           <Link
             href={`/kuis/${bab.nomor}`}
-            className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition min-h-[36px] flex items-center gap-1"
+            className="text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition min-h-[44px] px-2.5 rounded-lg flex items-center gap-1"
           >
             <span>🎯 Kuis {quizData ? `(${quizData.bestScore}/${quizData.total})` : ''}</span>
           </Link>
@@ -125,7 +125,7 @@ export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
 
         <Link
           href={`/materi/${bab.nomor}`}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-blue-700 transition min-h-[44px]"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-blue-700 transition min-h-[44px]"
         >
           <span>{status === 'sedang' ? 'Lanjutkan Belajar' : 'Buka Materi'}</span>
           <span aria-hidden="true">&rarr;</span>

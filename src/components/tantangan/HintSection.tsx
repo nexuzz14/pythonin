@@ -175,7 +175,7 @@ export default function HintSection({
             <button
               type="button"
               onClick={handleCopySolution}
-              className="inline-flex items-center gap-1 text-[11px] font-semibold text-blue-700 hover:text-blue-900 bg-white px-2.5 py-1 rounded-md border border-blue-200 transition"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 hover:text-blue-900 bg-white px-3 py-2 rounded-lg border border-blue-200 transition min-h-[44px]"
             >
               {copiedSolution ? '✓ Tersalin' : '📋 Salin Kode'}
             </button>

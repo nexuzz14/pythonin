@@ -38,16 +38,16 @@ export default function KuisIntroView({
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       {/* Breadcrumb Navigasi */}
-      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500">
-        <Link href="/" className="hover:text-blue-600 transition-colors">
+      <nav aria-label="Breadcrumb" className="mb-4 flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-500">
+        <Link href="/" className="hover:text-blue-600 transition-colors min-h-[44px] inline-flex items-center px-1">
           Beranda
         </Link>
         <span>/</span>
-        <Link href={`/materi/${babNumber}`} className="hover:text-blue-600 transition-colors">
+        <Link href={`/materi/${babNumber}`} className="hover:text-blue-600 transition-colors min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-2">
           Misi {babNumber}
         </Link>
         <span>/</span>
-        <span className="text-slate-900 font-semibold">Kuis Pemahaman</span>
+        <span className="text-slate-900 font-semibold min-h-[44px] inline-flex items-center">Kuis Pemahaman</span>
       </nav>
 
       {/* Kartu Utama Layar Pembuka */}

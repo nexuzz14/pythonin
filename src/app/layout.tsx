@@ -29,6 +29,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({
@@ -38,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${plusJakartaSans.variable} ${jetbrainsMono.variable}`}>
-      <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans">
+      <body className="flex min-h-dvh flex-col bg-slate-50 text-slate-900 antialiased font-sans">
         <Navbar />
         <main className="flex-1">
           {children}
