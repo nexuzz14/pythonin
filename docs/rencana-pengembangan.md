@@ -216,10 +216,11 @@ pythonin/
 | Tahap | Keterangan | Status | Tanggal Selesai | Commit |
 |---|---|---|---|---|
 | **0. Persiapan** | Pembacaan PRD, sinkronisasi skema konten, verifikasi script, penyusunan rencana | **Selesai** | 2026-10-06 | a795a6c |
-| **Tahap 1** | Inisialisasi Proyek, Layout Global, dan Footer Pembuat | **Selesai** | 2026-10-06 | diisi di commit berikutnya |
-| **Tahap 2** | Engine Eksekusi Python (Pyodide Worker) & Komponen Editor | Belum | — | — |
-| **Tahap 3** | Halaman Materi 5 Bab (Integrasi `content/bab-N.json`) | Belum | — | — |
-| **Tahap 4** | Sistem Kuis Interaktif (Integrasi `content/kuis-bab-N.json`) | Belum | — | — |
-| **Tahap 5** | Sistem Tantangan Koding & Progress Belajar (Integrasi `content/tantangan-bab-N.json`) | Belum | — | — |
-| **Tahap 6** | Chatbot Tutor Gemini (Mode Petunjuk via API Route) | Belum | — | — |
+| **Tahap 1** | Inisialisasi Proyek, Layout Global, dan Footer Pembuat | **Selesai** | 2026-10-06 | cfdaa26 |
+| **Tahap 1b** | Poles visual beranda, komponen UI reusable, dan jalur misi | **Selesai** | 2026-10-06 | 66060f9 |
+| **Tahap 2** | Engine Eksekusi Python (Pyodide Worker) & Komponen Editor | **Selesai** | 2026-10-06 | e96eccb |
+| **Tahap 3** | Halaman Materi 5 Bab (Integrasi `content/bab-N.json`) | **Selesai** | 2026-10-06 | 10b2490 |
+| **Tahap 4** | Sistem Kuis Interaktif (Integrasi `content/kuis-bab-N.json`) | **Selesai** | 2026-10-06 | 7690105 |
+| **Tahap 5** | Sistem Tantangan Koding & Progress Belajar (Integrasi `content/tantangan-bab-N.json`) | **Selesai** | 2026-10-07 | 6733491 |
+| **Tahap 6** | Chatbot Tutor Gemini (Mode Petunjuk via API Route & Rate Limiter PRD) | **Selesai** | 2026-10-07 | 268cec5 |
 | **Tahap 7** | Polish, Aksesibilitas, Verifikasi Final, & Persiapan Produksi | Belum | — | — |
