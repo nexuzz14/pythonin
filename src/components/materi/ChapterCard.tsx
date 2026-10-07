@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { BabSummary } from '@/types/content';
-import { useReadSections } from '@/lib/read-progress';
+import { useProgress } from '@/lib/progress';
 
 export interface ChapterCardProps {
   bab: BabSummary;
@@ -17,33 +17,35 @@ export type BabProgressStatus = 'belum' | 'sedang' | 'selesai';
  * Menampilkan ringkasan bab, estimasi durasi belajar, dan status progress siswa secara real-time.
  */
 export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
-  const { count: readSectionsCount } = useReadSections(bab.nomor);
+  const { isHydrated, getChapterStatus, progress } = useProgress();
 
-  const status: BabProgressStatus =
-    readSectionsCount >= 4
-      ? 'selesai'
-      : readSectionsCount > 0
-      ? 'sedang'
-      : 'belum';
+  const status: BabProgressStatus = isHydrated ? getChapterStatus(bab.nomor) : 'belum';
+
+  const chapterData = progress.chapters[`bab-${bab.nomor}`];
+  const readSectionsCount = chapterData?.readSections?.length || 0;
+  const passedChallengesCount = Object.values(chapterData?.challenges || {}).filter(
+    (c) => c.passed
+  ).length;
+  const quizData = chapterData?.quiz;
 
   const renderProgressBadge = () => {
     switch (status) {
       case 'selesai':
         return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
-            <span aria-hidden="true">✅</span> Selesai
+          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 border border-emerald-200">
+            <span aria-hidden="true">✅</span> Misi Selesai
           </span>
         );
       case 'sedang':
         return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
-            <span aria-hidden="true">⏳</span> Sedang Dipelajari ({readSectionsCount}/4)
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 border border-amber-200">
+            <span aria-hidden="true">⏳</span> Sedang ({passedChallengesCount}/3 🧩{quizData ? `, Kuis: ${quizData.bestScore}/${quizData.total}` : ''})
           </span>
         );
       case 'belum':
       default:
         return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+          <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 border border-slate-200">
             <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
             Belum Mulai
           </span>
@@ -63,7 +65,7 @@ export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
               Misi {bab.nomor}
             </span>
             <span className="text-xs font-medium text-slate-500">
-              ⏱️ ± {bab.durasi_menit} menit
+              ⏱️ ± {bab.durasi_menit} menit {readSectionsCount > 0 ? `• 📖 ${readSectionsCount}/4` : ''}
             </span>
           </div>
 
@@ -105,12 +107,21 @@ export default function ChapterCard({ bab, className = '' }: ChapterCardProps) {
 
       {/* Tombol Aksi Bawah */}
       <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-        <Link
-          href={`/kuis/${bab.nomor}`}
-          className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition min-h-[36px] flex items-center gap-1"
-        >
-          <span>🎯 Kuis Misi {bab.nomor}</span>
-        </Link>
+        <div className="flex items-center gap-2.5">
+          <Link
+            href={`/latihan?bab=${bab.nomor}`}
+            className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition min-h-[36px] flex items-center gap-1"
+          >
+            <span>🧩 Tantangan ({passedChallengesCount}/3)</span>
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link
+            href={`/kuis/${bab.nomor}`}
+            className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition min-h-[36px] flex items-center gap-1"
+          >
+            <span>🎯 Kuis {quizData ? `(${quizData.bestScore}/${quizData.total})` : ''}</span>
+          </Link>
+        </div>
 
         <Link
           href={`/materi/${bab.nomor}`}

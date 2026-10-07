@@ -24,6 +24,8 @@ function notifyListeners() {
   });
 }
 
+import { updateQuizResult } from './progress';
+
 /**
  * Menyimpan hasil pengerjaan kuis bab ke localStorage.
  * Menghasilkan event notifikasi agar komponen lain dapat merespons secara reaktif.
@@ -34,6 +36,11 @@ export function saveQuizResult(
   total: number,
   persentase?: number
 ): SavedQuizResult {
+  try {
+    updateQuizResult(babNumber, skor, total);
+  } catch {
+    // Abaikan jika ada error
+  }
   const calculatedPercentage =
     typeof persentase === 'number'
       ? persentase

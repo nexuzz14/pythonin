@@ -5,6 +5,7 @@ import type {
   BabSummary,
   KuisBab,
   TantanganBab,
+  ItemTantangan,
 } from '@/types/content';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
@@ -109,7 +110,7 @@ export function validateBabMateri(data: unknown): string | null {
  * Membaca file JSON konten dengan penanganan error yang ramah.
  * File yang hilang atau rusak tidak akan melempar exception fatal atau membuat halaman putih.
  */
-function readJsonSafely<T>(filename: string): T | null {
+export function readJsonSafely<T>(filename: string): T | null {
   try {
     const filePath = path.join(CONTENT_DIR, filename);
     if (!fs.existsSync(filePath)) {
@@ -365,14 +366,185 @@ export function getKuisByBab(babIdOrNumber: string | number): KuisBab | null {
   return result.status === 'success' ? result.data : null;
 }
 
+export type TantanganDetailResult =
+  | { status: 'success'; data: TantanganBab; babNumber: number }
+  | { status: 'not-found'; babParam: string }
+  | { status: 'file-not-found'; babNumber: number; filename: string; errorMessage: string }
+  | { status: 'corrupt'; babNumber: number; filename: string; errorMessage: string };
+
+/**
+ * Validasi skema runtime untuk konten TantanganBab.
+ */
+export function validateTantanganBab(data: unknown): string | null {
+  if (!data || typeof data !== 'object') {
+    return 'Data tantangan bukan merupakan objek JSON yang valid.';
+  }
+
+  const tantanganData = data as Partial<TantanganBab>;
+
+  if (typeof tantanganData.bab !== 'string' || !tantanganData.bab.trim()) {
+    return 'Properti "bab" tantangan tidak ditemukan atau bukan teks.';
+  }
+  if (!Array.isArray(tantanganData.tantangan) || tantanganData.tantangan.length === 0) {
+    return 'Properti "tantangan" harus berupa daftar (array) tantangan dan tidak boleh kosong.';
+  }
+
+  for (let i = 0; i < tantanganData.tantangan.length; i++) {
+    const t = tantanganData.tantangan[i];
+    if (!t || typeof t !== 'object') {
+      return `Tantangan ke-${i + 1} bukan objek tantangan yang valid.`;
+    }
+    if (typeof t.id !== 'number') {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "id" berupa angka.`;
+    }
+    if (!t.tingkat || !['mudah', 'sedang', 'sulit'].includes(t.tingkat)) {
+      return `Tantangan ke-${i + 1} memiliki "tingkat" kesulitan yang tidak valid.`;
+    }
+    if (typeof t.judul !== 'string' || !t.judul.trim()) {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "judul" teks.`;
+    }
+    if (typeof t.cerita !== 'string') {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "cerita".`;
+    }
+    if (typeof t.instruksi !== 'string' || !t.instruksi.trim()) {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "instruksi".`;
+    }
+    if (typeof t.kode_awal !== 'string') {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "kode_awal".`;
+    }
+    if (typeof t.output_diharapkan !== 'string') {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "output_diharapkan".`;
+    }
+    if (typeof t.contoh_solusi !== 'string') {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "contoh_solusi".`;
+    }
+    if (!Array.isArray(t.petunjuk) || t.petunjuk.length === 0) {
+      return `Tantangan ke-${i + 1} harus memiliki minimal 1 petunjuk.`;
+    }
+    if (!Array.isArray(t.kesalahan_umum)) {
+      return `Tantangan ke-${i + 1} tidak memiliki properti "kesalahan_umum" berupa array.`;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Mengambil tantangan bab dengan status rinci (sukses, id salah, file hilang, atau json rusak).
+ */
+export function getTantanganDetail(babIdOrNumber: string | number): TantanganDetailResult {
+  const babNum = normalizeBabNumber(babIdOrNumber);
+  if (!babNum) {
+    return {
+      status: 'not-found',
+      babParam: String(babIdOrNumber),
+    };
+  }
+
+  const filename = `tantangan-bab-${babNum}.json`;
+  const filePath = path.join(CONTENT_DIR, filename);
+
+  if (!fs.existsSync(filePath)) {
+    return {
+      status: 'file-not-found',
+      babNumber: babNum,
+      filename,
+      errorMessage: `File tantangan "${filename}" tidak ditemukan di direktori content.`,
+    };
+  }
+
+  let rawContent: string;
+  try {
+    rawContent = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    return {
+      status: 'file-not-found',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Gagal membaca file "${filename}": ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawContent);
+  } catch (err) {
+    return {
+      status: 'corrupt',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Sintaks JSON pada file "${filename}" tidak valid atau rusak: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  const schemaError = validateTantanganBab(parsed);
+  if (schemaError) {
+    return {
+      status: 'corrupt',
+      babNumber: babNum,
+      filename,
+      errorMessage: `Struktur data pada "${filename}" tidak sesuai: ${schemaError}`,
+    };
+  }
+
+  return {
+    status: 'success',
+    data: parsed as TantanganBab,
+    babNumber: babNum,
+  };
+}
+
 /**
  * Mengambil tantangan koding berdasarkan nomor atau id bab
  */
 export function getTantanganByBab(babIdOrNumber: string | number): TantanganBab | null {
-  const babNum = normalizeBabNumber(babIdOrNumber);
-  if (!babNum) return null;
+  const result = getTantanganDetail(babIdOrNumber);
+  return result.status === 'success' ? result.data : null;
+}
 
-  return readJsonSafely<TantanganBab>(`tantangan-bab-${babNum}.json`);
+/**
+ * Mengambil satu tantangan spesifik berdasarkan bab dan ID tantangan
+ */
+export function getTantanganItem(
+  babIdOrNumber: string | number,
+  tantanganId: number
+): { babNumber: number; item: ItemTantangan } | null {
+  const tantanganBab = getTantanganByBab(babIdOrNumber);
+  const babNum = normalizeBabNumber(babIdOrNumber);
+  if (!tantanganBab || !babNum) return null;
+
+  const item = tantanganBab.tantangan.find((t) => t.id === tantanganId);
+  if (!item) return null;
+
+  return { babNumber: babNum, item };
+}
+
+export interface TantanganBabGroup {
+  babNumber: number;
+  babJudul: string;
+  data: TantanganBab;
+}
+
+/**
+ * Mengambil seluruh tantangan dari Bab 1 s.d. 5 untuk halaman daftar tantangan
+ */
+export function getAllTantangan(): TantanganBabGroup[] {
+  const allBab = getAllBab();
+  const groups: TantanganBabGroup[] = [];
+
+  allBab.forEach((bab, index) => {
+    const babNum = index + 1;
+    const tData = getTantanganByBab(babNum);
+    if (tData) {
+      groups.push({
+        babNumber: babNum,
+        babJudul: bab.judul,
+        data: tData,
+      });
+    }
+  });
+
+  return groups;
 }
 
 export interface ContohMateriItem {

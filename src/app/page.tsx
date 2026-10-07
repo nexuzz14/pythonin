@@ -8,6 +8,8 @@ import {
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import HeroCodeDemo from '@/components/ui/HeroCodeDemo';
+import HomeProgressBadge from '@/components/ui/HomeProgressBadge';
+import HomeProgressBanner from '@/components/ui/HomeProgressBanner';
 
 export default function HomePage() {
   // 100% data dihitung dari SSOT content/
@@ -119,6 +121,9 @@ export default function HomePage() {
 
       {/* Bagian Jalur 5 Misi Pembelajaran */}
       <section className="mt-14 sm:mt-20">
+        {/* Banner Progres Aktif jika siswa sudah mulai belajar */}
+        <HomeProgressBanner />
+
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 mb-3 border border-slate-200">
             <span>🗺️</span>
@@ -179,9 +184,12 @@ export default function HomePage() {
                   <div>
                     {/* Header Kartu: Badge Misi & Durasi Nyata */}
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                      <Badge variant={variant} size="sm">
-                        Misi {bab.nomor}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={variant} size="sm">
+                          Misi {bab.nomor}
+                        </Badge>
+                        <HomeProgressBadge babNomor={bab.nomor} />
+                      </div>
                       <span className="text-xs font-semibold text-slate-500 flex items-center gap-1 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
                         ⏱️ {bab.durasi_menit} menit
                       </span>

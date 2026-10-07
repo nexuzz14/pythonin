@@ -39,13 +39,21 @@ export default function NavigasiBab({
             </p>
           </div>
 
-          <Link
-            href={`/kuis/${currentBab}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-xs sm:text-sm font-bold text-blue-700 shadow-sm transition hover:bg-blue-50 active:scale-[0.98] min-h-[44px] shrink-0"
-          >
-            <span>Mulai Kuis Misi {currentBab}</span>
-            <span aria-hidden="true">&rarr;</span>
-          </Link>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href={`/latihan?bab=${currentBab}`}
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-blue-700/80 hover:bg-blue-800 text-white border border-blue-400/80 px-4 py-2.5 text-xs sm:text-sm font-bold transition min-h-[44px] shrink-0"
+            >
+              <span>🧩 Tantangan Misi {currentBab}</span>
+            </Link>
+
+            <Link
+              href={`/kuis/${currentBab}`}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs sm:text-sm font-bold text-blue-700 shadow-sm transition hover:bg-blue-50 active:scale-[0.98] min-h-[44px] shrink-0"
+            >
+              <span>Mulai Kuis &rarr;</span>
+            </Link>
+          </div>
         </div>
 
         {/* Tombol Bab Sebelumnya dan Berikutnya */}

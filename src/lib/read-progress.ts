@@ -37,8 +37,15 @@ export function getReadSections(babNumber: number): string[] {
   }
 }
 
+import { toggleReadSection as toggleCentralReadSection } from './progress';
+
 export function toggleReadSection(babNumber: number, sectionId: string): void {
   if (typeof window === 'undefined') return;
+  try {
+    toggleCentralReadSection(babNumber, sectionId);
+  } catch {
+    // Abaikan jika ada error
+  }
   try {
     const current = getReadSections(babNumber);
     const set = new Set(current);

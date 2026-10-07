@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import type { BabMateri } from '@/types/content';
 import { useReadSections } from '@/lib/read-progress';
+import { markChapterOpened } from '@/lib/progress';
 import ObjectiveCard from './ObjectiveCard';
 import BagianMateri from './BagianMateri';
 import LatihanEditorSection from './LatihanEditorSection';
@@ -27,6 +28,10 @@ export default function MateriClientWrapper({
   babNumber,
 }: MateriClientWrapperProps) {
   const { readSections, toggleRead } = useReadSections(babNumber);
+
+  useEffect(() => {
+    markChapterOpened(babNumber);
+  }, [babNumber]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">

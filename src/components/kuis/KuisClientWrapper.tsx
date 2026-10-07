@@ -11,6 +11,7 @@ import type {
   SoalSalahReview,
 } from '@/types/kuis';
 import { saveQuizResult } from '@/lib/quiz-progress';
+import { updateQuizResult } from '@/lib/progress';
 import KuisIntroView from './KuisIntroView';
 import KuisQuestionView from './KuisQuestionView';
 import KuisResultView from './KuisResultView';
@@ -208,8 +209,13 @@ export default function KuisClientWrapper({
         waktuSelesai: new Date().toLocaleString('id-ID'),
       };
 
-      // Simpan ke state progres (Kebutuhan 9)
+      // Simpan ke state progres (Kebutuhan 9 & Tahap 5)
       saveQuizResult(babNumber, skor, totalSoal, persentase);
+      try {
+        updateQuizResult(babNumber, skor, totalSoal);
+      } catch {
+        // Abaikan
+      }
 
       // Panggil callback onFinish untuk integrasi tahap 5 bila disediakan
       if (typeof onFinish === 'function') {
